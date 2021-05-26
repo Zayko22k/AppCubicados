@@ -1,2 +1,2 @@
 # AppCubicados
-Vistas de Android primer en primer commit
+Vistas de Android en primer commit
