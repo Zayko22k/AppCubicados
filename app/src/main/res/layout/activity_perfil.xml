@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondo_inicio"
+    tools:context=".Actividades.Perfil">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="120dp"
+            android:background="@drawable/logo_empresa"
+            android:layout_marginLeft="120dp" />
+        <TextView
+            android:id="@+id/txt"
+            android:text="Perfil"
+            android:textColor="@color/negroEX"
+            android:fontFamily="@font/gotham"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txtCerrarSesion"
+            android:text="Cerrar sesión"
+            android:textColor="@color/rojo"
+            android:layout_marginStart="80dp"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp" />
+    </LinearLayout>
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_margin="20dp"
+       android:layout_height="match_parent">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:background="@color/white"
+               android:layout_marginTop="9dp"
+               android:layout_height="300dp">
+               <TextView
+                   android:id="@+id/txtNomPerfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="40dp"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtAP_Perfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:textSize="18sp"
+                   android:layout_marginTop="70dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtAM_Perfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:textSize="18sp"
+                   android:layout_marginTop="100dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtEmail_Perfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:textSize="18sp"
+                   android:layout_marginTop="130dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtFecha_Perfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:textSize="18sp"
+                   android:layout_marginTop="160dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtCelu_Perfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:textSize="18sp"
+                   android:layout_marginTop="190dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+           </RelativeLayout>
+           <RelativeLayout
+               android:layout_width="120dp"
+               android:background="@color/negroEX"
+               android:layout_marginStart="120dp"
+               android:layout_height="25dp"
+               android:layout_marginLeft="120dp">
+               <TextView
+                   android:id="@+id/text"
+                   android:text="MI PERFIL"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="5dp"
+                   android:textSize="18sp"
+                   android:textColor="@color/white"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="5dp" />
+           </RelativeLayout>
+<!--           Segundo Layout-->
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:background="@color/white"
+               android:layout_marginTop="305dp"
+               android:layout_height="match_parent">
+               <TextView
+                   android:id="@+id/text1"
+                   android:text="SERVICIOS"
+                   android:layout_marginStart="120dp"
+                   android:textColor="@color/negroEX"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="120dp" />
+               <TextView
+                   android:id="@+id/txtPrecio_Servicio"
+                   android:text="x"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="150dp"
+                   android:layout_marginTop="40dp"
+                   android:textSize="58sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txt3"
+                   android:text="RECURRENTE POR "
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="80dp"
+                   android:layout_marginTop="120dp"
+                   android:textSize="14sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txt5"
+                   android:text="Quedan "
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="80dp"
+                   android:layout_marginTop="180dp"
+                   android:textSize="14sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txtDiasPago"
+                   android:text="xx "
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="140dp"
+                   android:layout_marginTop="180dp"
+                   android:textSize="14sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/txt4"
+                   android:text="Perfecto para quienes buscan el desarrollo profesional"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="80dp"
+                   android:layout_marginTop="220dp"
+                   android:textSize="14sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <Button
+                   android:id="@+id/btnCancelar_Servi"
+                   android:text="Cancelar suscripción"
+                   android:layout_marginTop="280dp"
+                   android:layout_marginStart="70dp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="40dp" />
+           </RelativeLayout>
+       </RelativeLayout>
+   </ScrollView>
+</LinearLayout>

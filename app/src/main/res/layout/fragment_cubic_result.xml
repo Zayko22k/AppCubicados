@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/txt"
+            android:text="TU PROYECTO MIDE: "
+            android:textSize="18sp"
+            android:textColor="@color/negroEX"
+            android:fontFamily="@font/gotham"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/txtt"
+            android:text="INMUEBLE: "
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="30dp"
+            android:src="@mipmap/icon_cubic_result"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txtMedidaResult"
+                android:text="xxxx "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp" />
+            <TextView
+                android:id="@+id/txtt1"
+                android:text="NECESITAS: "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginTop="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/IMGG"
+                android:layout_marginTop="160dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_saco"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+
+
+            <TextView
+                android:id="@+id/txtAreaResult"
+                android:text="xxx "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="170dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp" />
+            <TextView
+                android:id="@+id/txtt5"
+                android:text="Por cada Saco de 25 kg de Cemento, Te recomendamos utilizar"
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="240dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/IMGG2"
+                android:layout_marginTop="310dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_grava"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <ViewAnimator
+                android:layout_width="1dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="300dp"
+                android:background="@color/negroEX" />
+            <TextView
+                android:id="@+id/txtGravaResult"
+                android:text="GRAVA"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="375dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt1"
+                android:text="GRAVA"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <ImageView
+                android:id="@+id/IMGG3"
+                android:layout_marginTop="310dp"
+                android:layout_marginStart="140dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_arena"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <ViewAnimator
+                android:layout_width="1dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="230dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="300dp"
+                android:background="@color/negroEX" />
+            <TextView
+                android:id="@+id/txtAremaResult"
+                android:text="ARENA"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="375dp"
+                android:layout_marginStart="140dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt2"
+                android:text="ARENA 5mm"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <ImageView
+                android:id="@+id/IMGG4"
+                android:layout_marginTop="310dp"
+                android:layout_marginStart="260dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_agua"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+        <TextView
+            android:id="@+id/txtResult"
+            android:text="AGUA"
+            android:fontFamily="@font/gotham"
+            android:textColor="@color/negroEX"
+            android:layout_marginTop="375dp"
+            android:layout_marginStart="265dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt3"
+                android:text="AGUA"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="265dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt4"
+                android:text="**Considera baldes de 10 litros"
+                android:fontFamily="@font/gotham"
+                android:textStyle="bold"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="430dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <ImageView
+                android:id="@+id/IMGG5"
+                android:layout_marginTop="470dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_saco"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt6"
+                android:text="Rendimiento aproximado"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="470dp"
+                android:layout_marginStart="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txt7"
+                android:text="10(sacos/m3)"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="490dp"
+                android:layout_marginStart="80dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txtnota"
+                android:text="@string/stFragmentCubic_result"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="540dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+            <Button
+                android:id="@+id/btnCotizar"
+                android:text="Cotizar"
+                android:backgroundTint="@color/orange"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gotham"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="750dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

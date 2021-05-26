@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Actividades.VistaUsuario">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="120dp"
+        android:background="@drawable/logo_empresa"
+        android:layout_marginLeft="120dp" />
+    <TextView
+        android:id="@+id/txt"
+        android:text="Cubicaciones"
+        android:textColor="@color/negroEX"
+        android:fontFamily="@font/gotham"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_inicio">
+
+    <ImageButton
+        android:id="@+id/imgCubic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_cubic_design"
+        android:tint="#00FFFFFF"
+        app:srcCompat="@mipmap/icon_cubic" />
+
+    <TextView
+        android:id="@+id/txt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="170dp"
+        android:fontFamily="@font/gotham"
+        android:text="Cubicador"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/imgMiCoti"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/button_cubic_design"
+        android:tint="#00FFFFFF"
+        app:srcCompat="@mipmap/icon_coti" />
+    <TextView
+        android:id="@+id/txt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="440dp"
+        android:fontFamily="@font/gotham"
+        android:text="Mis Cotizaciones"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/imgAsistencia"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="265dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/button_cubic_design"
+        android:tint="#00FFFFFF"
+        app:srcCompat="@mipmap/icon_asistencia"  />
+    <TextView
+        android:id="@+id/txt4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="255dp"
+        android:layout_marginLeft="255dp"
+        android:layout_marginTop="170dp"
+        android:fontFamily="@font/gotham"
+        android:text="Asistencia"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <ImageButton
+        android:id="@+id/imgPerfil"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="265dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/button_cubic_design"
+        android:tint="#00FFFFFF"
+        app:srcCompat="@mipmap/icon_perfil" />
+    <TextView
+        android:id="@+id/txt5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="265dp"
+        android:layout_marginLeft="255dp"
+        android:layout_marginTop="440dp"
+        android:fontFamily="@font/gotham"
+        android:text="Mi perfil"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</RelativeLayout>
+</LinearLayout>
