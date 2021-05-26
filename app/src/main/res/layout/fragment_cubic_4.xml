@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+<TextView
+    android:layout_width="wrap_content"
+    android:text="Ingresa las medidas de tu proyecto (mts)"
+    android:textColor="@color/negroEX"
+    android:textSize="18sp"
+    android:layout_marginTop="80dp"
+    android:layout_marginStart="20dp"
+    android:fontFamily="@font/gotham"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="20dp"
+    android:layout_height="wrap_content">
+    <!--Text input 1-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/negroEX"
+        android:textColorHint="@color/negroEX"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtLargo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/gotham"
+            android:hint="Largo"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--Text input 2-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/negroEX"
+        android:textColorHint="@color/negroEX"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtAncho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/gotham"
+            android:hint="Ancho"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>
+<TextView
+    android:id="@+id/txtxt"
+    android:text="**Para el alto coloca las medidas en cms**"
+    android:layout_marginStart="20dp"
+    android:textColor="@color/negroEX"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:layout_marginTop="50dp"
+    android:fontFamily="@font/gotham"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="70dp" />
+    <!--Text input 3-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/negroEX"
+        android:textColorHint="@color/negroEX"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtAlto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:fontFamily="@font/gotham"
+            android:hint="Alto"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/btnIniciarCubic"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gotham"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Iniciar cubicación"
+        android:layout_marginLeft="120dp" />
+</LinearLayout>

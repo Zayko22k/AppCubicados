@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">AppCubicados</string>
+    <!-- TODO: String ocupados en la App -->
+    <!--String Fragment_cubic_1    -->
+    <string name="stFragmentCubic_1">Dinos el Inmueble:</string>
+    <!-- String Fragment_cubic_2 -->
+    <string name="stFragmentCubic_2">Inmueble Seleccionado:</string>
+    <!-- String Fragment_cubic_3 -->
+    <string name="stFragmentCubic_3">¿Que quieres construir?</string>
+    <!-- String Fragment_cubic_5 -->
+    <string name="stFragmentCubic_5">Parametros:</string>
+    <!--    String Fragment_cubic_result-->
+    <string name="stFragmentCubic_result">Nota: Las dosificaciones indicada
+        y la cantidad de cemento calculada por el cubicador es una cantidad
+        minima necesaria. No nos hacemos responsable por los resultados obtenidos
+        luego de la aplicación de los productos ni por la calidad de áridos u otras
+        materias primas utilizadas, condiciones de humedad existentes, tiempos que el
+        cliente demore en la aplicación, etc. Sin perjuicio de lo anterior, se sugiere
+        seguir las recomendaciones de la que dispone el material indicadas en el cubicados
+        para la preparación del horimigon</string>
+</resources>
+
