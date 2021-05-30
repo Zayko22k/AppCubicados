@@ -1,5 +1,6 @@
 package com.cubic.appcubicados.Fragments.Cubicacion;
 
+
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,11 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cubic.appcubicados.Adaptadores.AdaptadorInmueble;
-import com.cubic.appcubicados.Clases.InmuebleClass;
+
 import com.cubic.appcubicados.Modelos.Inmueble;
 import com.cubic.appcubicados.R;
 import com.cubic.appcubicados.Retrofit.RetrofitInmueble;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +31,12 @@ import retrofit2.Response;
 
 import static com.cubic.appcubicados.Actividades.Cubicador.pager2;
 
-public class Fragment_cubic_1 extends Fragment {
+public class Fragment_cubic_1 extends Fragment implements Serializable {
 
      RecyclerView rvInmueble;
      List<Inmueble> listaInmueble = new ArrayList<>();
      AdaptadorInmueble adaptadorInmueble;
      LinearLayoutManager lym;
-    public static InmuebleClass inmuebleBackup;
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +46,12 @@ public class Fragment_cubic_1 extends Fragment {
         rvInmueble = rootView.findViewById(R.id.rvInmueble);
         verInmueble();
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+      //verInmueble();
     }
  private void verInmueble() {
     Call<List<Inmueble>> callInmueble = RetrofitInmueble.getApiService().indexInmueble();
@@ -58,14 +65,11 @@ public class Fragment_cubic_1 extends Fragment {
                 adaptadorInmueble = new AdaptadorInmueble(listaInmueble, getContext());
                 rvInmueble.setLayoutManager(lym);
                 rvInmueble.setAdapter(adaptadorInmueble);
-
                 rvListener();
             } else {
                 Toast.makeText(getContext(),"Inmuebles Vacios", Toast.LENGTH_LONG).show();
-
             }
         }
-
         @Override
         public void onFailure(Call<List<Inmueble>> call, Throwable t) {
             Toast.makeText(getContext(), "Error:" + t.getMessage(), Toast.LENGTH_LONG).show();
@@ -86,23 +90,12 @@ public class Fragment_cubic_1 extends Fragment {
                     View child = rvInmueble.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && mGestureDetector.onTouchEvent(e)) {
                         int position = rvInmueble.getChildAdapterPosition(child);
-                            Toast.makeText(getContext(), "Item id: " + listaInmueble.get(position).getIdInmueble(), Toast.LENGTH_SHORT).show();
-                               inmuebleBackup = new InmuebleClass();
-                               inmuebleBackup.setIdInmueble(listaInmueble.get(position).getIdInmueble());
-                               inmuebleBackup.setNomInmueble(listaInmueble.get(position).getNomInmueble());
-                               pager2.setCurrentItem(1);
-                           /* listaa.add(listaBot.get(position).getDescripcion());
-                            listaa.add(String.valueOf(listaBot.get(position).getValor()));
-                            listaa.add(String.valueOf(listaBot.get(position).getStock()));
-                            listaa.add(listaBot.get(position).getCategoria());
-                            listaa.add(String.valueOf(listaBot.get(position).getTipo_Alchol_idTipoA()));
-                            listaa.add(String.valueOf(listaBot.get(position).getId()));
-                            listaa.add(listaBot.get(position).getUrlImagen());
-                            System.out.println("" + listaBot.get(position).getUrlImagen());
-                            inte.putExtra("botel", listaa);
-                            startActivity(inte);*/
-                            return true;
+                        Toast.makeText(getContext(), "Item id: " + listaInmueble.get(position).getIdInmueble(), Toast.LENGTH_SHORT).show();
+                        String data =listaInmueble.get(position).getNomInmueble().trim();
+                        System.out.println(data);
+                       pager2.setCurrentItem(1);
 
+                            return true;
                     }
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -121,5 +114,6 @@ public class Fragment_cubic_1 extends Fragment {
 
             }
         });
+
     }
 }

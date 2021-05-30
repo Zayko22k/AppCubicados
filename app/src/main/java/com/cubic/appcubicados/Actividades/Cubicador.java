@@ -1,13 +1,17 @@
 package com.cubic.appcubicados.Actividades;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.cubic.appcubicados.Clases.MyViewModel;
+import com.cubic.appcubicados.Clases.ZoomOutPageTransformer;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_coti_result;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_1;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_2;
@@ -21,7 +25,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cubicador extends FragmentActivity {
+public class Cubicador extends AppCompatActivity{
     //Esta lista recibe como parametros fragment
     List<Fragment> fragmentList = new ArrayList<>();
     private FragmentStateAdapter pagerAdapter;
@@ -47,10 +51,26 @@ public class Cubicador extends FragmentActivity {
                 new TabLayoutMediator.TabConfigurationStrategy() {
                     @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                        tab.view.setClickable(false);
-                       tab.setText("Paso " + (position + 1));
+                       for(int i = 0; i<=position; i++){
+                           if(position == 0){
+                              tab.setText("Inmueble");
+                           } else if(position == 1){
+                               tab.setText("Tipo");
+                           } else if(position == 2){
+                               tab.setText("Construcción");
+                           } else if(position == 3){
+                               tab.setText("Parametros");
+                           } else if(position == 4){
+                               tab.setText("Resultado");
+                           } else if(position == 5){
+                               tab.setText("Cotización");
+                           }
+                       }
+                      // tab.setText("Paso " + (position + 1));
                     }
                 }).attach();
-        pager2.setUserInputEnabled(false);
+        pager2.setPageTransformer(new ZoomOutPageTransformer());
+       pager2.setUserInputEnabled(false);
 
     }
     //Este metodo es para cuando el cliente presiona el boton atras en el smartphone
@@ -66,6 +86,7 @@ public class Cubicador extends FragmentActivity {
 
         }
     }
+
     /*Adaptador que realiza el conteo de elementos que tiene la lista fragmentlist
      /*y crea los fragment
    */

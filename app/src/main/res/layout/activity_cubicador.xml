@@ -30,7 +30,10 @@
     </LinearLayout>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabsCubic"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
+        app:tabTextAppearance="@style/MineCustomTabText"
+        android:layout_gravity="center_horizontal"
+        app:tabMode="scrollable"
         android:layout_height="wrap_content" />
 
     <androidx.viewpager2.widget.ViewPager2

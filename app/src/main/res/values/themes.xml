@@ -16,5 +16,7 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBarOverlay">true</item>
     </style>
-
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>

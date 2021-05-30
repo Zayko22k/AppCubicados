@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/fragment_cubic_3"
     tools:context=".Fragments.Cubicacion.Fragment_cubic_3">
 
     <TextView
@@ -16,12 +18,18 @@
         android:textColor="@color/negroEX"
         android:text="@string/stFragmentCubic_3"
         android:layout_marginLeft="100dp" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCons"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        tools:listitem="@layout/list_construcciones_main"
-        android:layout_marginLeft="100dp" />
-</LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="50dp"
+            tools:listitem="@layout/list_construcciones_main"
+            android:layout_marginLeft="100dp" />
+    </ScrollView>
+
+</FrameLayout>

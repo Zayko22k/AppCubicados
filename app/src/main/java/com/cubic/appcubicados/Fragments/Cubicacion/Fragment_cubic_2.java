@@ -16,11 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cubic.appcubicados.Adaptadores.AdaptadorTipoCons;
-import com.cubic.appcubicados.Clases.InmuebleClass;
+
 import com.cubic.appcubicados.Modelos.TipoConstruccion;
 import com.cubic.appcubicados.R;
 import com.cubic.appcubicados.Retrofit.RetrofitTipoCons;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,32 +30,35 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.cubic.appcubicados.Actividades.Cubicador.pager2;
-import static com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_1.inmuebleBackup;
 
-public class Fragment_cubic_2 extends Fragment {
+public class Fragment_cubic_2 extends Fragment implements Serializable {
 
     RecyclerView rvTipoCons;
     List<TipoConstruccion> tipoConstruccionList = new ArrayList<>();
     AdaptadorTipoCons adaptadorTipoCons;
     LinearLayoutManager lym;
-
-    TextView txtInSelect;
+    TextView txtInmSelect;
 
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_cubic_2, container, false);
+        rvTipoCons = rootView.findViewById(R.id.rvTipoCons);
+       txtInmSelect = rootView.findViewById(R.id.txtInSelect);
 
-            txtInSelect = rootView.findViewById(R.id.txtInSelect);
-            String nomInmueble = inmuebleBackup.getNomInmueble();
-            rvTipoCons = rootView.findViewById(R.id.rvTipoCons);
-            txtInSelect.setText(nomInmueble);
 
               verTipoCons();
         return rootView;
 
     }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+       //  txtInmSelect = view.findViewById(R.id.txtInSelect);
+
+    }
+
     private void verTipoCons(){
         Call<List<TipoConstruccion>> callTipoCons = RetrofitTipoCons.getApiService().indexTipoCons();
         callTipoCons.enqueue(new Callback<List<TipoConstruccion>>() {
@@ -95,20 +99,8 @@ public class Fragment_cubic_2 extends Fragment {
                     if (child != null && mGestureDetector.onTouchEvent(e)) {
                         int position = rvTipoCons.getChildAdapterPosition(child);
                         Toast.makeText(getContext(), "Item id: " + tipoConstruccionList.get(position).getIdTipoConstruccion(), Toast.LENGTH_SHORT).show();
-                        inmuebleBackup = new InmuebleClass();
-                        inmuebleBackup.setIdInmueble(tipoConstruccionList.get(position).getIdTipoConstruccion());
-                        inmuebleBackup.setNomInmueble(tipoConstruccionList.get(position).getNomTipoCons());
                         pager2.setCurrentItem(2);
-                           /* listaa.add(listaBot.get(position).getDescripcion());
-                            listaa.add(String.valueOf(listaBot.get(position).getValor()));
-                            listaa.add(String.valueOf(listaBot.get(position).getStock()));
-                            listaa.add(listaBot.get(position).getCategoria());
-                            listaa.add(String.valueOf(listaBot.get(position).getTipo_Alchol_idTipoA()));
-                            listaa.add(String.valueOf(listaBot.get(position).getId()));
-                            listaa.add(listaBot.get(position).getUrlImagen());
-                            System.out.println("" + listaBot.get(position).getUrlImagen());
-                            inte.putExtra("botel", listaa);
-                            startActivity(inte);*/
+
                         return true;
 
                     }

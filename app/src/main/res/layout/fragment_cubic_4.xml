@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:id="@+id/fragment_cubic_4"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Cubicacion.Fragment_cubic_4">
 <TextView
+    android:id="@+id/text1"
     android:layout_width="wrap_content"
     android:text="Ingresa las medidas de tu proyecto (mts)"
     android:textColor="@color/negroEX"
     android:textSize="18sp"
-    android:layout_marginTop="80dp"
+    android:layout_marginTop="20dp"
     android:layout_marginStart="20dp"
     android:fontFamily="@font/gotham"
     android:layout_height="wrap_content"
@@ -22,10 +26,10 @@
     <!--Text input 1-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout1"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/gotham"
         android:textColor="@color/negroEX"
         android:textColorHint="@color/negroEX"
@@ -34,20 +38,21 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtLargo"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
+            android:drawableEnd="@mipmap/icon_mts"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
             android:background="@color/white"
             android:fontFamily="@font/gotham"
+            android:inputType="number"
             android:hint="Largo"
-            android:textColor="@color/white" />
+            android:textColor="@color/negroEX"
+            android:drawableRight="@mipmap/icon_mts" />
     </com.google.android.material.textfield.TextInputLayout>
     <!--Text input 2-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
-        android:layout_width="150dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:fontFamily="@font/gotham"
         android:textColor="@color/negroEX"
         android:textColorHint="@color/negroEX"
@@ -56,21 +61,24 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtAncho"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:drawableEnd="@mipmap/icon_mts"
+            android:layout_height="50dp"
             android:background="@color/white"
+            android:inputType="number"
             android:fontFamily="@font/gotham"
             android:hint="Ancho"
-            android:textColor="@color/white" />
+            android:textColor="@color/negroEX"
+            android:drawableRight="@mipmap/icon_mts" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
 <TextView
-    android:id="@+id/txtxt"
+    android:id="@+id/txt2"
     android:text="**Para el alto coloca las medidas en cms**"
     android:layout_marginStart="20dp"
     android:textColor="@color/negroEX"
-    android:textSize="18sp"
+    android:textSize="14sp"
     android:textStyle="bold"
     android:layout_marginTop="50dp"
     android:fontFamily="@font/gotham"
@@ -80,10 +88,10 @@
     <!--Text input 3-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/gotham"
         android:textColor="@color/negroEX"
@@ -93,22 +101,62 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtAlto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:inputType="number"
             android:background="@color/white"
+            android:drawableEnd="@mipmap/icon_cms"
+            android:drawableRight="@mipmap/icon_cms"
             android:fontFamily="@font/gotham"
             android:hint="Alto"
-            android:textColor="@color/white" />
+            android:textColor="@color/negroEX" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/text3"
+        android:textSize="18sp"
+        android:textColor="@color/negroEX"
+        android:fontFamily="@font/gotham"
+        android:layout_marginStart="10dp"
+        android:text="@string/stFragmentCubic_4"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp" />
+    <!--Text input 4-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout4"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/negroEX"
+        android:textColorHint="@color/negroEX"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txtm3"
+            android:layout_width="280dp"
+            android:drawableEnd="@mipmap/icon_m3"
+            android:layout_height="50dp"
+            android:inputType="number"
+            android:background="@color/white"
+            android:fontFamily="@font/gotham"
+            android:hint="M3"
+            android:textColor="@color/negroEX"
+            android:drawableRight="@mipmap/icon_m3" />
     </com.google.android.material.textfield.TextInputLayout>
     <Button
         android:id="@+id/btnIniciarCubic"
         android:backgroundTint="@color/orange"
         android:textColor="@color/white"
         android:fontFamily="@font/gotham"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="80dp"
         android:layout_marginStart="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Iniciar cubicación"
         android:layout_marginLeft="120dp" />
-</LinearLayout>
+</FrameLayout>

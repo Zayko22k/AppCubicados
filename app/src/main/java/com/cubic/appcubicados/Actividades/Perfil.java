@@ -1,8 +1,8 @@
 package com.cubic.appcubicados.Actividades;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cubic.appcubicados.R;
 

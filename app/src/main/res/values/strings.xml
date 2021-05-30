@@ -7,9 +7,10 @@
     <string name="stFragmentCubic_2">Inmueble Seleccionado:</string>
     <!-- String Fragment_cubic_3 -->
     <string name="stFragmentCubic_3">¿Que quieres construir?</string>
-    <!-- String Fragment_cubic_5 -->
-    <string name="stFragmentCubic_5">Parametros:</string>
-    <!--    String Fragment_cubic_result-->
+    <!--    2st String Fragmnent_cubic_4-->
+    <!-- String Fragment_cubic_4 -->
+    <string name="stFragmentCubic_4">Si conoces las dimensiones de tu proyecto, ingresalas aqui</string>
+    <!--   1st String Fragment_cubic_result-->
     <string name="stFragmentCubic_result">Nota: Las dosificaciones indicada
         y la cantidad de cemento calculada por el cubicador es una cantidad
         minima necesaria. No nos hacemos responsable por los resultados obtenidos
@@ -18,5 +19,6 @@
         cliente demore en la aplicación, etc. Sin perjuicio de lo anterior, se sugiere
         seguir las recomendaciones de la que dispone el material indicadas en el cubicados
         para la preparación del horimigon</string>
+
 </resources>
 

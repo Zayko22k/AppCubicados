@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/fragment_cubic_1"
     android:orientation="vertical"
     tools:context=".Fragments.Cubicacion.Fragment_cubic_1">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
@@ -17,7 +17,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="120dp"
         android:text="@string/stFragmentCubic_1"
-        android:layout_marginLeft="30dp" />
+        android:layout_marginLeft="30dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInmueble"
@@ -26,5 +26,5 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="100dp"
         tools:listitem="@layout/list_inmueble_main"
-        android:layout_marginLeft="100dp" />
-</LinearLayout>
+        android:layout_marginLeft="100dp"/>
+</FrameLayout>
