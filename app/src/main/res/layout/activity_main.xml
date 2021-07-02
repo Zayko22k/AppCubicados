@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_login"
     tools:context=".Actividades.MainActivity">
@@ -12,49 +13,43 @@
         android:id="@+id/imageView"
         android:layout_width="144dp"
         android:layout_height="125dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/logo_empresa"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.112" />
+        android:layout_marginLeft="100dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="356dp"
-        android:layout_height="289dp"
+        android:layout_height="280dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="45dp"
         android:background="@color/negroEX"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
         <!-- Texto referencia -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Iniciar sesión"
+            android:layout_marginTop="10dp"
             android:textSize="23dp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
-            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
         <!--Text input 1-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout2"
+            android:id="@+id/textInputLayout22"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/gotham"
             android:textColor="@color/white"
-            android:textColorHint="#ffffff"
-            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
-            app:layout_constraintTop_toTopOf="parent">
+            android:textColorHint="#ffffff">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtUsuario"
+                android:id="@+id/txtCorreo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gris"
@@ -66,20 +61,18 @@
         </com.google.android.material.textfield.TextInputLayout>
         <!--Text Input 2 -->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
+            android:id="@+id/textInputLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:fontFamily="@font/gotham"
             android:textColor="@color/white"
-            android:textColorHint="#ffffff"
-            app:layout_constraintBottom_toTopOf="@+id/btnIngreso"
-            app:layout_constraintTop_toTopOf="parent">
+            android:textColorHint="#ffffff">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtPass"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gris"
@@ -88,7 +81,6 @@
                 android:fontFamily="@font/gotham"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
-
                 android:textColor="@color/white" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -100,14 +92,11 @@
             android:backgroundTint="@color/orange"
             android:fontFamily="@font/gotham"
             android:text="Iniciar Sesión"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.892" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
 
     <!--Boton Registrar -->
     <ImageButton
@@ -115,25 +104,25 @@
         style="@android:style/Widget.DeviceDefault.ImageButton"
         android:layout_width="60dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/logo_registro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="170dp" />
 
     <TextView
-        android:id="@+id/txt2"
+        android:id="@+id/txtRegistro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Olvido su contraseña?"
+        android:text="@string/hyperlink"
+        android:layout_marginTop="20dp"
+        android:autoLink="web"
         android:textSize="18sp"
+        android:layout_marginStart="120dp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistro"
-        app:layout_constraintVertical_bias="0.371" />
+        android:layout_marginLeft="120dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

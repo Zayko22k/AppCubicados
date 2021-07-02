@@ -25,20 +25,21 @@
             android:textColor="@color/negroEX"
             android:fontFamily="@font/gotham"
             android:textSize="18sp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <TextView
+        <Button
             android:id="@+id/txtCerrarSesion"
-            android:text="Cerrar sesión"
-            android:textColor="@color/rojo"
-            android:layout_marginStart="80dp"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp" />
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="@color/white"
+            android:onClick="cerrarSesion"
+            android:text="Cerrar sesión"
+            android:textColor="@color/rojo" />
     </LinearLayout>
    <ScrollView
        android:layout_width="match_parent"
@@ -53,8 +54,8 @@
                android:layout_marginTop="9dp"
                android:layout_height="300dp">
                <TextView
-                   android:id="@+id/txtNomPerfil"
-                   android:text="xxxxxx"
+                   android:id="@+id/text2"
+                   android:text="Nombre:"
                    android:textColor="@color/negroEX"
                    android:layout_marginStart="20dp"
                    android:layout_marginTop="40dp"
@@ -64,12 +65,45 @@
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="20dp" />
                <TextView
+                   android:id="@+id/txtNomPerfil"
+                   android:text="xxxxxx"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="110dp"
+                   android:layout_marginTop="40dp"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/text3"
+                   android:text="Apellido Paterno:"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="70dp"
+                   android:textSize="18sp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
                    android:id="@+id/txtAP_Perfil"
                    android:text="xxxxxx"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="20dp"
+                   android:layout_marginStart="190dp"
                    android:textSize="18sp"
                    android:layout_marginTop="70dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/text4"
+                   android:text="Apellido Materno:"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="100dp"
+                   android:textSize="18sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -78,9 +112,20 @@
                    android:id="@+id/txtAM_Perfil"
                    android:text="xxxxxx"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="20dp"
+                   android:layout_marginStart="190dp"
                    android:textSize="18sp"
                    android:layout_marginTop="100dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/text5"
+                   android:text="Correo:"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="130dp"
+                   android:textSize="18sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -89,9 +134,20 @@
                    android:id="@+id/txtEmail_Perfil"
                    android:text="xxxxxx"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="20dp"
+                   android:layout_marginStart="100dp"
                    android:textSize="18sp"
                    android:layout_marginTop="130dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/text6"
+                   android:text="Fecha:"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="160dp"
+                   android:textSize="18sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -100,9 +156,20 @@
                    android:id="@+id/txtFecha_Perfil"
                    android:text="xxxxxx"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="20dp"
+                   android:layout_marginStart="90dp"
                    android:textSize="18sp"
                    android:layout_marginTop="160dp"
+                   android:fontFamily="@font/gotham"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="20dp" />
+               <TextView
+                   android:id="@+id/text7"
+                   android:text="Teléfono:"
+                   android:textColor="@color/negroEX"
+                   android:layout_marginStart="20dp"
+                   android:layout_marginTop="190dp"
+                   android:textSize="18sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -111,13 +178,26 @@
                    android:id="@+id/txtCelu_Perfil"
                    android:text="xxxxxx"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="20dp"
+                   android:layout_marginStart="110dp"
                    android:textSize="18sp"
                    android:layout_marginTop="190dp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="20dp" />
+
+               <Button
+                   android:id="@+id/btnCambiarPass"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="100dp"
+                   android:layout_marginLeft="80dp"
+                   android:layout_marginTop="230dp"
+                   android:backgroundTint="@color/white"
+                   android:fontFamily="@font/gotham"
+                   android:onClick="editarPerfil"
+                   android:text="Editar Perfil"
+                   android:textColor="@color/negroEX" />
            </RelativeLayout>
            <RelativeLayout
                android:layout_width="120dp"
@@ -143,12 +223,32 @@
                android:background="@color/white"
                android:layout_marginTop="305dp"
                android:layout_height="match_parent">
+               <RelativeLayout
+                   android:layout_width="120dp"
+                   android:background="@color/negroEX"
+                   android:layout_marginStart="120dp"
+                   android:layout_height="25dp"
+                   android:layout_marginLeft="120dp">
+                   <TextView
+                       android:id="@+id/text9"
+                       android:text="SERVICIO"
+                       android:layout_marginStart="10dp"
+                       android:layout_marginTop="5dp"
+                       android:textSize="18sp"
+                       android:textColor="@color/white"
+                       android:fontFamily="@font/gotham"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="5dp" />
+               </RelativeLayout>
+
                <TextView
-                   android:id="@+id/text1"
-                   android:text="SERVICIOS"
+                   android:id="@+id/txtNombreServicio"
+                   android:text="plan"
                    android:layout_marginStart="120dp"
                    android:textColor="@color/negroEX"
                    android:textSize="18sp"
+                   android:layout_marginTop="50dp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -157,30 +257,21 @@
                    android:id="@+id/txtPrecio_Servicio"
                    android:text="x"
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="150dp"
-                   android:layout_marginTop="40dp"
-                   android:textSize="58sp"
+                   android:layout_marginStart="70dp"
+                   android:layout_marginTop="90dp"
+                   android:textSize="30sp"
+                   android:textStyle="bold"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:layout_marginLeft="20dp" />
-               <TextView
-                   android:id="@+id/txt3"
-                   android:text="RECURRENTE POR "
-                   android:textColor="@color/negroEX"
-                   android:layout_marginStart="80dp"
-                   android:layout_marginTop="120dp"
-                   android:textSize="14sp"
-                   android:fontFamily="@font/gotham"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_marginLeft="20dp" />
+                   android:layout_marginLeft="20dp"/>
+
                <TextView
                    android:id="@+id/txt5"
                    android:text="Quedan "
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="80dp"
-                   android:layout_marginTop="180dp"
+                   android:layout_marginStart="120dp"
+                   android:layout_marginTop="150dp"
                    android:textSize="14sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
@@ -190,8 +281,8 @@
                    android:id="@+id/txtDiasPago"
                    android:text="xx "
                    android:textColor="@color/negroEX"
-                   android:layout_marginStart="140dp"
-                   android:layout_marginTop="180dp"
+                   android:layout_marginStart="180dp"
+                   android:layout_marginTop="150dp"
                    android:textSize="14sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
@@ -202,7 +293,7 @@
                    android:text="Perfecto para quienes buscan el desarrollo profesional"
                    android:textColor="@color/negroEX"
                    android:layout_marginStart="80dp"
-                   android:layout_marginTop="220dp"
+                   android:layout_marginTop="180dp"
                    android:textSize="14sp"
                    android:fontFamily="@font/gotham"
                    android:layout_width="wrap_content"
@@ -211,8 +302,8 @@
                <Button
                    android:id="@+id/btnCancelar_Servi"
                    android:text="Cancelar suscripción"
-                   android:layout_marginTop="280dp"
-                   android:layout_marginStart="70dp"
+                   android:layout_marginTop="220dp"
+                   android:layout_marginStart="90dp"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:layout_marginLeft="40dp" />

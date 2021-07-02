@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="100dp"
+        android:textSize="18sp"
+        android:text="¿Desea agregar el producto?"
+        android:layout_marginLeft="100dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="70dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="80dp">
+
+        <Button
+            android:id="@+id/btnConfirmarProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:fontFamily="@font/gotham"
+            android:text="Agregar" />
+
+        <Button
+            android:id="@+id/btnCancelarProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/rojo"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/gotham"
+            android:text="Cancelar"
+            android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+</LinearLayout>

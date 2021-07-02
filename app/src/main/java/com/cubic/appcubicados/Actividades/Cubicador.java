@@ -1,7 +1,6 @@
 package com.cubic.appcubicados.Actividades;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,27 +9,25 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.cubic.appcubicados.Clases.MyViewModel;
 import com.cubic.appcubicados.Clases.ZoomOutPageTransformer;
-import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_coti_result;
+import com.cubic.appcubicados.Clases.cubic;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_1;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_2;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_3;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_4;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_result;
 import com.cubic.appcubicados.R;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cubicador extends AppCompatActivity{
+public class Cubicador extends AppCompatActivity {
     //Esta lista recibe como parametros fragment
     List<Fragment> fragmentList = new ArrayList<>();
     private FragmentStateAdapter pagerAdapter;
     public static ViewPager2 pager2;
-    TabLayout tabLayout;
+    public static cubic cubicar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,38 +38,15 @@ public class Cubicador extends AppCompatActivity{
         fragmentList.add(new Fragment_cubic_3());
         fragmentList.add(new Fragment_cubic_4());
         fragmentList.add(new Fragment_cubic_result());
-        fragmentList.add(new Fragment_coti_result());
         //View pager con clase adaptadora
         pager2 = findViewById(R.id.vpCubic);
         pagerAdapter = new ScreenSlideAdapter(this);
         pager2.setAdapter(pagerAdapter);
-        tabLayout = findViewById(R.id.tabsCubic);
-        new TabLayoutMediator(tabLayout, pager2,
-                new TabLayoutMediator.TabConfigurationStrategy() {
-                    @Override public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                       tab.view.setClickable(false);
-                       for(int i = 0; i<=position; i++){
-                           if(position == 0){
-                              tab.setText("Inmueble");
-                           } else if(position == 1){
-                               tab.setText("Tipo");
-                           } else if(position == 2){
-                               tab.setText("Construcción");
-                           } else if(position == 3){
-                               tab.setText("Parametros");
-                           } else if(position == 4){
-                               tab.setText("Resultado");
-                           } else if(position == 5){
-                               tab.setText("Cotización");
-                           }
-                       }
-                      // tab.setText("Paso " + (position + 1));
-                    }
-                }).attach();
         pager2.setPageTransformer(new ZoomOutPageTransformer());
-       pager2.setUserInputEnabled(false);
+        pager2.setUserInputEnabled(false);
 
     }
+
     //Este metodo es para cuando el cliente presiona el boton atras en el smartphone
     @Override
     public void onBackPressed() {
@@ -81,7 +55,7 @@ public class Cubicador extends AppCompatActivity{
             //  Botón de retroceso. Esto llama a finish () en esta actividad y abre la pila de actividades.
             super.onBackPressed();
         } else {
-
+            cubicar = new cubic();
             pager2.setCurrentItem(pager2.getCurrentItem() - 1);
 
         }

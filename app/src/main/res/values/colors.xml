@@ -3,6 +3,7 @@
     <color name="purple_200">#FFBB86FC</color>
     <color name="green">#008f39</color>
     <color name="gris">#393939</color>
+    <color name="grisHint">#C6C5C5</color>
     <color  name="negroEX">#161616</color>
     <color name="transps" >#8C000000</color>
     <color name="orange">#fa6600</color>

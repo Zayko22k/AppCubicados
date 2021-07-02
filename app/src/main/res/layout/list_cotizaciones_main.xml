@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/cwMiCotizacion"
+    android:layout_marginTop="16dp"
+    app:cardCornerRadius="8dp"
     android:layout_margin="4dp"
     android:background="@color/black"
     android:orientation="horizontal">
-        <TextView
-            android:id="@+id/verNombreCoti"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+           android:layout_marginTop="15dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/verNombreMiCoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham"
+                android:layout_marginStart="20dp"
+                android:text="Nombre "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginLeft="20dp" />
+
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gotham"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="20dp"
-            android:text="aqui "
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp" />
-    <TextView
-        android:id="@+id/txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="10dp"
-        android:text="Fecha"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_marginLeft="200dp" />
+            android:layout_marginStart="320dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="320dp">
+            <TextView
+                android:id="@+id/txtVerFechaMiCoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:fontFamily="@font/gotham"
+                android:text="Fecha"
+                android:textColor="@color/negroEX"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/txtTotalMiCoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham"
+                android:text="Total"
+                android:textColor="@color/negroEX"
+                android:textSize="18sp" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/verFechaCoti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/gotham"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:text="aqui "
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp" />
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

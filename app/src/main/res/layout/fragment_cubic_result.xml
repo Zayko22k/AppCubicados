@@ -10,7 +10,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp">
+        android:layout_margin="20dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
@@ -47,13 +47,13 @@
                 android:text="NECESITAS: "
                 android:textColor="@color/negroEX"
                 android:textSize="18sp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="110dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/IMGG"
-                android:layout_marginTop="160dp"
+                android:layout_marginTop="150dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="50dp"
                 android:src="@mipmap/icon_saco"
@@ -62,12 +62,12 @@
 
 
             <TextView
-                android:id="@+id/txtAreaResult"
+                android:id="@+id/txtsacosResult"
                 android:text="xxx "
                 android:textColor="@color/negroEX"
                 android:textSize="18sp"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="170dp"
+                android:layout_marginTop="160dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp" />
@@ -77,12 +77,12 @@
                 android:textColor="@color/negroEX"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="215dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:id="@+id/IMGG2"
-                android:layout_marginTop="310dp"
+                android:layout_marginTop="280dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="50dp"
                 android:src="@mipmap/icon_grava"
@@ -93,14 +93,14 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="100dp"
                 android:layout_marginLeft="60dp"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="270dp"
                 android:background="@color/negroEX" />
             <TextView
                 android:id="@+id/txtGravaResult"
                 android:text="GRAVA"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="375dp"
+                android:layout_marginTop="345dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -110,14 +110,14 @@
                 android:text="GRAVA"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="370dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp" />
             <ImageView
                 android:id="@+id/IMGG3"
-                android:layout_marginTop="310dp"
+                android:layout_marginTop="280dp"
                 android:layout_marginStart="140dp"
                 android:layout_width="50dp"
                 android:src="@mipmap/icon_arena"
@@ -128,14 +128,14 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="230dp"
                 android:layout_marginLeft="60dp"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="270dp"
                 android:background="@color/negroEX" />
             <TextView
-                android:id="@+id/txtAremaResult"
+                android:id="@+id/txtArenaResult"
                 android:text="ARENA"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="375dp"
+                android:layout_marginTop="345dp"
                 android:layout_marginStart="140dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,25 +145,25 @@
                 android:text="ARENA 5mm"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="370dp"
                 android:layout_marginStart="120dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp" />
             <ImageView
                 android:id="@+id/IMGG4"
-                android:layout_marginTop="310dp"
+                android:layout_marginTop="280dp"
                 android:layout_marginStart="260dp"
                 android:layout_width="50dp"
                 android:src="@mipmap/icon_agua"
                 android:layout_height="50dp"
                 android:layout_marginLeft="30dp" />
         <TextView
-            android:id="@+id/txtResult"
+            android:id="@+id/txtAguaResult"
             android:text="AGUA"
             android:fontFamily="@font/gotham"
             android:textColor="@color/negroEX"
-            android:layout_marginTop="375dp"
+            android:layout_marginTop="345dp"
             android:layout_marginStart="265dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                 android:text="AGUA"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="400dp"
+                android:layout_marginTop="370dp"
                 android:layout_marginStart="265dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -184,14 +184,14 @@
                 android:fontFamily="@font/gotham"
                 android:textStyle="bold"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="430dp"
+                android:layout_marginTop="410dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp" />
             <ImageView
                 android:id="@+id/IMGG5"
-                android:layout_marginTop="470dp"
+                android:layout_marginTop="445dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="50dp"
                 android:src="@mipmap/icon_saco"
@@ -202,17 +202,17 @@
                 android:text="Rendimiento aproximado"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="470dp"
+                android:layout_marginTop="450dp"
                 android:layout_marginStart="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp" />
             <TextView
-                android:id="@+id/txt7"
+                android:id="@+id/txtDosificacion"
                 android:text="10(sacos/m3)"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="490dp"
+                android:layout_marginTop="475dp"
                 android:layout_marginStart="80dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,19 +222,20 @@
                 android:text="@string/stFragmentCubic_result"
                 android:fontFamily="@font/gotham"
                 android:textColor="@color/negroEX"
-                android:layout_marginTop="540dp"
+                android:layout_marginTop="510dp"
                 android:layout_marginStart="30dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp" />
+
             <Button
                 android:id="@+id/btnCotizar"
                 android:text="Cotizar"
                 android:backgroundTint="@color/orange"
                 android:textColor="@color/white"
                 android:fontFamily="@font/gotham"
-                android:layout_marginStart="120dp"
-                android:layout_marginTop="750dp"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="675dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="150dp" />

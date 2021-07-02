@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/activity_mi_cotizacion"
     android:background="@drawable/fondo_inicio"
     tools:context=".Actividades.MiCotizacion">
     <LinearLayout
@@ -42,7 +43,7 @@
         android:drawableRight="@drawable/ic_search"
         android:layout_marginLeft="5dp" />
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/textLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

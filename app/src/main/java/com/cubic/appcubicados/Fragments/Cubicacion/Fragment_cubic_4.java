@@ -12,16 +12,20 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.cubic.appcubicados.R;
 
+import static com.cubic.appcubicados.Actividades.Cubicador.cubicar;
+
 public class Fragment_cubic_4 extends Fragment {
 
-    TextView txtLargo;
-    TextView txtm3;
-    TextView txtAncho;
-    TextView txtAlto;
-    Button btnCubic;
+   private TextView txtLargo;
+   private TextView txtm3;
+   private TextView txtAncho;
+   private TextView txtAlto;
+   private Button btnCubic;
     @Nullable
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,42 +38,73 @@ public class Fragment_cubic_4 extends Fragment {
         txtm3 = rootView.findViewById(R.id.txtm3);
         btnCubic = rootView.findViewById(R.id.btnIniciarCubic);
         CalcularM3();
-        IniciarCubic();
-        return rootView;
-    }
-    private void IniciarCubic(){
         btnCubic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CalcularCubic();
+                calcularCubic();
             }
         });
+        return rootView;
     }
-    private void CalcularCubic(){
+    public void calcularCubic() {
 
-        if(txtLargo.getText().toString().isEmpty() ||
-        txtAncho.getText().toString().isEmpty() ||
-        txtAlto.getText().toString().isEmpty()){
-            Toast.makeText(null,"Ingresa los campos vacios", Toast.LENGTH_LONG).show();
-        } else{
+        if (txtLargo.getText().toString().isEmpty() ||
+                txtAncho.getText().toString().isEmpty() ||
+                txtAlto.getText().toString().isEmpty() ||
+        txtm3.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Ingresa los campos vacios", Toast.LENGTH_LONG).show();
+        } else {
+            int largo = Integer.parseInt(txtLargo.getText().toString());
+            cubicar.setLargo(largo);
+            int ancho = Integer.parseInt(txtAncho.getText().toString());
+            cubicar.setAncho(ancho);
+            int alto = Integer.parseInt(txtAlto.getText().toString());
+            cubicar.setAlto(alto);
+            double m3 = Double.parseDouble(txtm3.getText().toString());
+            System.out.println(alto);
+            double area = largo * ancho;
+            cubicar.setArea(area);
+            System.out.println(area);
+            double divAlto = (double) alto/100;
+            System.out.println(divAlto);
 
-           int largo = Integer.parseInt(txtLargo.getText().toString());
-           int ancho = Integer.parseInt(txtAncho.getText().toString());
-           int alto = Integer.parseInt(txtAlto.getText().toString());
+            if(cubicar.getIdConstrucciones() == 1){
+                double cal = (double) 180 * m3;
+                double sacos = (double) cal/25;
+                cubicar.setGravillaOcupar(9.0);
+                cubicar.setArenaOcupar(10.0);
+                cubicar.setAguaOcupar(1.5);
+                cubicar.setDosificacion(7);
+                cubicar.setSacosCemento(sacos);
 
-            //Calculo para los sacos de cemento
-           int area = largo * ancho;
-           int altoR = alto /100;
-           int m3 = area * altoR;
-           int cal = 340 * m3;
-           int sacos = cal/25;
-           //Gravilla
-            int cal2 = 1095 * m3;
-            double gravilla = cal2 * 0.72;
-            //Arena
-            int cal3 = 715 * m3;
-            double agua = cal3 * 0.5;
-
+                System.out.println(1);
+            } else if(cubicar.getIdConstrucciones() == 2){
+                double cal = (double) 270 * m3;
+                double sacos = (double) cal/25;
+                cubicar.setGravillaOcupar(6.0);
+                cubicar.setArenaOcupar(7.0);
+                cubicar.setAguaOcupar(1.0);
+                cubicar.setDosificacion(10);
+                cubicar.setSacosCemento(sacos);
+                System.out.println(2);
+            } else if(cubicar.getIdConstrucciones() == 3){
+                double cal = (double) 370 * m3;
+                double sacos = (double) cal/25;
+                cubicar.setGravillaOcupar(4.0);
+                cubicar.setArenaOcupar(4.0);
+                cubicar.setAguaOcupar(1.0);
+                cubicar.setDosificacion(15);
+                cubicar.setSacosCemento(sacos);
+                System.out.println(3);
+            }
+            cubicar.setM3(m3);
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            Fragment_cubic_result fragment1 = new Fragment_cubic_result();
+            manager.beginTransaction()
+                    .replace(R.id.activity_cubicar, fragment1)
+                    .addToBackStack(null)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
         }
     }
     private void CalcularM3(){
@@ -108,4 +143,5 @@ public class Fragment_cubic_4 extends Fragment {
             }
         });
     }
+
 }

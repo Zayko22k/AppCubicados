@@ -1,12 +1,15 @@
 <resources>
     <string name="app_name">AppCubicados</string>
     <!-- TODO: String ocupados en la App -->
+    <!--    Main_activity-->
+    <string name="hyperlink">Olvidaste tu contraseña? at\n<a href="https://learntodroid.com">¡Recuperala Aqui!</a></string>
+    <string name="ip">192.168.1.10</string>
     <!--String Fragment_cubic_1    -->
     <string name="stFragmentCubic_1">Dinos el Inmueble:</string>
     <!-- String Fragment_cubic_2 -->
     <string name="stFragmentCubic_2">Inmueble Seleccionado:</string>
     <!-- String Fragment_cubic_3 -->
-    <string name="stFragmentCubic_3">¿Que quieres construir?</string>
+    <string name="stFragmentCubic_3">¿Que quieres cubicar?</string>
     <!--    2st String Fragmnent_cubic_4-->
     <!-- String Fragment_cubic_4 -->
     <string name="stFragmentCubic_4">Si conoces las dimensiones de tu proyecto, ingresalas aqui</string>
@@ -19,6 +22,8 @@
         cliente demore en la aplicación, etc. Sin perjuicio de lo anterior, se sugiere
         seguir las recomendaciones de la que dispone el material indicadas en el cubicados
         para la preparación del horimigon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
 

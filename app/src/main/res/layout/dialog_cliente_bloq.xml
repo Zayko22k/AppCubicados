@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:background="@color/negroEX"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text1"
+        android:text="¡Advertencia!"
+        android:textSize="18sp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/text2"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:fontFamily="@font/gotham"
+            android:text="**¡OJO! Actualmente estas bloqueado dirijase a nuestra web para la renovacion del pago"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnRenovarPago"
+            android:text="Renovar"
+            android:layout_marginStart="50dp"
+            android:fontFamily="@font/gotham"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp" />
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_marginStart="30dp"
+            android:backgroundTint="@color/rojo"
+            android:text="Cancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp" />
+    </LinearLayout>
+</LinearLayout>

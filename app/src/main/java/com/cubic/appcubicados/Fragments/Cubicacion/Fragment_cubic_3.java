@@ -11,13 +11,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cubic.appcubicados.Adaptadores.AdaptadorCons;
 import com.cubic.appcubicados.Modelos.Construcciones;
 import com.cubic.appcubicados.R;
-import com.cubic.appcubicados.Retrofit.RetrofitConstrucciones;
+import com.cubic.appcubicados.Retrofit.RetrofitBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.cubic.appcubicados.Actividades.Cubicador.pager2;
+import static com.cubic.appcubicados.Actividades.Cubicador.cubicar;
 
 public class Fragment_cubic_3 extends Fragment {
 
@@ -44,7 +46,7 @@ public class Fragment_cubic_3 extends Fragment {
         return rootView;
     }
     private void verCons(){
-        Call<List<Construcciones>> construccionesCall = RetrofitConstrucciones.getApiService().indexConstrucciones();
+        Call<List<Construcciones>> construccionesCall = RetrofitBuilder.construccionesService.indexConstrucciones();
         construccionesCall.enqueue(new Callback<List<Construcciones>>() {
             @Override
             public void onResponse(Call<List<Construcciones>> call, Response<List<Construcciones>> response) {
@@ -82,17 +84,17 @@ public class Fragment_cubic_3 extends Fragment {
                     if (child != null && mGestureDetector.onTouchEvent(e)) {
                         int position = rvCons.getChildAdapterPosition(child);
                         Toast.makeText(getContext(), "Item id: " + construccionesList.get(position).getIdConstrucciones(), Toast.LENGTH_SHORT).show();
-                        pager2.setCurrentItem(3);
-                           /* listaa.add(listaBot.get(position).getDescripcion());
-                            listaa.add(String.valueOf(listaBot.get(position).getValor()));
-                            listaa.add(String.valueOf(listaBot.get(position).getStock()));
-                            listaa.add(listaBot.get(position).getCategoria());
-                            listaa.add(String.valueOf(listaBot.get(position).getTipo_Alchol_idTipoA()));
-                            listaa.add(String.valueOf(listaBot.get(position).getId()));
-                            listaa.add(listaBot.get(position).getUrlImagen());
-                            System.out.println("" + listaBot.get(position).getUrlImagen());
-                            inte.putExtra("botel", listaa);
-                            startActivity(inte);*/
+                        String data = construccionesList.get(position).getNomConstr();
+                        cubicar.setNomConstruccionSelect(data);
+                        cubicar.setIdConstrucciones(construccionesList.get(position).getIdConstrucciones());
+                        FragmentManager manager = getActivity().getSupportFragmentManager();
+                        Fragment_cubic_4 fragment1 = new Fragment_cubic_4();
+
+                        manager.beginTransaction()
+                                .replace(R.id.activity_cubicar, fragment1)
+                                .addToBackStack(null)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .commit();
                         return true;
 
                     }
