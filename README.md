@@ -7,9 +7,52 @@ _Aplicación para cubicar superficies en el area de la construcción_
 _Primero es Importar las siguientes dependencias al Gradle del proyecto_
 
 ```
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    packagingOptions {
+        pickFirst 'androidsupportmultidexversion.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.cubic.appcubicados"
+        minSdkVersion 16
+        targetSdkVersion 30
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
 dependencies {
 
-   implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'org.jsoup:jsoup:1.13.1'
@@ -34,7 +77,6 @@ dependencies {
     implementation 'com.srxlike.itextpdf:itextpdf:1.0.12.1'
     implementation 'com.itextpdf:itext7-core:7.1.8'
     implementation 'com.android.support:multidex:1.0.3'
-
 }
 ```
 _Segundo es configurar el AndroidManifest.xml esto es para el acceso de Internet_
