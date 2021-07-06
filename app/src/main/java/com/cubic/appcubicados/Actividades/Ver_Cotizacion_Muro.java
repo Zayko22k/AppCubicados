@@ -49,8 +49,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Ver_Cotizacion extends AppCompatActivity {
-
+public class Ver_Cotizacion_Muro extends AppCompatActivity {
     private TextView txtNombreCoti;
     private TextView txtFechaCoti;
     private ImageView imgMaterial;
@@ -59,96 +58,79 @@ public class Ver_Cotizacion extends AppCompatActivity {
     private TextView txtCproyecto;
     private TextView txtAnchoProyecto;
     private TextView txtLargoProyecto;
-    private TextView txtAlturaProyecto;
-    private TextView txtM3Proyecto;
-    private TextView txtCantSacosProyecto;
-    private TextView txtGravaProyecto;
-    private TextView txtArenaProyecto;
-    private TextView txtAguaProyecto;
-    private TextView txtSacosxM3;
+    private TextView txtM2Proyecto;
+    private TextView txtCantLitros;
+    private TextView txtLitrosxM2;
     private TextView txtTiendaMaterial;
     private TextView txtMarcaMaterial;
     private TextView txtDescripcionMaterial;
     private TextView txtPrecioMaterial;
-    private TextView txtTotalMaterial;
     private TextView txtDespachoMaterial;
     private TextView txtRetiroMaterial;
     private TextView btnExportarCoti;
     private TextView btnEliminarCoti;
 
+
     String NOMBRE_DIRECTORIO = "CotizacionCubica2";
     DetalleCotizacion detalleCotizacion = new DetalleCotizacion();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_cotizacion);
-        detalleCotizacion = (DetalleCotizacion)getIntent().getSerializableExtra("detalleCoti");
-
+        setContentView(R.layout.activity_ver_cotizacion_muro);
+        detalleCotizacion = (DetalleCotizacion) getIntent().getSerializableExtra("detalleCoti");
         //Ficha Tecnica
-        txtNombreCoti = findViewById(R.id.verNombreCoti);
-        txtFechaCoti = findViewById(R.id.txtVerFechaCoti);
-        txtInmuebleProyecto = findViewById(R.id.txtInmCoti);
-        txtTCproyecto = findViewById(R.id.txtTCCoti);
-        txtCproyecto = findViewById(R.id.txtCCoti);
-        txtAnchoProyecto = findViewById(R.id.txtAnchoCoti);
-        txtLargoProyecto = findViewById(R.id.txtLargoCoti);
-        txtAlturaProyecto = findViewById(R.id.txtAltoCoti);
-        txtM3Proyecto = findViewById(R.id.txtM3Coti);
-        txtCantSacosProyecto = findViewById(R.id.txtsacosCoti);
-        txtGravaProyecto = findViewById(R.id.txtGravaCoti);
-        txtArenaProyecto = findViewById(R.id.txtArenaCoti);
-        txtAguaProyecto = findViewById(R.id.txtAguaCoti);
-        txtSacosxM3 = findViewById(R.id.txtDosificacionCoti);
+        txtNombreCoti = findViewById(R.id.verNombreCotiMuro);
+        txtFechaCoti = findViewById(R.id.txtVerFechaCotiMuro);
+        txtInmuebleProyecto = findViewById(R.id.txtVerInmProyectoMuro);
+        txtTCproyecto = findViewById(R.id.txtVerTCproyectoMuro);
+        txtCproyecto = findViewById(R.id.txtVerCproyectoMuro);
+        txtAnchoProyecto = findViewById(R.id.txtVerAnchoProyectoMuro);
+        txtLargoProyecto = findViewById(R.id.txtVerLargoProyectoMuro);
+        txtM2Proyecto = findViewById(R.id.txtVerM2ProyectoMuro);
+        txtCantLitros = findViewById(R.id.txtVerLitrosResultMuro);
+        txtLitrosxM2 = findViewById(R.id.txtVerDosificacionProyectoMuro);
         //Material
-        imgMaterial = findViewById(R.id.imgMaterialCoti);
-        txtTiendaMaterial = findViewById(R.id.txtTiendaCoti);
-        txtMarcaMaterial = findViewById(R.id.txtMarcaMaterialCoti);
-        txtDescripcionMaterial = findViewById(R.id.txtDescripcionMaterialCoti);
-        txtPrecioMaterial = findViewById(R.id.txtPrecioMaterialCoti);
-        txtTotalMaterial = findViewById(R.id.txtTotalMaterialCoti);
-        txtDespachoMaterial = findViewById(R.id.txtDespachoMaterialCoti);
-        txtRetiroMaterial = findViewById(R.id.txtRetiroMaterialCoti);
+        imgMaterial = findViewById(R.id.verImgMaterialMuro);
+        txtTiendaMaterial = findViewById(R.id.txtVerTiendaMaterialMuro);
+        txtMarcaMaterial = findViewById(R.id.txtVerMarcaMaterialMuro);
+        txtDescripcionMaterial = findViewById(R.id.txtVerDescripcionMaterialMuro);
+        txtPrecioMaterial = findViewById(R.id.txtVerPrecioMaterialMuro);
+        txtDespachoMaterial = findViewById(R.id.txtVerDespachoMaterialMuro);
+        txtRetiroMaterial = findViewById(R.id.txtVerRetiroMaterialMuro);
         btnExportarCoti = findViewById(R.id.btnExportCoti);
         btnEliminarCoti = findViewById(R.id.btnEliminarCoti);
-        cargarCotizacion();
-    }
-    private void cargarCotizacion(){
-      try{
-          System.out.println("Id de detalle"+detalleCotizacion.getIdDetalleCoti());
-          txtNombreCoti.setText(detalleCotizacion.getNombreCoti());
-          String s = new SimpleDateFormat("MM/dd/yyyy").format(detalleCotizacion.getCreated_at());
-          txtFechaCoti.setText(s);
-          Picasso.get().load(detalleCotizacion.getImagenMaterial()).into(imgMaterial);
-          txtInmuebleProyecto.setText(detalleCotizacion.getNomInmueble());
-          txtTCproyecto.setText(detalleCotizacion.getNomTipoCons());
-          txtCproyecto.setText(detalleCotizacion.getNomConstr());
-          txtAnchoProyecto.setText(detalleCotizacion.getAncho()+" mts");
-          txtLargoProyecto.setText(detalleCotizacion.getLargo()+ " mts");
-          txtAlturaProyecto.setText(detalleCotizacion.getProfundidad()+" cms");
-          txtM3Proyecto.setText(detalleCotizacion.getM3() + " M³");
-          txtCantSacosProyecto.setText(Math.round(detalleCotizacion.getCantidad()) + " sacos de cemento necesitas");
-          txtGravaProyecto.setText(String.valueOf(detalleCotizacion.getGrava()));
-          txtArenaProyecto.setText(String.valueOf(detalleCotizacion.getArena()));
-          txtAguaProyecto.setText(String.valueOf(detalleCotizacion.getAgua()));
-          txtSacosxM3.setText(detalleCotizacion.getDosificacion()+" (Sacos/M³)");
-          txtTiendaMaterial.setText(detalleCotizacion.getNomTienda());
-          txtMarcaMaterial.setText(detalleCotizacion.getMarcaMaterial());
-          txtDescripcionMaterial.setText(detalleCotizacion.getDescripcionMaterial());
-          String pr = String.valueOf(detalleCotizacion.getPrecio());
-          System.out.println(""+pr);
-          String subCadena = pr.substring(0, 5);
-          StringBuilder pre = new StringBuilder(subCadena);
-          System.out.println("Precio ajustado: "+pre.toString());
-          txtPrecioMaterial.setText("$ " + pre.toString() + " C/U");
-          txtTotalMaterial.setText("$ " + detalleCotizacion.getTotal() + " por los " + Math.round(detalleCotizacion.getCantidad()) + " sacos");
-          txtDespachoMaterial.setText(detalleCotizacion.getDespacho());
-          txtRetiroMaterial.setText(detalleCotizacion.getRetiro());
-      }catch (Exception e){
-          Toast.makeText(Ver_Cotizacion.this,"No se pudo cargar la cotizacion", Toast.LENGTH_LONG).show();
-      }
+
+        cargarCotizacionMuro();
     }
 
-    public void exportarCoti(View v){
+    private void cargarCotizacionMuro() {
+        try {
+            System.out.println("Id de detalle" + detalleCotizacion.getIdDetalleCoti());
+            txtNombreCoti.setText(detalleCotizacion.getNombreCoti());
+            String s = new SimpleDateFormat("MM/dd/yyyy").format(detalleCotizacion.getCreated_at());
+            txtFechaCoti.setText(s);
+            Picasso.get().load(detalleCotizacion.getImagenMaterial()).into(imgMaterial);
+            txtInmuebleProyecto.setText(detalleCotizacion.getNomInmueble());
+            txtTCproyecto.setText(detalleCotizacion.getNomTipoCons());
+            txtCproyecto.setText(detalleCotizacion.getNomConstr());
+            txtAnchoProyecto.setText(detalleCotizacion.getAncho() + " mts");
+            txtLargoProyecto.setText(detalleCotizacion.getLargo() + " mts");
+            txtM2Proyecto.setText(detalleCotizacion.getArea() + " M²");
+            txtCantLitros.setText(Math.round(detalleCotizacion.getCantidad()) + " Litros aprox necesitas");
+            txtLitrosxM2.setText(detalleCotizacion.getDosificacion() + " (mts2 / litro)");
+            txtTiendaMaterial.setText(detalleCotizacion.getNomTienda());
+            txtMarcaMaterial.setText(detalleCotizacion.getMarcaMaterial());
+            txtDescripcionMaterial.setText(detalleCotizacion.getDescripcionMaterial());
+            txtPrecioMaterial.setText("$ " + detalleCotizacion.getPrecio() + " C/U");
+            txtDespachoMaterial.setText(detalleCotizacion.getDespacho());
+            txtRetiroMaterial.setText(detalleCotizacion.getRetiro());
+        } catch (Exception e) {
+            Toast.makeText(Ver_Cotizacion_Muro.this, "No se pudo cargar la cotizacion", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void exportarCotiMuro(View v) {
         // Permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED &&
@@ -157,15 +139,17 @@ public class Ver_Cotizacion extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,},
                     1000);
         }
-        crearPDF();
-        Toast.makeText(Ver_Cotizacion.this,"Se creo el pdf", Toast.LENGTH_SHORT).show();
+        crearPDFMuro();
+        Toast.makeText(Ver_Cotizacion_Muro.this, "Se creo el pdf", Toast.LENGTH_SHORT).show();
 
     }
-    public void crearPDF() {
+
+    public void crearPDFMuro() {
         Document documento = new Document(PageSize.A4, 20, 20, 20, 20);
 
         try {
-            File file = crearFichero("Proyecto_"+ txtNombreCoti.getText().toString()+".pdf");
+
+            File file = crearFicheroMuro("Proyecto_" + txtNombreCoti.getText().toString() + ".pdf");
             FileOutputStream ficheroPDF = new FileOutputStream(file.getAbsolutePath());
 
             PdfWriter writer = PdfWriter.getInstance(documento, ficheroPDF);
@@ -212,43 +196,60 @@ public class Ver_Cotizacion extends AppCompatActivity {
             parrafo3.setAlignment(Element.ALIGN_LEFT);
             documento.add(parrafo3);
             // Insertamos una tabla__2
-            PdfPTable tabla2 = new PdfPTable(8);
+            PdfPTable tabla2 = new PdfPTable(4);
             PdfPCell cell2 = new PdfPCell(new Paragraph("Diámetros del proyecto", FontFactory.getFont("Microsoft YaHei UI",
                     11,
                     Font.BOLD)));
-            cell2.setColspan(16);
+            cell2.setColspan(8);
             cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell2.setBackgroundColor(BaseColor.LIGHT_GRAY);
             tabla2.setHorizontalAlignment(Element.ALIGN_LEFT);
             tabla2.addCell(cell2);
             tabla2.addCell("Ancho(mts)");
-            tabla2.addCell("Alto(cms)");
             tabla2.addCell("Largo(mts)");
-            tabla2.addCell("M3");
-            tabla2.addCell("Cantidad de sacos");
-            tabla2.addCell("Grava");
-            tabla2.addCell("Arena");
-            tabla2.addCell("Agua");
+            tabla2.addCell("M2");
+            tabla2.addCell("Cantidad de Litros aprox");
             tabla2.addCell(txtAnchoProyecto.getText().toString());
-            tabla2.addCell(txtAlturaProyecto.getText().toString());
             tabla2.addCell(txtLargoProyecto.getText().toString());
-            tabla2.addCell(txtM3Proyecto.getText().toString());
-            tabla2.addCell(txtCantSacosProyecto.getText().toString());
-            tabla2.addCell(txtGravaProyecto.getText().toString());
-            tabla2.addCell(txtArenaProyecto.getText().toString());
-            tabla2.addCell(txtAguaProyecto.getText().toString());
+            tabla2.addCell(txtM2Proyecto.getText().toString());
+            tabla2.addCell(txtCantLitros.getText().toString());
             //Añadimos la tabla__2
             documento.add(tabla2);
-            documento.add(new Paragraph("\n\n **Considera utilizar baldes de 10 litros \n\n", FontFactory.getFont("Microsoft YaHei UI",
+            documento.add(new Paragraph("\n\n **Considera estas manos por tipo de pared** \n\n", FontFactory.getFont("Microsoft YaHei UI",
                     11,
                     Font.ITALIC)));
-            documento.add(new Paragraph("Rendimiento aproximado\n\n", FontFactory.getFont("Microsoft YaHei UI",
+            documento.add(new Paragraph("Pared pintada con el mismo color | 2 Manos\n\n", FontFactory.getFont("Microsoft YaHei UI",
                     11,
                     Font.ITALIC)));
-            documento.add(new Paragraph(txtSacosxM3.getText().toString() + " (sacos/m3) **\n\n", FontFactory.getFont("Microsoft YaHei UI",
+            documento.add(new Paragraph("Pared sin pintar | 3 Manos o mas\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11,
+                    Font.ITALIC)));
+            documento.add(new Paragraph("Pared de material absorvente o irregular | 3 Manos o mas\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11,
+                    Font.ITALIC)));
+            documento.add(new Paragraph("Tipo de Diluyente según pintura\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    13,
+                    Font.BOLD)));
+            documento.add(new Paragraph("Esmalte al agua: Agua\n\n", FontFactory.getFont("Microsoft YaHei UI",
                     11)));
-            documento.add(new Paragraph("Ficha Material\n\n", FontFactory.getFont("Microsoft YaHei UI",
-                    11,
+            documento.add(new Paragraph("Latex: Agua\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+            documento.add(new Paragraph("Esmalte sintético: Aguarrás o diluyente sintético\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+            documento.add(new Paragraph("Oleo: Aguarrás o diluyente sintético\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+            documento.add(new Paragraph("Cantidad diluyente según herramienta\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    13,
+                    Font.BOLD)));
+            documento.add(new Paragraph("Brocha o rodillo: 5% de diluyente respecto cantidad total de pintura\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+            documento.add(new Paragraph("Pistola: 10% de diluyente respecto cantidad total de pintura\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+
+            documento.add(new Paragraph(txtLitrosxM2.getText().toString() + " (mts2 / litro) **\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    11)));
+            documento.add(new Paragraph("\n\n Ficha Material\n\n", FontFactory.getFont("Microsoft YaHei UI",
+                    13,
                     Font.BOLD)));
             //Tabla 3
             // Insertamos una tabla__2
@@ -283,20 +284,6 @@ public class Ver_Cotizacion extends AppCompatActivity {
             tabla3.addCell(imagen2);
             //Añadimos la tabla__3
             documento.add(tabla3);
-            // Insertamos una tabla__4
-            PdfPTable tabla4 = new PdfPTable(2);
-            PdfPCell cell4 = new PdfPCell();
-            cell4.setColspan(4);
-            tabla4.setTotalWidth(150f);
-            tabla4.setLockedWidth(true);
-            cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
-            tabla4.setHorizontalAlignment(Element.ALIGN_LEFT);
-            tabla4.addCell(cell4);
-            tabla4.addCell("Total");
-            tabla4.addCell(txtTotalMaterial.getText().toString());
-            //Añadimos la tabla
-            documento.add(new Paragraph("\n\n"));
-            documento.add(tabla4);
             int year = Calendar.getInstance().get(Calendar.YEAR);
             System.out.println("" + year);
             documento.add(new Paragraph("\n\n"));
@@ -314,8 +301,8 @@ public class Ver_Cotizacion extends AppCompatActivity {
     }
 
 
-    public File crearFichero(String nombreFichero) {
-        File ruta = getRuta();
+    public File crearFicheroMuro(String nombreFichero) {
+        File ruta = getRutaMuro();
 
         File fichero = null;
         if (ruta != null) {
@@ -325,7 +312,7 @@ public class Ver_Cotizacion extends AppCompatActivity {
         return fichero;
     }
 
-    public File getRuta() {
+    public File getRutaMuro() {
         File ruta = null;
 
         if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
@@ -342,7 +329,8 @@ public class Ver_Cotizacion extends AppCompatActivity {
         }
         return ruta;
     }
-    public void eliminarCoti(View v){
+
+    public void eliminarCotiMuro(View v) {
         Dialog dialog = new Dialog(v.getContext());
         dialog.setContentView(R.layout.dialog_eliminar_coti);
         int witdh = WindowManager.LayoutParams.MATCH_PARENT;
@@ -354,9 +342,9 @@ public class Ver_Cotizacion extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteCoti();
-                Toast.makeText(Ver_Cotizacion.this, "Cotización borrada",Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Ver_Cotizacion.this, MiCotizacion.class);
+                deleteCotiMuro();
+                Toast.makeText(Ver_Cotizacion_Muro.this, "Cotización borrada", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Ver_Cotizacion_Muro.this, MiCotizacion.class);
                 startActivity(i);
 
             }
@@ -369,12 +357,13 @@ public class Ver_Cotizacion extends AppCompatActivity {
         });
 
     }
-    private void deleteCoti(){
+
+    private void deleteCotiMuro() {
         Call<List<DetalleCotizacion>> detalleCotizacionCall = RetrofitBuilder.detalleCotizacionService.deleteCotizacion(detalleCotizacion.getIdDetalleCoti());
         detalleCotizacionCall.enqueue(new Callback<List<DetalleCotizacion>>() {
             @Override
             public void onResponse(Call<List<DetalleCotizacion>> call, Response<List<DetalleCotizacion>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
 
                 }
             }
@@ -384,6 +373,10 @@ public class Ver_Cotizacion extends AppCompatActivity {
 
             }
         });
-
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Ver_Cotizacion_Muro.this, MiCotizacion.class);
+        startActivity(i);
     }
 }

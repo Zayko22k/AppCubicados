@@ -1,5 +1,6 @@
 package com.cubic.appcubicados.Actividades;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -69,22 +70,20 @@ public class Perfil extends AppCompatActivity {
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+
     public void IsFinish(String msjAlert) {
 
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
 
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        android.os.Process.killProcess(android.os.Process.myPid());
-                        // This above line close correctly
-                        //finish();
-                        break;
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    // This above line close correctly
+                    //finish();
+                    break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
 
@@ -94,7 +93,35 @@ public class Perfil extends AppCompatActivity {
                 .setNegativeButton("Quedarse", dialogClickListener).show();
 
     }
+    private void cargarDiasRestantes(int usID){
+            Call<Integer> integerCall = RetrofitBuilder.arriendoService.getDias(usID);
+            integerCall.enqueue(new Callback<Integer>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    if(response.isSuccessful()){
+                      int diasRest =  response.body();
+                      if(diasRest == 31){
+                          Intent i = new Intent(Perfil.this, MainActivity.class);
+                          startActivity(i);
+                      }
+                      System.out.println("Dias restantes"+response.body());
+                       diasPago.setText(diasRest+" dias");
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+
+                }
+            });
+    }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+       Intent i = new Intent(Perfil.this, VistaUsuario.class);
+       startActivity(i);
+    }
     private void cargarUsuario() {
         //Datos Usuario
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("userP", MODE_PRIVATE);
@@ -124,6 +151,7 @@ public class Perfil extends AppCompatActivity {
                         nombre_Servicio.setText(arriendoList.get(i).getNombre());
                         precio_Servicio.setText("$ " + arriendoList.get(i).getPrecio() + " X MES");
                         a.setCreated_at(arriendoList.get(i).getCreated_at());
+                        cargarDiasRestantes(usr.getId());
                     }
                     System.out.println(a.getCreated_at());
                 }
@@ -134,5 +162,6 @@ public class Perfil extends AppCompatActivity {
                 Log.d("Error: ", t.getMessage());
             }
         });
+
     }
 }

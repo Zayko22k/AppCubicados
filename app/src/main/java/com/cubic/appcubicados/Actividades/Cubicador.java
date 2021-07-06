@@ -1,5 +1,8 @@
 package com.cubic.appcubicados.Actividades;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +17,11 @@ import com.cubic.appcubicados.Clases.cubic;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_1;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_2;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_3;
-import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_4;
+import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_calculo_rev2;
+import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_calculo_rev_nw;
+import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_calculo_sup;
 import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_result;
+import com.cubic.appcubicados.Fragments.Cubicacion.Fragment_cubic_result_rev;
 import com.cubic.appcubicados.R;
 
 import java.util.ArrayList;
@@ -36,8 +42,11 @@ public class Cubicador extends AppCompatActivity {
         fragmentList.add(new Fragment_cubic_1());
         fragmentList.add(new Fragment_cubic_2());
         fragmentList.add(new Fragment_cubic_3());
-        fragmentList.add(new Fragment_cubic_4());
+        fragmentList.add(new Fragment_cubic_calculo_rev_nw());
+        fragmentList.add(new Fragment_cubic_calculo_rev2());
+        fragmentList.add(new Fragment_cubic_calculo_sup());
         fragmentList.add(new Fragment_cubic_result());
+        fragmentList.add(new Fragment_cubic_result_rev());
         //View pager con clase adaptadora
         pager2 = findViewById(R.id.vpCubic);
         pagerAdapter = new ScreenSlideAdapter(this);
@@ -50,15 +59,35 @@ public class Cubicador extends AppCompatActivity {
     //Este metodo es para cuando el cliente presiona el boton atras en el smartphone
     @Override
     public void onBackPressed() {
-        if (pager2.getCurrentItem() == 0) {
-            //Si el usuario está mirando actualmente el primer paso, permite que el sistema maneje el
-            //  Botón de retroceso. Esto llama a finish () en esta actividad y abre la pila de actividades.
-            super.onBackPressed();
-        } else {
-            cubicar = new cubic();
-            pager2.setCurrentItem(pager2.getCurrentItem() - 1);
+
+        IsFinish("¿Volver a inicio?");
 
         }
+    public void IsFinish(String msjAlert) {
+
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Intent i = new Intent(Cubicador.this, VistaUsuario.class);
+                        startActivity(i);
+                        // This above line close correctly
+                        //finish();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(Cubicador.this);
+        builder.setMessage(msjAlert)
+                .setPositiveButton("Salir", dialogClickListener)
+                .setNegativeButton("Quedarse", dialogClickListener).show();
+
     }
 
     /*Adaptador que realiza el conteo de elementos que tiene la lista fragmentlist

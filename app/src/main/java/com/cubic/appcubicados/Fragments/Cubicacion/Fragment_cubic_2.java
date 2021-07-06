@@ -101,7 +101,8 @@ public class Fragment_cubic_2 extends Fragment implements Serializable {
                         Toast.makeText(getContext(), "Item " + tipoConstruccionList.get(position).getIdTipoConstruccion(), Toast.LENGTH_SHORT).show();
                         String data = tipoConstruccionList.get(position).getNomTipoCons();
                         cubicar.setNomTipoConstruccionSelect(data);
-
+                        cubicar.setIdTipoConstruccion(tipoConstruccionList.get(position).getIdTipoConstruccion());
+                        System.out.println(tipoConstruccionList.get(position).getIdTipoConstruccion());
                         FragmentManager manager = getActivity().getSupportFragmentManager();
                         Fragment_cubic_3 fragment1 = new Fragment_cubic_3();
                         manager.beginTransaction()

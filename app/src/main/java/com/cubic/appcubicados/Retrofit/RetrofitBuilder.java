@@ -2,7 +2,7 @@ package com.cubic.appcubicados.Retrofit;
 
 import com.cubic.appcubicados.Servicios.ArriendoService;
 import com.cubic.appcubicados.Servicios.AsistenciaService;
-import com.cubic.appcubicados.Servicios.CementoService;
+import com.cubic.appcubicados.Servicios.MaterialService;
 import com.cubic.appcubicados.Servicios.ConstruccionesService;
 import com.cubic.appcubicados.Servicios.CubicacionService;
 import com.cubic.appcubicados.Servicios.DetalleCotizacionService;
@@ -58,7 +58,7 @@ public class RetrofitBuilder {
     public static CubicacionService cubicacionService = retrofit.create(CubicacionService.class);
     public static DetalleCotizacionService detalleCotizacionService = retrofit.create(DetalleCotizacionService.class);
     public static InmuebleService inmuebleService = retrofit.create(InmuebleService.class);
-    public static CementoService cementoService = retrofit.create(CementoService.class);
+    public static MaterialService cementoService = retrofit.create(MaterialService.class);
     public static RegionService regionService = retrofit.create(RegionService.class);
     public static TiendaService tiendaService = retrofit.create(TiendaService.class);
     public static TipoConstruccionService tipoConstruccionService = retrofit.create(TipoConstruccionService.class);

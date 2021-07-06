@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/fragment_cubic_result"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Cubicacion.Fragment_cubic_result_rev">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txt"
+                android:text="TU PROYECTO MIDE: "
+                android:textSize="18sp"
+                android:textColor="@color/negroEX"
+                android:fontFamily="@font/gotham"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/txtt"
+                android:text="INMUEBLE: "
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="30dp"
+                android:src="@mipmap/icon_area_m2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txtMedidaResult_rev"
+                android:text="xxxx "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp" />
+            <TextView
+                android:text="Tipo de Pintura:"
+                android:layout_marginTop="120dp"
+                android:fontFamily="@font/gotham"
+                android:textSize="18sp"
+                android:textColor="@color/negroEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/IMGG6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:src="@mipmap/bote_icon"
+                android:layout_marginTop="170dp" />
+            <TextView
+                android:id="@+id/txtTipodePintura"
+                android:text="xx"
+                android:layout_marginTop="175dp"
+                android:fontFamily="@font/gotham"
+                android:layout_marginStart="100dp"
+                android:textSize="18sp"
+                android:textColor="@color/negroEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp" />
+            <TextView
+                android:text="Rendimiento por m2/litro"
+                android:layout_marginTop="120dp"
+                android:fontFamily="@font/gotham"
+                android:layout_marginStart="240dp"
+                android:textSize="18sp"
+                android:textColor="@color/negroEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp" />
+            <TextView
+                android:id="@+id/txtRendimientoporLitro"
+                android:text="xxx"
+                android:layout_marginTop="175dp"
+                android:fontFamily="@font/gotham"
+                android:textSize="18sp"
+                android:layout_marginStart="260dp"
+                android:textColor="@color/negroEX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="200dp" />
+            <TextView
+                android:id="@+id/txtt1"
+                android:text="NECESITAS: "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginTop="260dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/IMGG"
+                android:layout_marginTop="300dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_pintura"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+
+
+            <TextView
+                android:id="@+id/txtLitrosResult"
+                android:text="xxx "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="305dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp" />
+            <TextView
+                android:id="@+id/txtt5"
+                android:text="Herramienta a utilizar:"
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginTop="375dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/txtHerramResult"
+                android:text="xxx "
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="410dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp" />
+            <ImageView
+                android:id="@+id/IMGG3"
+                android:layout_marginTop="400dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon__herramienta"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txtt6"
+                android:text="Diluyente:"
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginTop="495dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/txtNombreDiluyente"
+                android:text="xxxx:"
+                android:textColor="@color/negroEX"
+                android:textSize="18sp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="495dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp" />
+
+            <ImageView
+                android:id="@+id/IMGG5"
+                android:layout_marginTop="545dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="50dp"
+                android:src="@mipmap/icon_agua"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp" />
+            <TextView
+                android:id="@+id/txtCantidadDeDiluyente"
+                android:text="xxx"
+                android:fontFamily="@font/gotham"
+                android:textColor="@color/negroEX"
+                android:layout_marginTop="555dp"
+                android:layout_marginStart="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp" />
+
+            <Button
+                android:id="@+id/btnCotizarPintura"
+                android:text="Cotizar"
+                android:backgroundTint="@color/orange"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gotham"
+                android:layout_marginStart="130dp"
+                android:layout_marginTop="675dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="150dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+</FrameLayout>

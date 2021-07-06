@@ -25,6 +25,9 @@
         android:theme="@style/Theme.AppCubicados"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
+        <activity android:name=".Actividades.Ver_Cotizacion_Muro"></activity>
+        <activity android:name=".Actividades.CrearCotizacionPintura" />
+        <activity android:name=".Actividades.CotizacionPintura" />
         <activity android:name=".Actividades.Ver_Cotizacion" />
         <activity android:name=".Actividades.CrearCotizacion" />
         <activity android:name=".Actividades.CotizacionCemento" />

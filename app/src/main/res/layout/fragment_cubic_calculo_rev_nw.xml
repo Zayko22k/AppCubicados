@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/fragment_cubic_4"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.Cubicacion.Fragment_cubic_calculo_rev_nw">
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:text="Ingresa las medidas de tu Muro (mts)"
+        android:textColor="@color/negroEX"
+        android:textSize="18sp"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="20dp"
+        android:fontFamily="@font/gotham"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp">
+        <!--Text input 1-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout1"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/gotham"
+            android:textColor="@color/negroEX"
+            android:textColorHint="@color/negroEX"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtLargoMuroNW"
+                android:drawableEnd="@mipmap/icon_mts"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:fontFamily="@font/gotham"
+                android:inputType="number"
+                android:hint="Largo"
+                android:textColor="@color/negroEX"
+                android:drawableRight="@mipmap/icon_mts" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--Text input 2-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gotham"
+            android:textColor="@color/negroEX"
+            android:textColorHint="@color/negroEX"
+            app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtAnchoMuroNW"
+                android:layout_width="180dp"
+                android:drawableEnd="@mipmap/icon_mts"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:inputType="number"
+                android:fontFamily="@font/gotham"
+                android:hint="Ancho"
+                android:textColor="@color/negroEX"
+                android:drawableRight="@mipmap/icon_mts" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnSiguienteCubicRevNW"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gotham"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Siguiente"
+        android:layout_marginLeft="120dp" />
+</LinearLayout>

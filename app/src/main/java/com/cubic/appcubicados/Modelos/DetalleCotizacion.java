@@ -37,8 +37,8 @@ public class DetalleCotizacion implements Serializable {
     private double agua;
     @SerializedName("largo")
     private double largo;
-    @SerializedName("cantidadSacos")
-    private int cantidadSacos;
+    @SerializedName("cantidad")
+    private int cantidad;
     //Inmueble
     @SerializedName("Inmueble_idInmueble")
     private int Inmueble_idInmueble;
@@ -55,14 +55,14 @@ public class DetalleCotizacion implements Serializable {
     @SerializedName("nomTipoCons")
     private String nomTipoCons;
     //Cemento
-    @SerializedName("cemento_idCemento")
-    private  int cemento_idCemento;
-    @SerializedName("imagenCemento")
-    private String imagenCemento;
-    @SerializedName("descripcionCemento")
-    private String descripcioncemento;
-    @SerializedName("marcaCemento")
-    private String marcaCemento;
+    @SerializedName("material_idMaterial")
+    private  int material_idMaterial;
+    @SerializedName("imagenMaterial")
+    private String imagenMaterial;
+    @SerializedName("descripcionMaterial")
+    private String descripcionMaterial;
+    @SerializedName("marcaMaterial")
+    private String marcaMaterial;
     @SerializedName("precio")
     private  BigDecimal precio;
     @SerializedName("despacho")
@@ -112,12 +112,212 @@ public class DetalleCotizacion implements Serializable {
         this.cubicacion_idCubica = cubicacion_idCubica;
     }
 
-    public int getCemento_idCemento() {
-        return cemento_idCemento;
+    public double getArea() {
+        return area;
     }
 
-    public void setCemento_idCemento(int cemento_idCemento) {
-        this.cemento_idCemento = cemento_idCemento;
+    public void setArea(double area) {
+        this.area = area;
+    }
+
+    public double getProfundidad() {
+        return profundidad;
+    }
+
+    public void setProfundidad(double profundidad) {
+        this.profundidad = profundidad;
+    }
+
+    public double getAncho() {
+        return ancho;
+    }
+
+    public void setAncho(double ancho) {
+        this.ancho = ancho;
+    }
+
+    public double getVolumen() {
+        return volumen;
+    }
+
+    public void setVolumen(double volumen) {
+        this.volumen = volumen;
+    }
+
+    public double getM3() {
+        return m3;
+    }
+
+    public void setM3(double m3) {
+        this.m3 = m3;
+    }
+
+    public int getDosificacion() {
+        return dosificacion;
+    }
+
+    public void setDosificacion(int dosificacion) {
+        this.dosificacion = dosificacion;
+    }
+
+    public double getGrava() {
+        return grava;
+    }
+
+    public void setGrava(double grava) {
+        this.grava = grava;
+    }
+
+    public double getArena() {
+        return arena;
+    }
+
+    public void setArena(double arena) {
+        this.arena = arena;
+    }
+
+    public double getAgua() {
+        return agua;
+    }
+
+    public void setAgua(double agua) {
+        this.agua = agua;
+    }
+
+    public double getLargo() {
+        return largo;
+    }
+
+    public void setLargo(double largo) {
+        this.largo = largo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getInmueble_idInmueble() {
+        return Inmueble_idInmueble;
+    }
+
+    public void setInmueble_idInmueble(int inmueble_idInmueble) {
+        Inmueble_idInmueble = inmueble_idInmueble;
+    }
+
+    public String getNomInmueble() {
+        return nomInmueble;
+    }
+
+    public void setNomInmueble(String nomInmueble) {
+        this.nomInmueble = nomInmueble;
+    }
+
+    public int getConstrucciones_idConstrucciones() {
+        return Construcciones_idConstrucciones;
+    }
+
+    public void setConstrucciones_idConstrucciones(int construcciones_idConstrucciones) {
+        Construcciones_idConstrucciones = construcciones_idConstrucciones;
+    }
+
+    public String getNomConstr() {
+        return nomConstr;
+    }
+
+    public void setNomConstr(String nomConstr) {
+        this.nomConstr = nomConstr;
+    }
+
+    public int getTipoConstruccion_idTipoConstruccion() {
+        return TipoConstruccion_idTipoConstruccion;
+    }
+
+    public void setTipoConstruccion_idTipoConstruccion(int tipoConstruccion_idTipoConstruccion) {
+        TipoConstruccion_idTipoConstruccion = tipoConstruccion_idTipoConstruccion;
+    }
+
+    public String getNomTipoCons() {
+        return nomTipoCons;
+    }
+
+    public void setNomTipoCons(String nomTipoCons) {
+        this.nomTipoCons = nomTipoCons;
+    }
+
+    public int getMaterial_idMaterial() {
+        return material_idMaterial;
+    }
+
+    public void setMaterial_idMaterial(int material_idMaterial) {
+        this.material_idMaterial = material_idMaterial;
+    }
+
+    public String getImagenMaterial() {
+        return imagenMaterial;
+    }
+
+    public void setImagenMaterial(String imagenMaterial) {
+        this.imagenMaterial = imagenMaterial;
+    }
+
+    public String getDescripcionMaterial() {
+        return descripcionMaterial;
+    }
+
+    public void setDescripcionMaterial(String descripcionMaterial) {
+        this.descripcionMaterial = descripcionMaterial;
+    }
+
+    public String getMarcaMaterial() {
+        return marcaMaterial;
+    }
+
+    public void setMarcaMaterial(String marcaMaterial) {
+        this.marcaMaterial = marcaMaterial;
+    }
+
+    public BigDecimal getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+
+    public String getDespacho() {
+        return despacho;
+    }
+
+    public void setDespacho(String despacho) {
+        this.despacho = despacho;
+    }
+
+    public String getRetiro() {
+        return retiro;
+    }
+
+    public void setRetiro(String retiro) {
+        this.retiro = retiro;
+    }
+
+    public int getTienda_idTienda() {
+        return tienda_idTienda;
+    }
+
+    public void setTienda_idTienda(int tienda_idTienda) {
+        this.tienda_idTienda = tienda_idTienda;
+    }
+
+    public String getNomTienda() {
+        return nomTienda;
+    }
+
+    public void setNomTienda(String nomTienda) {
+        this.nomTienda = nomTienda;
     }
 
     public int getUsers_id() {
@@ -142,107 +342,5 @@ public class DetalleCotizacion implements Serializable {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
-    }
-
-    //Get de los join
-
-    public double getArea() {
-        return area;
-    }
-
-    public double getProfundidad() {
-        return profundidad;
-    }
-
-    public double getAncho() {
-        return ancho;
-    }
-
-    public double getVolumen() {
-        return volumen;
-    }
-
-    public double getM3() {
-        return m3;
-    }
-
-    public int getDosificacion() {
-        return dosificacion;
-    }
-
-    public double getGrava() {
-        return grava;
-    }
-
-    public double getArena() {
-        return arena;
-    }
-
-    public double getAgua() {
-        return agua;
-    }
-
-    public double getLargo() {
-        return largo;
-    }
-
-    public int getCantidadSacos() {
-        return cantidadSacos;
-    }
-
-    public int getInmueble_idInmueble() {
-        return Inmueble_idInmueble;
-    }
-
-    public String getNomInmueble() {
-        return nomInmueble;
-    }
-
-    public int getConstrucciones_idConstrucciones() {
-        return Construcciones_idConstrucciones;
-    }
-
-    public String getNomConstr() {
-        return nomConstr;
-    }
-
-    public int getTipoConstruccion_idTipoConstruccion() {
-        return TipoConstruccion_idTipoConstruccion;
-    }
-
-    public String getNomTipoCons() {
-        return nomTipoCons;
-    }
-
-    public String getImagenCemento() {
-        return imagenCemento;
-    }
-
-    public String getDescripcioncemento() {
-        return descripcioncemento;
-    }
-
-    public String getMarcaCemento() {
-        return marcaCemento;
-    }
-
-    public BigDecimal getPrecio() {
-        return precio;
-    }
-
-    public String getDespacho() {
-        return despacho;
-    }
-
-    public String getRetiro() {
-        return retiro;
-    }
-
-    public int getTienda_idTienda() {
-        return tienda_idTienda;
-    }
-
-    public String getNomTienda() {
-        return nomTienda;
     }
 }

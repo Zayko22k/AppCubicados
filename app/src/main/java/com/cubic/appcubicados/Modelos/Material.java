@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Cemento implements Serializable {
+public class Material implements Serializable {
 
-    @SerializedName("idCemento")
-    private int idCemento;
-    @SerializedName("imagenCemento")
-    private String imagenCemento;
-    @SerializedName("descripcionCemento")
-    private String descripcionCemento;
-    @SerializedName("marcaCemento")
-    private  String marcaCemento;
+    @SerializedName("idMaterial")
+    private int idMaterial;
+    @SerializedName("imagenMaterial")
+    private String imagenMaterial;
+    @SerializedName("descripcionMaterial")
+    private String descripcionMaterial;
+    @SerializedName("marcaMaterial")
+    private  String marcaMaterial;
     @SerializedName("precio")
     private BigDecimal precio;
     @SerializedName("despacho")
@@ -24,36 +24,36 @@ public class Cemento implements Serializable {
     @SerializedName("tienda_idTienda")
     private int tienda_idTienda;
 
-    public int getIdCemento() {
-        return idCemento;
+    public int getIdMaterial() {
+        return idMaterial;
     }
 
-    public void setIdCemento(int idCemento) {
-        this.idCemento = idCemento;
+    public void setIdMaterial(int idMaterial) {
+        this.idMaterial = idMaterial;
     }
 
-    public String getImagenCemento() {
-        return imagenCemento;
+    public String getImagenMaterial() {
+        return imagenMaterial;
     }
 
-    public void setImagenCemento(String imagenCemento) {
-        this.imagenCemento = imagenCemento;
+    public void setImagenMaterial(String imagenMaterial) {
+        this.imagenMaterial = imagenMaterial;
     }
 
-    public String getDescripcionCemento() {
-        return descripcionCemento;
+    public String getDescripcionMaterial() {
+        return descripcionMaterial;
     }
 
-    public void setDescripcionCemento(String descripcionCemento) {
-        this.descripcionCemento = descripcionCemento;
+    public void setDescripcionMaterial(String descripcionMaterial) {
+        this.descripcionMaterial = descripcionMaterial;
     }
 
-    public String getMarcaCemento() {
-        return marcaCemento;
+    public String getMarcaMaterial() {
+        return marcaMaterial;
     }
 
-    public void setMarcaCemento(String marcaCemento) {
-        this.marcaCemento = marcaCemento;
+    public void setMarcaMaterial(String marcaMaterial) {
+        this.marcaMaterial = marcaMaterial;
     }
 
     public BigDecimal getPrecio() {

@@ -14,5 +14,7 @@ public interface ArriendoService {
     Call<List<Arriendo>> getArriendoList();
     @GET("buscarxUser/{users_id}")
     Call<List<Arriendo>> getArriendo(@Path("users_id") int users_id);
+    @GET("arriendoVence/{users_id}")
+    Call<Integer> getDias(@Path("users_id") int users_id);
 
 }

@@ -24,6 +24,21 @@
         para la preparación del horimigon</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="numeros">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="pinturas">
+        <item>Esmalte al agua</item>
+        <item>Latex</item>
+        <item>Emaslte sintético</item>
+        <item>Óleo</item>
+    </string-array>
+    <string-array name="herramienta">
+        <item>Brocha o rodillo</item>
+        <item>Pistola</item>
+    </string-array>
+
 
 </resources>
 

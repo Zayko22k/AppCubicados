@@ -1,5 +1,6 @@
 package com.cubic.appcubicados.Actividades;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -16,13 +17,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.cubic.appcubicados.Clases.CementoProducto;
-import com.cubic.appcubicados.Modelos.Material;
 import com.cubic.appcubicados.Modelos.Cubicacion;
 import com.cubic.appcubicados.Modelos.DetalleCotizacion;
+import com.cubic.appcubicados.Modelos.Material;
 import com.cubic.appcubicados.Modelos.Tienda;
 import com.cubic.appcubicados.R;
 import com.cubic.appcubicados.Retrofit.RetrofitBuilder;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -35,29 +38,24 @@ import retrofit2.Response;
 
 import static com.cubic.appcubicados.Actividades.Cubicador.cubicar;
 
-public class CrearCotizacion extends AppCompatActivity {
+public class CrearCotizacionPintura extends AppCompatActivity {
 
     private TextView txtNombreCoti;
-    private ImageView imgMaterial;
+    private ImageView imgMaterialMuro;
     private TextView txtInmuebleProyecto;
     private TextView txtTCproyecto;
     private TextView txtCproyecto;
     private TextView txtAnchoProyecto;
     private TextView txtLargoProyecto;
-    private TextView txtAlturaProyecto;
-    private TextView txtM3Proyecto;
-    private TextView txtCantSacosProyecto;
-    private TextView txtGravaProyecto;
-    private TextView txtArenaProyecto;
-    private TextView txtAguaProyecto;
-    private TextView txtSacosxM3;
+    private TextView txtM2Proyecto;
+    private TextView txtLitrosM2;
     private TextView txtTiendaMaterial;
     private TextView txtMarcaMaterial;
     private TextView txtDescripcionMaterial;
     private TextView txtPrecioMaterial;
-    private TextView txtTotalMaterial;
     private TextView txtDespachoMaterial;
     private TextView txtRetiroMaterial;
+    private TextView txtLitrosResultados;
     private Button btnGuardarCoti;
     private Button btnCancelarCoti;
     private DetalleCotizacion detalleCotizacion;
@@ -65,85 +63,70 @@ public class CrearCotizacion extends AppCompatActivity {
     private Material material;
     private CementoProducto cementoPrice;
     private String totalProyecto;
-    private CementoProducto cementoProducto = new CementoProducto();
+    private CementoProducto pinturaProducto = new CementoProducto();
     private List<DetalleCotizacion> detalleCotizacionList = new ArrayList<>();
     private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_cotizacion);
-
-
-        cementoProducto = (CementoProducto) getIntent().getSerializableExtra("productoSelect");
+        setContentView(R.layout.activity_crear_cotizacion_pintura);
+        pinturaProducto = (CementoProducto) getIntent().getSerializableExtra("productoSelectMuro");
         //Ficha Tecnica
-        txtNombreCoti = findViewById(R.id.txtNombreCoti);
-        txtInmuebleProyecto = findViewById(R.id.txtInmProyecto);
-        txtTCproyecto = findViewById(R.id.txtTCproyecto);
-        txtCproyecto = findViewById(R.id.txtCproyecto);
-        txtAnchoProyecto = findViewById(R.id.txtAnchoProyecto);
-        txtLargoProyecto = findViewById(R.id.txtLargoProyecto);
-        txtAlturaProyecto = findViewById(R.id.txtAltoProyecto);
-        txtM3Proyecto = findViewById(R.id.txtM3Proyecto);
-        txtCantSacosProyecto = findViewById(R.id.txtsacosProyecto);
-        txtGravaProyecto = findViewById(R.id.txtGravaProyecto);
-        txtArenaProyecto = findViewById(R.id.txtArenaProyecto);
-        txtAguaProyecto = findViewById(R.id.txtAguaProyecto);
-        txtSacosxM3 = findViewById(R.id.txtDosificacionProyecto);
+        txtNombreCoti = findViewById(R.id.txtNombreCotiMuro);
+        txtInmuebleProyecto = findViewById(R.id.txtInmProyectoMuro);
+        txtTCproyecto = findViewById(R.id.txtTCproyectoMuro);
+        txtCproyecto = findViewById(R.id.txtCproyectoMuro);
+        txtAnchoProyecto = findViewById(R.id.txtAnchoProyectoMuro);
+        txtLargoProyecto = findViewById(R.id.txtLargoProyectoMuro);
+        txtM2Proyecto = findViewById(R.id.txtM2ProyectoMuro);
+        txtLitrosResultados = findViewById(R.id.txtLitrosResultMuro);
+        txtLitrosM2 = findViewById(R.id.txtDosificacionProyectoMuro);
         //Material
-        imgMaterial = findViewById(R.id.imgMaterial);
-        txtTiendaMaterial = findViewById(R.id.txtTiendaMaterial);
-        txtMarcaMaterial = findViewById(R.id.txtMarcaMaterial);
-        txtDescripcionMaterial = findViewById(R.id.txtDescripcionMaterial);
-        txtPrecioMaterial = findViewById(R.id.txtPrecioMaterial);
-        txtTotalMaterial = findViewById(R.id.txtTotalMaterial);
-        txtDespachoMaterial = findViewById(R.id.txtDespachoMaterial);
-        txtRetiroMaterial = findViewById(R.id.txtRetiroMaterial);
-        btnGuardarCoti = findViewById(R.id.btnCrearCoti);
-        btnCancelarCoti = findViewById(R.id.btnCancelarCoti);
-
-        cargarFicha();
+        imgMaterialMuro = findViewById(R.id.imgMaterialMuro);
+        txtTiendaMaterial = findViewById(R.id.txtTiendaMaterialMuro);
+        txtMarcaMaterial = findViewById(R.id.txtMarcaMaterialMuro);
+        txtDescripcionMaterial = findViewById(R.id.txtDescripcionMaterialMuro);
+        txtPrecioMaterial = findViewById(R.id.txtPrecioMaterialMuro);
+        txtDespachoMaterial = findViewById(R.id.txtDespachoMaterialMuro);
+        txtRetiroMaterial = findViewById(R.id.txtRetiroMaterialMuro);
+        btnGuardarCoti = findViewById(R.id.btnCrearCotiMuro);
+        btnCancelarCoti = findViewById(R.id.btnCancelarCotiMuro);
+        cargarFichaMuro();
     }
 
-    private void cargarFicha() {
-        try {
-            //Ficha tecnica
-            DecimalFormat formato1 = new DecimalFormat("#.00");
-            txtInmuebleProyecto.setText(cubicar.getInmuebleSelect());
-            txtTCproyecto.setText(cubicar.getNomTipoConstruccionSelect());
-            txtCproyecto.setText(cubicar.getNomConstruccionSelect());
-            txtAnchoProyecto.setText(cubicar.getAncho() + " mts");
-            txtLargoProyecto.setText(cubicar.getLargo() + " mts");
-            txtAlturaProyecto.setText(cubicar.getAlto() + " cms");
-            txtM3Proyecto.setText(formato1.format(cubicar.getM3()) + " M³");
-            txtCantSacosProyecto.setText(Math.round(cubicar.getSacosCemento()) + " sacos de cemento necesitas");
-            txtGravaProyecto.setText(String.valueOf(cubicar.getGravillaOcupar()));
-            txtArenaProyecto.setText(String.valueOf(cubicar.getArenaOcupar()));
-            txtAguaProyecto.setText(String.valueOf(cubicar.getAguaOcupar()));
-            txtSacosxM3.setText(cubicar.getDosificacion() + " (Sacos/M³)");
-            //Material
-            cargarTienda();
-            Picasso.get().load(cementoProducto.getImgUrl()).into(imgMaterial);
-            txtMarcaMaterial.setText(cementoProducto.getMarca());
-            txtDescripcionMaterial.setText(cementoProducto.getDescripcion());
+    @SuppressLint("SetTextI18n")
+    private void cargarFichaMuro() {
 
-            txtPrecioMaterial.setText("$ " + cementoProducto.getPrecio() + " C/U");
-            String total = String.valueOf(getIntent().getSerializableExtra("total"));
-            txtTotalMaterial.setText("$ " + total + " por los " + Math.round(cubicar.getSacosCemento()) + " sacos");
-            txtDespachoMaterial.setText(cementoProducto.getDespacho());
-            txtRetiroMaterial.setText(cementoProducto.getRetiro());
+        //Ficha tecnica
+        DecimalFormat formato1 = new DecimalFormat("#.00");
+        txtInmuebleProyecto.setText(cubicar.getInmuebleSelect());
+        txtTCproyecto.setText(cubicar.getNomTipoConstruccionSelect());
+        txtCproyecto.setText(cubicar.getNomConstruccionSelect());
+        txtAnchoProyecto.setText(cubicar.getAncho() + " mts");
+        System.out.println("Ancho: " + cubicar.getAncho());
+        txtLargoProyecto.setText(cubicar.getLargo() + " mts");
+        txtM2Proyecto.setText(cubicar.getMuroPorPintar() + " M²");
+        int litrosAprox = (int) Math.round(cubicar.getLitrosPintura());
+        txtLitrosResultados.setText(litrosAprox+ " litros necesitas");
+        txtLitrosM2.setText(cubicar.getRendimientoPintura() + " (mts2 / Litros)");
+        //Material
+        cargarTiendaMuro();
+        Picasso.get().load(pinturaProducto.getImgUrl()).into(imgMaterialMuro);
+        txtMarcaMaterial.setText(pinturaProducto.getMarca());
+        txtDescripcionMaterial.setText(pinturaProducto.getDescripcion());
+        txtPrecioMaterial.setText("$ " + pinturaProducto.getPrecio() + " C/U");
+        txtDespachoMaterial.setText(pinturaProducto.getDespacho());
+        txtRetiroMaterial.setText(pinturaProducto.getRetiro());
 
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
 
     }
 
-    private void cargarTienda() {
+    private void cargarTiendaMuro() {
         Call<Tienda> tiendaCall = RetrofitBuilder.tiendaService.getTiendaSelect(cubicar.getIdTienda());
         tiendaCall.enqueue(new Callback<Tienda>() {
             @Override
-            public void onResponse(Call<Tienda> call, Response<Tienda> response) {
+            public void onResponse(@NotNull Call<Tienda> call, Response<Tienda> response) {
                 if (response.isSuccessful()) {
                     Tienda tienda = response.body();
                     txtTiendaMaterial.setText(tienda.getNomTienda());
@@ -151,14 +134,14 @@ public class CrearCotizacion extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Tienda> call, Throwable t) {
+            public void onFailure(@NotNull Call<Tienda> call, Throwable t) {
                 Log.d("Error: ", t.getMessage());
             }
         });
     }
 
-    public void validarNombre(View v){
-        crearCotizacion();
+    public void validarNombreMuro(View v) {
+        crearCotizacionMuro();
        /* SharedPreferences prefs = getApplicationContext().getSharedPreferences("identificadorCl", MODE_PRIVATE);
         String userSave = prefs.getString("userID", null);
         int idUs = Integer.parseInt(userSave);
@@ -190,24 +173,24 @@ public class CrearCotizacion extends AppCompatActivity {
         });*/
     }
 
-    public void crearCotizacion() {
+    public void crearCotizacionMuro() {
         try {
-            if(txtNombreCoti.getText().toString().isEmpty()){
-                Toast.makeText(CrearCotizacion.this, "No dejes campos vacios", Toast.LENGTH_LONG).show();
-            }else {
+            if (txtNombreCoti.getText().toString().isEmpty()) {
+                Toast.makeText(CrearCotizacionPintura.this, "No dejes campos vacios", Toast.LENGTH_LONG).show();
+            } else {
                 material = new Material();
 
 
-                material.setImagenMaterial(cementoProducto.getImgUrl());
-                material.setMarcaMaterial(cementoProducto.getMarca());
+                material.setImagenMaterial(pinturaProducto.getImgUrl());
+                material.setMarcaMaterial(pinturaProducto.getMarca());
                 material.setTienda_idTienda(cubicar.getIdTienda());
-                material.setRetiro(cementoProducto.getRetiro());
-                material.setDespacho(cementoProducto.getDespacho());
-                material.setDescripcionMaterial(cementoProducto.getDescripcion());
+                material.setRetiro(pinturaProducto.getRetiro());
+                material.setDespacho(pinturaProducto.getDespacho());
+                material.setDescripcionMaterial(pinturaProducto.getDescripcion());
 
 
                 cementoPrice = new CementoProducto();
-                cementoPrice.setPrecio(cementoProducto.getPrecio());
+                cementoPrice.setPrecio(pinturaProducto.getPrecio());
                 String d = cementoPrice.getPrecio();
                 addPrice(cementoPrice.getPrecio(), '.', d.length());
                 System.out.println("DECIMAL NUMERO:" + cementoPrice.getPrecio());
@@ -217,11 +200,11 @@ public class CrearCotizacion extends AppCompatActivity {
                 Call<Material> cementoCall = RetrofitBuilder.cementoService.crearMaterial(material);
                 cementoCall.enqueue(new Callback<Material>() {
                     @Override
-                    public void onResponse(Call<Material> call, Response<Material> response) {
+                    public void onResponse(@NotNull Call<Material> call, Response<Material> response) {
                         if (response.isSuccessful()) {
-                            System.out.println("Cemento creado: ");
+                            System.out.println("Pintura creada: ");
                             int idMaterial = response.body().getIdMaterial();
-                            crearCubicacion(idMaterial);
+                            crearCubicacionMuro(idMaterial);
                         }
                     }
 
@@ -236,24 +219,22 @@ public class CrearCotizacion extends AppCompatActivity {
 
         }
 
-
     }
 
-    private void crearCubicacion(int idCemento) {
+    private void crearCubicacionMuro(int idCemento) {
         try {
             cubicacion = new Cubicacion();
-            cubicacion.setArea(cubicar.getArea());
-            cubicacion.setProfundidad(cubicar.getAlto());
+            cubicacion.setArea(cubicar.getMuroPorPintar());
+            cubicacion.setProfundidad(0);
             cubicacion.setAncho(cubicar.getAncho());
-            cubicacion.setVolumen(0);
-            cubicacion.setM3(cubicar.getM3());
-            cubicacion.setDosificacion(cubicar.getDosificacion());
-            cubicacion.setGrava(cubicar.getGravillaOcupar());
-            cubicacion.setArena(cubicar.getArenaOcupar());
-            cubicacion.setAgua(cubicar.getAguaOcupar());
+            cubicacion.setM3(0);
+            cubicacion.setDosificacion(cubicar.getRendimientoPintura());
+            cubicacion.setGrava(0);
+            cubicacion.setArena(0);
+            cubicacion.setAgua(0);
             cubicacion.setLargo(cubicar.getLargo());
-            int sacosAprox = (int) Math.round(cubicar.getSacosCemento());
-            cubicacion.setCantidad(sacosAprox);
+            int litrosAprox = (int) Math.round(cubicar.getLitrosPintura());
+            cubicacion.setCantidad(litrosAprox);
             cubicacion.setInmueble_idInmueble(cubicar.getIdInmueble());
             cubicacion.setConstrucciones_idConstrucciones(cubicar.getIdConstrucciones());
 
@@ -266,7 +247,7 @@ public class CrearCotizacion extends AppCompatActivity {
                         cubicacion = new Cubicacion();
                         cubicacion = response.body();
                         int idCubicacion = cubicacion.getIdCubica();
-                        guardarCotizacion(idCemento, idCubicacion);
+                        guardarCotizacionMuro(idCemento, idCubicacion);
                         System.out.println("llamada dentro del metodo de cubic: " + response.body().getIdCubica());
 
 
@@ -286,44 +267,40 @@ public class CrearCotizacion extends AppCompatActivity {
         }
     }
 
-    public void guardarCotizacion(int idMaterial, int idCubicacion) {
+    public void guardarCotizacionMuro (int idMaterial, int idCubicacion) {
 
         try {
 
-                detalleCotizacion = new DetalleCotizacion();
-                detalleCotizacion.setNombreCoti(txtNombreCoti.getText().toString());
-                System.out.println(txtNombreCoti.getText().toString());
-                totalProyecto = new String();
-                totalProyecto = String.valueOf(getIntent().getSerializableExtra("total"));
-                addTotal(totalProyecto, '.', totalProyecto.length());
-                System.out.println("TOTAL: " + totalProyecto);
-                detalleCotizacion.setTotal(new BigDecimal(totalProyecto));
-                SharedPreferences prefs = getApplicationContext().getSharedPreferences("identificadorCl", MODE_PRIVATE);
-                String userSave = prefs.getString("userID", null);
-                detalleCotizacion.setUsers_id(Integer.parseInt(userSave));
-                detalleCotizacion.setCubicacion_idCubica(idCubicacion);
-                detalleCotizacion.setMaterial_idMaterial(idMaterial);
-                System.out.println("ID Cubicacion " + idCubicacion);
-                System.out.println("ID de usuario " + userSave);
-                System.out.println("ID Cemento " + idMaterial);
-                Call<DetalleCotizacion> detalleCotizacionCall = RetrofitBuilder.detalleCotizacionService.crearDetalleCoti(detalleCotizacion);
-                detalleCotizacionCall.enqueue(new Callback<DetalleCotizacion>() {
-                    @Override
-                    public void onResponse(Call<DetalleCotizacion> call, Response<DetalleCotizacion> response) {
-                        if (response.isSuccessful()) {
-                            System.out.println("Cotizacion creada");
-                            dialog = ProgressDialog.show(CrearCotizacion.this, "",
-                                    "Espere. Creando su cotización", true);
-                            dialog.show();
-                            new Hilo1().start();
-                        }
+            detalleCotizacion = new DetalleCotizacion();
+            detalleCotizacion.setNombreCoti(txtNombreCoti.getText().toString());
+            System.out.println(txtNombreCoti.getText().toString());
+            detalleCotizacion.setTotal(new BigDecimal(cementoPrice.getPrecio()));
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("identificadorCl", MODE_PRIVATE);
+            String userSave = prefs.getString("userID", null);
+            detalleCotizacion.setUsers_id(Integer.parseInt(userSave));
+            detalleCotizacion.setCubicacion_idCubica(idCubicacion);
+            detalleCotizacion.setMaterial_idMaterial(idMaterial);
+            System.out.println("ID Cubicacion " + idCubicacion);
+            System.out.println("ID de usuario " + userSave);
+            System.out.println("ID Material " + idMaterial);
+            Call<DetalleCotizacion> detalleCotizacionCall = RetrofitBuilder.detalleCotizacionService.crearDetalleCoti(detalleCotizacion);
+            detalleCotizacionCall.enqueue(new Callback<DetalleCotizacion>() {
+                @Override
+                public void onResponse(Call<DetalleCotizacion> call, Response<DetalleCotizacion> response) {
+                    if (response.isSuccessful()) {
+                        System.out.println("Cotizacion creada");
+                        dialog = ProgressDialog.show(CrearCotizacionPintura.this, "",
+                                "Espere. Creando su cotización", true);
+                        dialog.show();
+                        new CrearCotizacionPintura.Hilo1().start();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<DetalleCotizacion> call, Throwable t) {
-                               Log.d("Error",t.getMessage());
-                    }
-                });
+                @Override
+                public void onFailure(Call<DetalleCotizacion> call, Throwable t) {
+                    Log.d("Error", t.getMessage());
+                }
+            });
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
@@ -331,6 +308,7 @@ public class CrearCotizacion extends AppCompatActivity {
 
 
     }
+
     class Hilo1 extends Thread {
         @Override
         public void run() {
@@ -342,13 +320,13 @@ public class CrearCotizacion extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(CrearCotizacion.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CrearCotizacionPintura.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
                 });
                 Thread.sleep(1500);
-                Intent i = new Intent(CrearCotizacion.this, VistaUsuario.class);
+                Intent i = new Intent(CrearCotizacionPintura.this, VistaUsuario.class);
                 startActivity(i);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -371,20 +349,6 @@ public class CrearCotizacion extends AppCompatActivity {
         return sb.toString();
     }
 
-    public String addTotal(String str, char ch, int position) {
-        StringBuilder sb = new StringBuilder(str);
-        if (position == 4) {
-            sb.insert(1, ch);
-        } else if (position == 5) {
-            sb.insert(2, ch);
-        } else if (position == 6) {
-            sb.insert(3, ch);
-        }
-        totalProyecto = sb.toString();
-        return sb.toString();
-    }
-
-
     public void cerrar(View v) {
         IsFinish("¿Estás seguro deseas cancelar?");
     }
@@ -403,7 +367,7 @@ public class CrearCotizacion extends AppCompatActivity {
 
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Intent i = new Intent(CrearCotizacion.this, VistaUsuario.class);
+                        Intent i = new Intent(CrearCotizacionPintura.this, VistaUsuario.class);
                         startActivity(i);
                         // This above line close correctly
                         //finish();
@@ -415,7 +379,7 @@ public class CrearCotizacion extends AppCompatActivity {
             }
         };
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(CrearCotizacion.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(CrearCotizacionPintura.this);
         builder.setMessage(msjAlert)
                 .setPositiveButton("Salir", dialogClickListener)
                 .setNegativeButton("Quedarse", dialogClickListener).show();

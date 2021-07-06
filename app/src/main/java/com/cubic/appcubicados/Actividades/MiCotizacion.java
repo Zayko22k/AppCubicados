@@ -141,7 +141,11 @@ public class MiCotizacion extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(MiCotizacion.this, VistaUsuario.class);
+        startActivity(i);
+    }
     private void rvListener() {
         final GestureDetector mGestureDetector = new GestureDetector(MiCotizacion.this, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -159,7 +163,7 @@ public class MiCotizacion extends AppCompatActivity {
                     if (child != null && mGestureDetector.onTouchEvent(e)) {
                         int position = rvCotizaciones.getChildAdapterPosition(child);
                         Toast.makeText(MiCotizacion.this, "Item " + detalleCotizacionList.get(position).getIdDetalleCoti(), Toast.LENGTH_SHORT).show();
-                        String data = detalleCotizacionList.get(position).getImagenCemento();
+                        String data = detalleCotizacionList.get(position).getImagenMaterial();
                         System.out.println(data);
                         Fade fade = new Fade();
                         View decor = getWindow().getDecorView();
@@ -168,12 +172,22 @@ public class MiCotizacion extends AppCompatActivity {
                         fade.excludeTarget(android.R.id.navigationBarBackground, true);
                         getWindow().setEnterTransition(fade);
                         getWindow().setExitTransition(fade);
-                        Intent intent = new Intent(MiCotizacion.this, Ver_Cotizacion.class);
-                        final CardView cardView = findViewById(R.id.cwMiCotizacion);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MiCotizacion.this, cardView, "Card view");
-                        DetalleCotizacion detalleCotizacion = detalleCotizacionList.get(position);
-                        intent.putExtra("detalleCoti", detalleCotizacion);
-                        startActivity(intent, options.toBundle());
+                        if(detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 1){
+                            Intent intent = new Intent(MiCotizacion.this, Ver_Cotizacion.class);
+                            final CardView cardView = findViewById(R.id.cwMiCotizacion);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MiCotizacion.this, cardView, "Card view");
+                            DetalleCotizacion detalleCotizacion = detalleCotizacionList.get(position);
+                            intent.putExtra("detalleCoti", detalleCotizacion);
+                            startActivity(intent, options.toBundle());
+                        } else if(detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 2){
+                            Intent intent = new Intent(MiCotizacion.this, Ver_Cotizacion_Muro.class);
+                            final CardView cardView = findViewById(R.id.cwMiCotizacion);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MiCotizacion.this, cardView, "Card view");
+                            DetalleCotizacion detalleCotizacion = detalleCotizacionList.get(position);
+                            intent.putExtra("detalleCoti", detalleCotizacion);
+                            startActivity(intent, options.toBundle());
+                        }
+
                         //pager2.setCurrentItem(1);
                         return true;
                     }

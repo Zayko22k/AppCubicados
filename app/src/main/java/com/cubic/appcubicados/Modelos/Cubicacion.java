@@ -28,8 +28,8 @@ public class Cubicacion implements Serializable {
     private  double agua;
     @SerializedName("largo")
     private double largo;
-    @SerializedName("cantidadSacos")
-    private  int cantidadSacos;
+    @SerializedName("cantidad")
+    private  int cantidad;
     @SerializedName("Inmueble_idInmueble")
     private int Inmueble_idInmueble;
     @SerializedName("Construcciones_idConstrucciones")
@@ -123,12 +123,12 @@ public class Cubicacion implements Serializable {
         this.largo = largo;
     }
 
-    public int getCantidadSacos() {
-        return cantidadSacos;
+    public int getCantidad() {
+        return cantidad;
     }
 
-    public void setCantidadSacos(int cantidadSacos) {
-        this.cantidadSacos = cantidadSacos;
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 
     public int getInmueble_idInmueble() {

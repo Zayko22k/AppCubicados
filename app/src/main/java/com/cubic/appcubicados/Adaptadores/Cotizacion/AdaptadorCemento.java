@@ -54,6 +54,7 @@ public class AdaptadorCemento extends RecyclerView.Adapter<AdaptadorCemento.View
         holder.descripcion.setText(cementoProducto.getDescripcion());
 
         String pr = cementoProducto.getPrecio();
+        System.out.println(""+pr);
         String subCadena = pr.substring(1, 6);
         StringBuilder pre = new StringBuilder(subCadena);
         pre = pre.deleteCharAt(1);
@@ -104,13 +105,21 @@ public class AdaptadorCemento extends RecyclerView.Adapter<AdaptadorCemento.View
             @Override
             public void onClick(View v) {
                 try {
-                    String url = cementoProducto.getUrlTienda();
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    context.startActivity(i);
-
+                    if(cubicar.getIdTienda() == 1){
+                        String url = "https://www.sodimac.cl/sodimac-cl/product/"+cementoProducto.getIdProducto();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        i.setData(Uri.parse(url));
+                        context.startActivity(i);
+                    } else if(cubicar.getIdTienda() == 2){
+                        String url = "https://www.construmart.cl"+cementoProducto.getIdProducto();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        i.setData(Uri.parse(url));
+                        context.startActivity(i);
+                    }
                 } catch (Exception e) {
-                    System.out.println("Error: " + e);
+                    e.printStackTrace();
                 }
             }
         });

@@ -46,7 +46,7 @@ public class Fragment_cubic_3 extends Fragment {
         return rootView;
     }
     private void verCons(){
-        Call<List<Construcciones>> construccionesCall = RetrofitBuilder.construccionesService.indexConstrucciones();
+        Call<List<Construcciones>> construccionesCall = RetrofitBuilder.construccionesService.indexCons(cubicar.getIdTipoConstruccion());
         construccionesCall.enqueue(new Callback<List<Construcciones>>() {
             @Override
             public void onResponse(Call<List<Construcciones>> call, Response<List<Construcciones>> response) {
@@ -87,14 +87,39 @@ public class Fragment_cubic_3 extends Fragment {
                         String data = construccionesList.get(position).getNomConstr();
                         cubicar.setNomConstruccionSelect(data);
                         cubicar.setIdConstrucciones(construccionesList.get(position).getIdConstrucciones());
-                        FragmentManager manager = getActivity().getSupportFragmentManager();
-                        Fragment_cubic_4 fragment1 = new Fragment_cubic_4();
+                        System.out.println(""+construccionesList.get(position).getTipoConstruccion_idTipoConstruccion());
+                       if(construccionesList.get(position).getIdConstrucciones()<4){
+                           cubicar.setNomConstruccionSelect(data);
+                           cubicar.setIdConstrucciones(construccionesList.get(position).getIdConstrucciones());
+                           FragmentManager manager = getActivity().getSupportFragmentManager();
+                           Fragment_cubic_calculo_sup fragment1 = new Fragment_cubic_calculo_sup();
+                           manager.beginTransaction()
+                                   .replace(R.id.activity_cubicar, fragment1)
+                                   .addToBackStack(null)
+                                   .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                   .commit();
+                       } else if(construccionesList.get(position).getIdConstrucciones() == 4){
+                           cubicar.setNomConstruccionSelect(data);
+                           cubicar.setIdConstrucciones(construccionesList.get(position).getIdConstrucciones());
+                          FragmentManager manager = getActivity().getSupportFragmentManager();
+                           Fragment_cubic_calculo_rev_nw fragment1 = new Fragment_cubic_calculo_rev_nw();
+                           manager.beginTransaction()
+                                   .replace(R.id.activity_cubicar, fragment1)
+                                   .addToBackStack(null)
+                                   .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                   .commit();
+                       } else if(construccionesList.get(position).getIdConstrucciones() == 5){
+                           cubicar.setNomConstruccionSelect(data);
+                           cubicar.setIdConstrucciones(construccionesList.get(position).getIdConstrucciones());
+                           FragmentManager manager = getActivity().getSupportFragmentManager();
+                           Fragment_cubic_calculo_rev_w fragment1 = new Fragment_cubic_calculo_rev_w();
+                           manager.beginTransaction()
+                                   .replace(R.id.activity_cubicar, fragment1)
+                                   .addToBackStack(null)
+                                   .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                   .commit();
+                       }
 
-                        manager.beginTransaction()
-                                .replace(R.id.activity_cubicar, fragment1)
-                                .addToBackStack(null)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                .commit();
                         return true;
 
                     }

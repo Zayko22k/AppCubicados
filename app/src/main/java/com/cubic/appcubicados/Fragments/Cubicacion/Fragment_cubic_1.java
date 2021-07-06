@@ -94,19 +94,25 @@ public class Fragment_cubic_1 extends Fragment implements Serializable {
                     View child = rvInmueble.findChildViewUnder(e.getX(), e.getY());
                     if (child != null && mGestureDetector.onTouchEvent(e)) {
                         int position = rvInmueble.getChildAdapterPosition(child);
-                        Toast.makeText(getContext(), "Item " + listaInmueble.get(position).getIdInmueble(), Toast.LENGTH_SHORT).show();
                         String data = listaInmueble.get(position).getNomInmueble().trim();
                         System.out.println(data);
                         cubicar = new cubic();
-                        cubicar.setIdInmueble(listaInmueble.get(position).getIdInmueble());
-                        cubicar.setInmuebleSelect(data);
-                        FragmentManager manager = getActivity().getSupportFragmentManager();
-                        Fragment_cubic_2 fragment1 = new Fragment_cubic_2();
-                        manager.beginTransaction()
-                                .replace(R.id.activity_cubicar, fragment1)
-                                .addToBackStack(null)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                .commit();
+                        if(listaInmueble.get(position).getIdInmueble()==1){
+                            cubicar.setIdInmueble(listaInmueble.get(position).getIdInmueble());
+                            cubicar.setInmuebleSelect(data);
+                            FragmentManager manager = getActivity().getSupportFragmentManager();
+                            Fragment_cubic_2 fragment1 = new Fragment_cubic_2();
+                            manager.beginTransaction()
+                                    .replace(R.id.activity_cubicar, fragment1)
+                                    .addToBackStack(null)
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                    .commit();
+                        }else if(listaInmueble.get(position).getIdInmueble() == 2){
+                            Toast.makeText(getContext(), "Aun estamos en Beta no te muevas", Toast.LENGTH_SHORT).show();
+                        }else if(listaInmueble.get(position).getIdInmueble() == 3){
+                            Toast.makeText(getContext(), "Aun estamos en Beta no te muevas", Toast.LENGTH_SHORT).show();
+                        }
+
                         //pager2.setCurrentItem(1);
                         return true;
                     }

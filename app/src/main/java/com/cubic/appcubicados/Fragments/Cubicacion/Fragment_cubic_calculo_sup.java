@@ -1,5 +1,6 @@
 package com.cubic.appcubicados.Fragments.Cubicacion;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,9 +18,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.cubic.appcubicados.R;
 
+import java.text.DecimalFormat;
+
 import static com.cubic.appcubicados.Actividades.Cubicador.cubicar;
 
-public class Fragment_cubic_4 extends Fragment {
+public class Fragment_cubic_calculo_sup extends Fragment {
 
    private TextView txtLargo;
    private TextView txtm3;
@@ -30,7 +33,7 @@ public class Fragment_cubic_4 extends Fragment {
     @Override
     public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_cubic_4, container, false);
+                .inflate(R.layout.fragment_cubic_calculo_sup, container, false);
 
         txtAlto = rootView.findViewById(R.id.txtAlto);
         txtAncho = rootView.findViewById(R.id.txtAncho);
@@ -38,12 +41,7 @@ public class Fragment_cubic_4 extends Fragment {
         txtm3 = rootView.findViewById(R.id.txtm3);
         btnCubic = rootView.findViewById(R.id.btnIniciarCubic);
         CalcularM3();
-        btnCubic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calcularCubic();
-            }
-        });
+        btnCubic.setOnClickListener(v -> calcularCubic());
         return rootView;
     }
     public void calcularCubic() {
@@ -54,9 +52,9 @@ public class Fragment_cubic_4 extends Fragment {
         txtm3.getText().toString().isEmpty()) {
             Toast.makeText(getContext(), "Ingresa los campos vacios", Toast.LENGTH_LONG).show();
         } else {
-            int largo = Integer.parseInt(txtLargo.getText().toString());
+            double largo = Double.parseDouble(txtLargo.getText().toString());
             cubicar.setLargo(largo);
-            int ancho = Integer.parseInt(txtAncho.getText().toString());
+            double ancho = Double.parseDouble(txtAncho.getText().toString());
             cubicar.setAncho(ancho);
             int alto = Integer.parseInt(txtAlto.getText().toString());
             cubicar.setAlto(alto);
@@ -98,22 +96,29 @@ public class Fragment_cubic_4 extends Fragment {
                 System.out.println(3);
             }
             cubicar.setM3(m3);
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            Fragment_cubic_result fragment1 = new Fragment_cubic_result();
-            manager.beginTransaction()
-                    .replace(R.id.activity_cubicar, fragment1)
-                    .addToBackStack(null)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit();
+            if(m3 == 0){
+                Toast.makeText(getContext(), "No se puede dejar los m3 en 0", Toast.LENGTH_SHORT).show();
+            } else{
+                FragmentManager manager = requireActivity().getSupportFragmentManager();
+                Fragment_cubic_result fragment1 = new Fragment_cubic_result();
+                manager.beginTransaction()
+                        .replace(R.id.activity_cubicar, fragment1)
+                        .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
+            }
+
         }
     }
     private void CalcularM3(){
+        //Evento alto text
         txtAlto.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -121,14 +126,17 @@ public class Fragment_cubic_4 extends Fragment {
                 if(txtLargo.getText().toString().isEmpty() ||
                         txtAncho.getText().toString().isEmpty() ||
                 txtAlto.getText().toString().isEmpty()){
-                    txtm3.setText("0,0");
+                    txtm3.setText(""+0.0);
                 } else{
                     double param1 = Double.parseDouble(txtLargo.getText().toString());
                     double param2 = Double.parseDouble(txtAncho.getText().toString());
                     double param3 = Double.parseDouble(txtAlto.getText().toString());
                     double area  = param1 * param2;
                     double m3 = area/param3;
-                    txtm3.setText(""+m3);
+                    DecimalFormat formato2 = new DecimalFormat("#.##");
+                    System.out.println(formato2.format(m3));
+                  String m3Ajust =  formato2.format(m3);
+                    txtm3.setText(m3Ajust);
                 }
 
             }

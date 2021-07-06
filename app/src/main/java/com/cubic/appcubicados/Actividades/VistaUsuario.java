@@ -1,8 +1,10 @@
 package com.cubic.appcubicados.Actividades;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -11,6 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cubic.appcubicados.Modelos.Users;
 import com.cubic.appcubicados.R;
+import com.cubic.appcubicados.Retrofit.RetrofitBuilder;
+import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class VistaUsuario extends AppCompatActivity {
     private ImageButton imgCubicador;
@@ -27,6 +35,12 @@ public class VistaUsuario extends AppCompatActivity {
         imgAsis = findViewById(R.id.imgAsistencia);
         imgPerfil = findViewById(R.id.imgPerfil);
         users = (Users) getIntent().getSerializableExtra("usuario");
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("userP", MODE_PRIVATE);
+        String userSave = prefs.getString("userperfil", null);
+        Gson gson = new Gson();
+        Users usr = gson.fromJson(userSave, Users.class);
+        cargarDiasRestantes(usr.getId());
+
         //Metodos
         irCubicar();
         irAsistencia();
@@ -101,5 +115,27 @@ public class VistaUsuario extends AppCompatActivity {
                 .setPositiveButton("Salir", dialogClickListener)
                 .setNegativeButton("Quedarse", dialogClickListener).show();
 
+    }
+    private void cargarDiasRestantes(int usID){
+        Call<Integer> integerCall = RetrofitBuilder.arriendoService.getDias(usID);
+        integerCall.enqueue(new Callback<Integer>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()){
+                    int diasRest =  response.body();
+                    if(diasRest == 31){
+                        Intent i = new Intent(VistaUsuario.this, MainActivity.class);
+                        startActivity(i);
+                    }
+                    System.out.println("Dias restantes"+response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
     }
 }

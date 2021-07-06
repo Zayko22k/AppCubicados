@@ -6,19 +6,91 @@ public class cubic {
     private String inmuebleSelect;
     private String nomConstruccionSelect;
     private int idConstrucciones;
+    private int idTipoConstruccion;
     private String nomTipoConstruccionSelect;
+    private int idConstruccionesRev;
     private double area;
+    private int tipoPintura;
+    private double muroPorPintar;
+    private int rendimientoPintura;
+    private int herramienta;
     private double ancho;
     private double largo;
     private int alto;
     private double m3;
     private double sacosCemento;
+    private double litrosPintura;
+    private double cantidadDiluyente;
     private int idTienda;
     private String idProduct;
     private int dosificacion;
     private double gravillaOcupar;
     private double arenaOcupar;
     private double aguaOcupar;
+
+    public int getHerramienta() {
+        return herramienta;
+    }
+
+    public void setHerramienta(int herramienta) {
+        this.herramienta = herramienta;
+    }
+
+    public int getRendimientoPintura() {
+        return rendimientoPintura;
+    }
+
+    public void setRendimientoPintura(int rendimientoPintura) {
+        this.rendimientoPintura = rendimientoPintura;
+    }
+
+    public int getTipoPintura() {
+        return tipoPintura;
+    }
+
+    public void setTipoPintura(int tipoPintura) {
+        this.tipoPintura = tipoPintura;
+    }
+
+    public double getCantidadDiluyente() {
+        return cantidadDiluyente;
+    }
+
+    public void setCantidadDiluyente(double cantidadDiluyente) {
+        this.cantidadDiluyente = cantidadDiluyente;
+    }
+
+    public double getLitrosPintura() {
+        return litrosPintura;
+    }
+
+    public void setLitrosPintura(double litrosPintura) {
+        this.litrosPintura = litrosPintura;
+    }
+
+    public double getMuroPorPintar() {
+        return muroPorPintar;
+    }
+
+    public void setMuroPorPintar(double muroPorPintar) {
+        this.muroPorPintar = muroPorPintar;
+    }
+
+    public int getIdTipoConstruccion() {
+        return idTipoConstruccion;
+    }
+
+    public int getIdConstruccionesRev() {
+        return idConstruccionesRev;
+    }
+
+    public void setIdConstruccionesRev(int idConstruccionesRev) {
+        this.idConstruccionesRev = idConstruccionesRev;
+    }
+
+    public void setIdTipoConstruccion(int idTipoConstruccion) {
+        this.idTipoConstruccion = idTipoConstruccion;
+    }
 
     public int getId() {
         return id;

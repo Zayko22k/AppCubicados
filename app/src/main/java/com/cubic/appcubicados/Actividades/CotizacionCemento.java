@@ -67,7 +67,7 @@ public class CotizacionCemento extends AppCompatActivity {
                     case 0:
                         try {
                             cubicar.setIdTienda(1);
-                            sodimacScrap();
+                           sodimacScrap();
                             rvListener();
                         } catch (Exception e) {
                             Toast.makeText(CotizacionCemento.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
@@ -78,6 +78,15 @@ public class CotizacionCemento extends AppCompatActivity {
                         try {
                             cubicar.setIdTienda(2);
                             construmartScrap();
+                            rvListener();
+                        } catch (Exception e) {
+                            Toast.makeText(CotizacionCemento.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    case 2:
+                        try {
+                            cubicar.setIdTienda(3);
+                            imperialScrap();
                             rvListener();
                         } catch (Exception e) {
                             Toast.makeText(CotizacionCemento.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
@@ -187,7 +196,7 @@ public class CotizacionCemento extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    String url = "https://www.sodimac.cl/sodimac-cl/category/scat934880/Cemento-y-Complementos?currentpage=1&=&f.product.attribute.Material=%2522cemento%2522&f.range.derived.price.event.search.7=1%257CHasta%2520%25245.000";
+                    String url = "https://www.sodimac.cl/sodimac-cl/category/scat102653/Cemento-y-Morteros?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.L2_category_paths=scat913790%257C%257CObra%2520gruesa%252Fscat934880%257C%257CCemento%2520y%2520Complementos%252Fscat102653%257C%257CCemento%2520y%2520Morteros&f.product.attribute.Material=cemento%252C%2520aridos%2520y%2520aditivos%3A%3Ahormigon&f.product.brandName=Topex";
 
                     Document doc = Jsoup.connect(url).get();
 
@@ -246,7 +255,7 @@ public class CotizacionCemento extends AppCompatActivity {
                                 ". retiro: " + retiro +
                                 ". idProducto:" + idProducto);
                     }
-                    cementoProductoList = new ArrayList<>();
+                   // cementoProductoList = new ArrayList<>();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -328,7 +337,7 @@ public class CotizacionCemento extends AppCompatActivity {
 
                                 ". idProducto:" + idProducto);
                     }
-                    cementoProductoList = new ArrayList<>();
+                   // cementoProductoList = new ArrayList<>();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

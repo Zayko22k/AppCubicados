@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:id="@+id/fragment_cubic_4"
     android:layout_height="match_parent"
-    tools:context=".Fragments.Cubicacion.Fragment_cubic_4">
+    tools:context=".Fragments.Cubicacion.Fragment_cubic_calculo_sup">
 <TextView
     android:id="@+id/text1"
     android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:fontFamily="@font/gotham"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:hint="Largo"
             android:textColor="@color/negroEX"
             android:drawableRight="@mipmap/icon_mts" />
@@ -65,7 +65,7 @@
             android:drawableEnd="@mipmap/icon_mts"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:fontFamily="@font/gotham"
             android:hint="Ancho"
             android:textColor="@color/negroEX"
@@ -111,17 +111,7 @@
             android:hint="Alto"
             android:textColor="@color/negroEX" />
     </com.google.android.material.textfield.TextInputLayout>
-    <TextView
-        android:id="@+id/text3"
-        android:textSize="18sp"
-        android:textColor="@color/negroEX"
-        android:fontFamily="@font/gotham"
-        android:layout_marginStart="10dp"
-        android:text="@string/stFragmentCubic_4"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp" />
+
     <!--Text input 4-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
