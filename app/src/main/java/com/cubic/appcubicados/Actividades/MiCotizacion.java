@@ -46,6 +46,10 @@ public class MiCotizacion extends AppCompatActivity {
     private TextView textLista;
     Users user = new Users();
 
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,8 +63,13 @@ public class MiCotizacion extends AppCompatActivity {
         verMisCotizaciones();
     }
 
+    /**
+     * Metodo que carga las cotizaciones asociadas
+     * al id de usuario que segun pase por
+     * parametro
+     */
     private void verMisCotizaciones() {
-        try{
+        try {
             SharedPreferences prefs = getApplicationContext().getSharedPreferences("identificadorCl", MODE_PRIVATE);
             String userSave = prefs.getString("userID", null);
             int idUs = Integer.parseInt(userSave);
@@ -95,14 +104,19 @@ public class MiCotizacion extends AppCompatActivity {
 
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(MiCotizacion.this, "No se pudo cargar la cotizacion", Toast.LENGTH_SHORT).show();
         }
 
 
-
     }
-    private void buscarCotizacion(){
+
+    /**
+     * listener de texto que busca
+     * en la base de datos en tiempo real
+     * coincidencias de nombres de cotizacion
+     */
+    private void buscarCotizacion() {
         buscador.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,7 +135,7 @@ public class MiCotizacion extends AppCompatActivity {
                 listCall.enqueue(new Callback<List<DetalleCotizacion>>() {
                     @Override
                     public void onResponse(Call<List<DetalleCotizacion>> call, Response<List<DetalleCotizacion>> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             detalleCotizacionList = response.body();
                             lym = new LinearLayoutManager(MiCotizacion.this);
                             lym.setOrientation(LinearLayoutManager.VERTICAL);
@@ -141,11 +155,21 @@ public class MiCotizacion extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * cuando se presiona atras vuelve a la actividad de VistaUsuario
+     */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(MiCotizacion.this, VistaUsuario.class);
         startActivity(i);
     }
+
+    /**
+     * RecyclerView.Listener
+     * Trae la posicion donde se marco en la pantalla
+     * segun cual sea se redireccionara a distintas cotizacion
+     */
     private void rvListener() {
         final GestureDetector mGestureDetector = new GestureDetector(MiCotizacion.this, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -172,14 +196,14 @@ public class MiCotizacion extends AppCompatActivity {
                         fade.excludeTarget(android.R.id.navigationBarBackground, true);
                         getWindow().setEnterTransition(fade);
                         getWindow().setExitTransition(fade);
-                        if(detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 1){
+                        if (detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 1) {
                             Intent intent = new Intent(MiCotizacion.this, Ver_Cotizacion.class);
                             final CardView cardView = findViewById(R.id.cwMiCotizacion);
                             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MiCotizacion.this, cardView, "Card view");
                             DetalleCotizacion detalleCotizacion = detalleCotizacionList.get(position);
                             intent.putExtra("detalleCoti", detalleCotizacion);
                             startActivity(intent, options.toBundle());
-                        } else if(detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 2){
+                        } else if (detalleCotizacionList.get(position).getTipoConstruccion_idTipoConstruccion() == 2) {
                             Intent intent = new Intent(MiCotizacion.this, Ver_Cotizacion_Muro.class);
                             final CardView cardView = findViewById(R.id.cwMiCotizacion);
                             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MiCotizacion.this, cardView, "Card view");

@@ -1,5 +1,6 @@
 package com.cubic.appcubicados.Adaptadores.Cotizacion;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import com.cubic.appcubicados.Modelos.DetalleCotizacion;
 import com.cubic.appcubicados.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdaptadorMisCotizaciones extends RecyclerView.Adapter<AdaptadorMisCotizaciones.ViewHolder> {
@@ -32,6 +32,7 @@ public class AdaptadorMisCotizaciones extends RecyclerView.Adapter<AdaptadorMisC
                 .inflate(R.layout.list_cotizaciones_main, parent, false);
         return new AdaptadorMisCotizaciones.ViewHolder(view);
     }
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull AdaptadorMisCotizaciones.ViewHolder holder, int position) {
         DetalleCotizacion detalleCotizacion;
@@ -58,10 +59,5 @@ public class AdaptadorMisCotizaciones extends RecyclerView.Adapter<AdaptadorMisC
             fechaCotizacion = itemView.findViewById(R.id.txtVerFechaMiCoti);
             totalCotizacion =  itemView.findViewById(R.id.txtTotalMiCoti);
         }
-    }
-    public void setFilter(ArrayList<DetalleCotizacion> newList) {
-        detalleCotizacionList = new ArrayList<>();
-        detalleCotizacionList.addAll(newList);
-        notifyDataSetChanged();
     }
 }

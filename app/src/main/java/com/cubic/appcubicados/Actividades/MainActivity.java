@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     Users u = new Users();
     Button btnIngreso;
 
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
         linkTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    /**
+     * Metodo para iniciar sesion
+     * se pasa por parametro un objeto user
+     * cargado con los datos que se pasen en los EditText correo
+     * y pass
+     */
     private void iniciarSesion() {
         if (txtCorreo.getText().toString().isEmpty() ||
                 txtPass.getText().toString().isEmpty()) {
@@ -92,6 +102,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo que pasa el token por post
+     * para recibir los datos de usuario
+     * tambien se valida si el token existe o expiro
+     * o es invalido
+     *
+     * @param token
+     */
     private void getUser(String token) {
         Call<Users> getUserCall = RetrofitBuilder.usersService.getSecret("Bearer " + token);
         getUserCall.enqueue(new Callback<Users>() {
@@ -111,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     editor2.putString("userperfil", json);
                     editor2.apply();
                     editor.apply();
-                    servicioVencido(id,intent);
+                    servicioVencido(id, intent);
 
                 } else {
                     Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_SHORT).show();
@@ -125,62 +143,81 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Metodo que usa el parametro id (usuario)
+     * que busca el arriendo y verifica si se encuentra activo
+     * si esta activo el login se llevara con exito si no se despliega
+     *
+     * @param id
+     * @param intent
+     */
     private void servicioVencido(int id, Intent intent) {
 
-       Call<List<Arriendo>>  arriendoCall = RetrofitBuilder.arriendoService.getArriendo(id);
-       arriendoCall.enqueue(new Callback<List<Arriendo>>() {
-           @Override
-           public void onResponse(Call<List<Arriendo>> call, Response<List<Arriendo>> response) {
-               if(response.isSuccessful()){
+        Call<List<Arriendo>> arriendoCall = RetrofitBuilder.arriendoService.getArriendo(id);
+        arriendoCall.enqueue(new Callback<List<Arriendo>>() {
+            @Override
+            public void onResponse(Call<List<Arriendo>> call, Response<List<Arriendo>> response) {
+                if (response.isSuccessful()) {
                     arriendoList = response.body();
-                   for (int i = 0; i < arriendoList.size(); i++ ){
-                       if(arriendoList.get(i).getActivo() == 1){
-                           System.out.println("Estado: "+arriendoList.get(i).getActivo());
-                           startActivity(intent);
-                       } else {
-                           Dialog dialog = new Dialog(MainActivity.this);
-                           dialog.setContentView(R.layout.dialog_cliente_bloq);
-                           int witdh = WindowManager.LayoutParams.MATCH_PARENT;
-                           int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                           dialog.getWindow().setLayout(witdh, height);
-                           Button btnRenovar = dialog.findViewById(R.id.btnRenovarPago);
-                           Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
-                           dialog.show();
-                           btnRenovar.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   String url = "http://www.google.com";
-                                   Intent i = new Intent(Intent.ACTION_VIEW);
-                                   i.setData(Uri.parse(url));
-                                   startActivity(i);
-                               }
-                           });
-                           btnCancelar.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   dialog.dismiss();
-                               }
-                           });
+                    for (int i = 0; i < arriendoList.size(); i++) {
+                        if (arriendoList.get(i).getActivo() == 1) {
+                            System.out.println("Estado: " + arriendoList.get(i).getActivo());
+                            startActivity(intent);
+                        } else {
+                            Dialog dialog = new Dialog(MainActivity.this);
+                            dialog.setContentView(R.layout.dialog_cliente_bloq);
+                            int witdh = WindowManager.LayoutParams.MATCH_PARENT;
+                            int height = WindowManager.LayoutParams.WRAP_CONTENT;
+                            dialog.getWindow().setLayout(witdh, height);
+                            Button btnRenovar = dialog.findViewById(R.id.btnRenovarPago);
+                            Button btnCancelar = dialog.findViewById(R.id.btnCancelar);
+                            dialog.show();
+                            btnRenovar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String url = "http://www.google.com";
+                                    Intent i = new Intent(Intent.ACTION_VIEW);
+                                    i.setData(Uri.parse(url));
+                                    startActivity(i);
+                                }
+                            });
+                            btnCancelar.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
 
-                       }
-                   }
-               } else{
-               }
-           }
+                        }
+                    }
+                } else {
+                }
+            }
 
-           @Override
-           public void onFailure(Call<List<Arriendo>> call, Throwable t) {
+            @Override
+            public void onFailure(Call<List<Arriendo>> call, Throwable t) {
                 Log.d("Error", t.getMessage());
-           }
-       });
+            }
+        });
     }
 
+    /**
+     *Cuando se presiona atras  llama al metodo
+     * Is Finish y se le pasa una cadena
+     */
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
         IsFinish("¿Deseas salir de la app?");
     }
 
+    /**
+     * Metodo que despliega un AlertDialog
+     * que pregunta si quiere cerrar la app
+     * switch.case.positive = mata el proceso de android haciendo que se cierre la aplicacion
+     * switch.case.negative = cierra el alertDialog
+     * @param msjAlert
+     */
     public void IsFinish(String msjAlert) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -199,12 +236,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setMessage(msjAlert)
                 .setPositiveButton("Salir", dialogClickListener)
                 .setNegativeButton("Quedarse", dialogClickListener).show();
-
     }
 
 }

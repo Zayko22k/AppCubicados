@@ -43,6 +43,10 @@ public class Perfil extends AppCompatActivity {
 
     Users users = new Users();
 
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,17 +63,37 @@ public class Perfil extends AppCompatActivity {
 
         cargarUsuario();
     }
-    public void cerrarSesion(View v){
+
+    /**
+     * Metodo que llama al metodo IsFinish
+     *
+     * @param v
+     */
+    public void cerrarSesion(View v) {
 
         IsFinish("¿Deseas cerrar sesión?");
 
     }
-    public void editarPerfil(View v){
+
+    /**
+     * Metodo que redirecciona a la edicion del perfil
+     *
+     * @param v
+     */
+    public void editarPerfil(View v) {
         String url = "http://www.google.com";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
     }
+
+    /**
+     * Metodo que crea una alerta de dialogo
+     * switch.case.positivo = cierra la sesión
+     * switch.case.negativo = cierra el cuadro de dialogo
+     *
+     * @param msjAlert
+     */
 
     public void IsFinish(String msjAlert) {
 
@@ -93,35 +117,53 @@ public class Perfil extends AppCompatActivity {
                 .setNegativeButton("Quedarse", dialogClickListener).show();
 
     }
-    private void cargarDiasRestantes(int usID){
-            Call<Integer> integerCall = RetrofitBuilder.arriendoService.getDias(usID);
-            integerCall.enqueue(new Callback<Integer>() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    if(response.isSuccessful()){
-                      int diasRest =  response.body();
-                      if(diasRest == 31){
-                          Intent i = new Intent(Perfil.this, MainActivity.class);
-                          startActivity(i);
-                      }
-                      System.out.println("Dias restantes"+response.body());
-                       diasPago.setText(diasRest+" dias");
+
+    /**
+     * metodo que carga los dias restantes del servicio
+     * segun la fecha donde se haya creado el arriendo
+     *
+     * @param usID
+     */
+    private void cargarDiasRestantes(int usID) {
+        Call<Integer> integerCall = RetrofitBuilder.arriendoService.getDias(usID);
+        integerCall.enqueue(new Callback<Integer>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (response.isSuccessful()) {
+                    int diasRest = response.body();
+                    if (diasRest == 31) {
+                        Intent i = new Intent(Perfil.this, MainActivity.class);
+                        startActivity(i);
                     }
+                    System.out.println("Dias restantes" + response.body());
+                    diasPago.setText(diasRest + " dias");
                 }
+            }
 
-                @Override
-                public void onFailure(Call<Integer> call, Throwable t) {
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
 
-                }
-            });
+            }
+        });
     }
+
+    /**
+     * Cuando se presiona atras regresa al activity vista usuario
+     */
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
-       Intent i = new Intent(Perfil.this, VistaUsuario.class);
-       startActivity(i);
+        Intent i = new Intent(Perfil.this, VistaUsuario.class);
+        startActivity(i);
     }
+
+    /**
+     * Metodo para cargar usuarios
+     * ocupando un shared preferences
+     * que traera el id
+     * para buscar el arriendo asociado al id de usuario
+     */
     private void cargarUsuario() {
         //Datos Usuario
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("userP", MODE_PRIVATE);

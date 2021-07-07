@@ -22,7 +22,6 @@ import com.cubic.appcubicados.Clases.FichaTecnica;
 import com.cubic.appcubicados.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.cubic.appcubicados.Actividades.Cubicador.cubicar;
@@ -70,57 +69,43 @@ public class AdaptadorCemento extends RecyclerView.Adapter<AdaptadorCemento.View
         holder.retiro.setText(cementoProducto.getRetiro());
         Picasso.get().load(cementoProducto.getImgUrl()).into(holder.imagenCemento);
         cubicar.setIdProduct(cementoProducto.getIdProducto());
-        holder.imgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println(cementoProducto.getIdProducto());
-                Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.dialog_agregar_producto);
-                int witdh = WindowManager.LayoutParams.MATCH_PARENT;
-                int height = WindowManager.LayoutParams.WRAP_CONTENT;
-                dialog.getWindow().setLayout(witdh, height);
-                Button btnAgregar = dialog.findViewById(R.id.btnConfirmarProducto);
-                Button btnCancelar = dialog.findViewById(R.id.btnCancelarProducto);
-                dialog.show();
-                btnAgregar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(context, CrearCotizacion.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.putExtra("productoSelect", cementoProducto);
-                        intent.putExtra("total", totalprecio);
-                        dialog.dismiss();
-                        context.startActivity(intent);
-                    }
-                });
-                btnCancelar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-            }
+        holder.imgAdd.setOnClickListener(v -> {
+            System.out.println(cementoProducto.getIdProducto());
+            Dialog dialog = new Dialog(v.getContext());
+            dialog.setContentView(R.layout.dialog_agregar_producto);
+            int witdh = WindowManager.LayoutParams.MATCH_PARENT;
+            int height = WindowManager.LayoutParams.WRAP_CONTENT;
+            dialog.getWindow().setLayout(witdh, height);
+            Button btnAgregar = dialog.findViewById(R.id.btnConfirmarProducto);
+            Button btnCancelar = dialog.findViewById(R.id.btnCancelarProducto);
+            dialog.show();
+            btnAgregar.setOnClickListener(v1 -> {
+                Intent intent = new Intent(context, CrearCotizacion.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("productoSelect", cementoProducto);
+                intent.putExtra("total", totalprecio);
+                dialog.dismiss();
+                context.startActivity(intent);
+            });
+            btnCancelar.setOnClickListener(v12 -> dialog.dismiss());
         });
-        holder.imgVer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    if(cubicar.getIdTienda() == 1){
-                        String url = "https://www.sodimac.cl/sodimac-cl/product/"+cementoProducto.getIdProducto();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.setData(Uri.parse(url));
-                        context.startActivity(i);
-                    } else if(cubicar.getIdTienda() == 2){
-                        String url = "https://www.construmart.cl"+cementoProducto.getIdProducto();
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        i.setData(Uri.parse(url));
-                        context.startActivity(i);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+        holder.imgVer.setOnClickListener(v -> {
+            try {
+                if(cubicar.getIdTienda() == 1){
+                    String url = "https://www.sodimac.cl/sodimac-cl/product/"+cementoProducto.getIdProducto();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.setData(Uri.parse(url));
+                    context.startActivity(i);
+                } else if(cubicar.getIdTienda() == 2){
+                    String url = "https://www.construmart.cl"+cementoProducto.getIdProducto();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.setData(Uri.parse(url));
+                    context.startActivity(i);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -158,9 +143,4 @@ public class AdaptadorCemento extends RecyclerView.Adapter<AdaptadorCemento.View
         }
     }
 
-    public void setFilter(ArrayList<CementoProducto> newList) {
-        cementoProductoList = new ArrayList<>();
-        cementoProductoList.addAll(newList);
-        notifyDataSetChanged();
-    }
 }

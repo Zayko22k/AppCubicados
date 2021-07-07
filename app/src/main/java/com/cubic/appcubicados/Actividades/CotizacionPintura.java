@@ -84,15 +84,6 @@ public class CotizacionPintura extends AppCompatActivity {
                             Toast.makeText(CotizacionPintura.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
                         }
                         break;
-                    case 2:
-                        try {
-                            cubicar.setIdTienda(3);
-                           // imperialScrap();
-                            rvListener();
-                        } catch (Exception e) {
-                            Toast.makeText(CotizacionPintura.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
-                        }
-                        break;
                 }
             }
 
@@ -101,6 +92,10 @@ public class CotizacionPintura extends AppCompatActivity {
             }
         });
     }
+    /**
+     * @GET Lista de tiendas
+     * @Acción luego de get carga las tiendas en el spinner
+     */
     private void spinnerTiendaPintura() {
         Call<List<Tienda>> tiendaCall = RetrofitBuilder.tiendaService.getTiendas();
         tiendaCall.enqueue(new Callback<List<Tienda>>() {
@@ -164,7 +159,13 @@ public class CotizacionPintura extends AppCompatActivity {
         });
 
     }
-
+    /**
+     * @Acción Hilo scrap que trae los datos desde la url
+     * @Get trae los datos de pintura
+     * @Set cementoProductList.Envia los datos al adaptadorCemento
+     * @Libreria Jsoup que conecta con la url e inspecciona
+     * el contenido de las etiquetas por medio de llamada de clases css
+     */
     private void sodimacScrapPintura() {
         new Thread(new Runnable() {
             @Override
@@ -255,7 +256,13 @@ public class CotizacionPintura extends AppCompatActivity {
             }
         }).start();
     }
-
+    /**
+     * @Acción Hilo scrap que trae los datos desde la url
+     * @Get trae los datos de pintura
+     * @Set cementoProductList.Envia los datos al adaptadorCemento
+     * @Libreria Jsoup que conecta con la url e inspecciona
+     * el contenido de las etiquetas por medio de llamada de clases css
+     */
     private void construmartScrap() {
         new Thread(new Runnable() {
             @Override

@@ -78,6 +78,11 @@ public class Ver_Cotizacion extends AppCompatActivity {
 
     String NOMBRE_DIRECTORIO = "CotizacionCubica2";
     DetalleCotizacion detalleCotizacion = new DetalleCotizacion();
+
+    /**
+     * @Autor Pablo Rodriguez
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +117,10 @@ public class Ver_Cotizacion extends AppCompatActivity {
         btnEliminarCoti = findViewById(R.id.btnEliminarCoti);
         cargarCotizacion();
     }
+
+    /**
+     * metodo que carga cotizacion de Superficie
+     */
     private void cargarCotizacion(){
       try{
           System.out.println("Id de detalle"+detalleCotizacion.getIdDetalleCoti());
@@ -148,6 +157,11 @@ public class Ver_Cotizacion extends AppCompatActivity {
       }
     }
 
+    /**
+     * Metodo que pregunta por permisos de almacenamiento
+     *
+     * @param v
+     */
     public void exportarCoti(View v){
         // Permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
@@ -161,6 +175,10 @@ public class Ver_Cotizacion extends AppCompatActivity {
         Toast.makeText(Ver_Cotizacion.this,"Se creo el pdf", Toast.LENGTH_SHORT).show();
 
     }
+    /**
+     * Metodo que  da formato al documento pdf
+     * carga los datos traidos desde la activity anterior
+     */
     public void crearPDF() {
         Document documento = new Document(PageSize.A4, 20, 20, 20, 20);
 
@@ -313,7 +331,14 @@ public class Ver_Cotizacion extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Metodo que crear el fichero y valida
+     * si no esta nulo entonces crea
+     * un nuevo objeto
+     *
+     * @param nombreFichero
+     * @return fichero
+     */
     public File crearFichero(String nombreFichero) {
         File ruta = getRuta();
 
@@ -324,7 +349,11 @@ public class Ver_Cotizacion extends AppCompatActivity {
 
         return fichero;
     }
-
+    /**
+     * Metodo que verifica la ruta si no existe crea un nuevo directorio
+     *
+     * @return ruta del directorio
+     */
     public File getRuta() {
         File ruta = null;
 
@@ -342,6 +371,12 @@ public class Ver_Cotizacion extends AppCompatActivity {
         }
         return ruta;
     }
+    /**
+     * metodo que muestra un dialogo para la confirmación
+     * o cancelación de eliminación de cotizacion de superficie
+     *
+     * @param v
+     */
     public void eliminarCoti(View v){
         Dialog dialog = new Dialog(v.getContext());
         dialog.setContentView(R.layout.dialog_eliminar_coti);
@@ -369,6 +404,11 @@ public class Ver_Cotizacion extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Metodo para eliminar cotizacion segun
+     * id de cotización
+     */
     private void deleteCoti(){
         Call<List<DetalleCotizacion>> detalleCotizacionCall = RetrofitBuilder.detalleCotizacionService.deleteCotizacion(detalleCotizacion.getIdDetalleCoti());
         detalleCotizacionCall.enqueue(new Callback<List<DetalleCotizacion>>() {
@@ -385,5 +425,13 @@ public class Ver_Cotizacion extends AppCompatActivity {
             }
         });
 
+    }
+    /**
+     * Al presionar atras vuelve al activity MiCotización
+     */
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(Ver_Cotizacion.this, MiCotizacion.class);
+        startActivity(i);
     }
 }

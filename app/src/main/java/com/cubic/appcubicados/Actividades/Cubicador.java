@@ -33,7 +33,10 @@ public class Cubicador extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     public static ViewPager2 pager2;
     public static cubic cubicar;
-
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,13 +59,23 @@ public class Cubicador extends AppCompatActivity {
 
     }
 
-    //Este metodo es para cuando el cliente presiona el boton atras en el smartphone
+    /**
+     *  Este metodo es para cuando el cliente presiona el boton atras en el smartphone
+     */
     @Override
     public void onBackPressed() {
 
         IsFinish("¿Volver a inicio?");
 
         }
+
+    /**
+     * Metodo que despliega un AlertDialog
+     * que pregunta si quiere cerrar la app
+     * switch.case.positive = redirecciona a la vista usuario
+     * switch.case.negative = cierra el alertDialog
+     * @param msjAlert
+     */
     public void IsFinish(String msjAlert) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

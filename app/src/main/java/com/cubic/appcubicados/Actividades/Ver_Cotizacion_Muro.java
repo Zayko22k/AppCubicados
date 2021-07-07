@@ -74,6 +74,10 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
     String NOMBRE_DIRECTORIO = "CotizacionCubica2";
     DetalleCotizacion detalleCotizacion = new DetalleCotizacion();
 
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,6 +108,9 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         cargarCotizacionMuro();
     }
 
+    /**
+     * Metodo que carga las cotizaciones de Revestimiento
+     */
     private void cargarCotizacionMuro() {
         try {
             System.out.println("Id de detalle" + detalleCotizacion.getIdDetalleCoti());
@@ -130,6 +137,11 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo que pregunta por permisos de almacenamiento
+     *
+     * @param v
+     */
     public void exportarCotiMuro(View v) {
         // Permisos
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
@@ -144,6 +156,11 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
 
     }
 
+
+    /**
+     * Metodo que  da formato al documento pdf
+     * carga los datos traidos desde la activity anterior
+     */
     public void crearPDFMuro() {
         Document documento = new Document(PageSize.A4, 20, 20, 20, 20);
 
@@ -300,7 +317,14 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Metodo que crear el fichero y valida
+     * si no esta nulo entonces crea
+     * un nuevo objeto
+     *
+     * @param nombreFichero
+     * @return fichero
+     */
     public File crearFicheroMuro(String nombreFichero) {
         File ruta = getRutaMuro();
 
@@ -312,6 +336,11 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         return fichero;
     }
 
+    /**
+     * Metodo que verifica la ruta si no existe crea un nuevo directorio
+     *
+     * @return ruta del directorio
+     */
     public File getRutaMuro() {
         File ruta = null;
 
@@ -330,6 +359,12 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         return ruta;
     }
 
+    /**
+     * metodo que muestra un dialogo para la confirmación
+     * o cancelación de eliminación de cotizacion de muro
+     *
+     * @param v
+     */
     public void eliminarCotiMuro(View v) {
         Dialog dialog = new Dialog(v.getContext());
         dialog.setContentView(R.layout.dialog_eliminar_coti);
@@ -339,32 +374,27 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
         Button btnDelete = dialog.findViewById(R.id.btnDeleteCoti);
         Button btnCancelar = dialog.findViewById(R.id.btnCancelarDeleteCoti);
         dialog.show();
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteCotiMuro();
-                Toast.makeText(Ver_Cotizacion_Muro.this, "Cotización borrada", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(Ver_Cotizacion_Muro.this, MiCotizacion.class);
-                startActivity(i);
+        btnDelete.setOnClickListener(v12 -> {
+            deleteCotiMuro();
+            Toast.makeText(Ver_Cotizacion_Muro.this, "Cotización borrada", Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(Ver_Cotizacion_Muro.this, MiCotizacion.class);
+            startActivity(i);
 
-            }
         });
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
+        btnCancelar.setOnClickListener(v1 -> dialog.dismiss());
 
     }
 
+    /**
+     * Metodo para eliminar cotizacion segun
+     * id de cotización
+     */
     private void deleteCotiMuro() {
         Call<List<DetalleCotizacion>> detalleCotizacionCall = RetrofitBuilder.detalleCotizacionService.deleteCotizacion(detalleCotizacion.getIdDetalleCoti());
         detalleCotizacionCall.enqueue(new Callback<List<DetalleCotizacion>>() {
             @Override
             public void onResponse(Call<List<DetalleCotizacion>> call, Response<List<DetalleCotizacion>> response) {
                 if (response.isSuccessful()) {
-
                 }
             }
 
@@ -374,6 +404,10 @@ public class Ver_Cotizacion_Muro extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Al presionar atras vuelve al activity MiCotización
+     */
     @Override
     public void onBackPressed() {
         Intent i = new Intent(Ver_Cotizacion_Muro.this, MiCotizacion.class);

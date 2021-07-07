@@ -69,6 +69,10 @@ public class CrearCotizacion extends AppCompatActivity {
     private List<DetalleCotizacion> detalleCotizacionList = new ArrayList<>();
     private ProgressDialog dialog;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,6 +109,11 @@ public class CrearCotizacion extends AppCompatActivity {
         cargarFicha();
     }
 
+    /**
+     * @Get cubicar.trae los datos previamente enviados
+     * @Get
+     *
+     */
     private void cargarFicha() {
         try {
             //Ficha tecnica

@@ -35,6 +35,12 @@ public class Consulta extends AppCompatActivity {
     private EditText consultaAsis;
     private Button btnEnviarAsis;
 
+    /**
+     * Activity para las consultas(Asistencia de la app)
+     *
+     * @param savedInstanceState
+     * @Autor PabloRodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +51,11 @@ public class Consulta extends AppCompatActivity {
         consultaAsis = findViewById(R.id.txtConsultaAsis);
         btnEnviarAsis = findViewById(R.id.btnEnviarAsist);
         inicioAsistencia();
-        btnEnviarAsis.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crearAsistencia();
-            }
-        });
+        /**
+         *  Boton listener
+         *  llama al metodo crear Asistencia
+         */
+        btnEnviarAsis.setOnClickListener(v -> crearAsistencia());
     }
 
     private void crearAsistencia() {
@@ -72,6 +77,9 @@ public class Consulta extends AppCompatActivity {
         }
     }
 
+    /**
+     * Lista de regiones en spinner
+     */
     private void inicioAsistencia() {
         Call<List<Region>> regionCall = RetrofitBuilder.regionService.getRegion();
         regionCall.enqueue(new Callback<List<Region>>() {

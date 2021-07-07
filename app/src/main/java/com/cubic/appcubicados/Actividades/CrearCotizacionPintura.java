@@ -28,7 +28,6 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +66,10 @@ public class CrearCotizacionPintura extends AppCompatActivity {
     private List<DetalleCotizacion> detalleCotizacionList = new ArrayList<>();
     private ProgressDialog dialog;
 
+    /**
+     * @param savedInstanceState
+     * @Autor Pablo Rodriguez
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,11 +98,13 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         cargarFichaMuro();
     }
 
+    /**
+     * Metodo carga los datos del muro
+     */
     @SuppressLint("SetTextI18n")
     private void cargarFichaMuro() {
 
         //Ficha tecnica
-        DecimalFormat formato1 = new DecimalFormat("#.00");
         txtInmuebleProyecto.setText(cubicar.getInmuebleSelect());
         txtTCproyecto.setText(cubicar.getNomTipoConstruccionSelect());
         txtCproyecto.setText(cubicar.getNomConstruccionSelect());
@@ -108,7 +113,7 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         txtLargoProyecto.setText(cubicar.getLargo() + " mts");
         txtM2Proyecto.setText(cubicar.getMuroPorPintar() + " M²");
         int litrosAprox = (int) Math.round(cubicar.getLitrosPintura());
-        txtLitrosResultados.setText(litrosAprox+ " litros necesitas");
+        txtLitrosResultados.setText(litrosAprox + " litros necesitas");
         txtLitrosM2.setText(cubicar.getRendimientoPintura() + " (mts2 / Litros)");
         //Material
         cargarTiendaMuro();
@@ -122,6 +127,9 @@ public class CrearCotizacionPintura extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo que carga la tienda segun el id asociado
+     */
     private void cargarTiendaMuro() {
         Call<Tienda> tiendaCall = RetrofitBuilder.tiendaService.getTiendaSelect(cubicar.getIdTienda());
         tiendaCall.enqueue(new Callback<Tienda>() {
@@ -140,6 +148,10 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         });
     }
 
+    /**
+     * metodo para llamar a un metodo
+     * @param v
+     */
     public void validarNombreMuro(View v) {
         crearCotizacionMuro();
        /* SharedPreferences prefs = getApplicationContext().getSharedPreferences("identificadorCl", MODE_PRIVATE);
@@ -173,6 +185,10 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         });*/
     }
 
+    /**
+     * metodo para crear el material en la base de datos
+     * con validacion de campos vacios
+     */
     public void crearCotizacionMuro() {
         try {
             if (txtNombreCoti.getText().toString().isEmpty()) {
@@ -221,6 +237,11 @@ public class CrearCotizacionPintura extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo que crea la cubicacion con parametro
+     * que se encarga de recibir el id del material creado
+     * @param idCemento
+     */
     private void crearCubicacionMuro(int idCemento) {
         try {
             cubicacion = new Cubicacion();
@@ -267,7 +288,15 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         }
     }
 
-    public void guardarCotizacionMuro (int idMaterial, int idCubicacion) {
+    /**
+     * Metodo que crea el detalle de la cotizacion recibe dos parametros
+     * el idDel material creado y el id de la cubicacion
+     * la cual se le pasa al service un objeto que requiere para la creacion
+     * de la cotizacion
+     * @param idMaterial
+     * @param idCubicacion
+     */
+    public void guardarCotizacionMuro(int idMaterial, int idCubicacion) {
 
         try {
 
@@ -309,21 +338,19 @@ public class CrearCotizacionPintura extends AppCompatActivity {
 
     }
 
+    /**
+     * Hilo que tira un toast que indica la creacion de la cotizacion
+     */
     class Hilo1 extends Thread {
         @Override
         public void run() {
             try {
 
-
                 Thread.sleep(3000);
+                runOnUiThread(() -> {
+                    Toast.makeText(CrearCotizacionPintura.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CrearCotizacionPintura.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-
-                    }
                 });
                 Thread.sleep(1500);
                 Intent i = new Intent(CrearCotizacionPintura.this, VistaUsuario.class);
@@ -334,7 +361,15 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * metodo para ajustar el precio
+     * la cual se encarga de agregar el punto determinado el largo
+     * de la cadena
+     * @param str
+     * @param ch
+     * @param position
+     * @return
+     */
     public String addPrice(String str, char ch, int position) {
         StringBuilder sb = new StringBuilder(str);
         if (position == 4) {
@@ -349,10 +384,18 @@ public class CrearCotizacionPintura extends AppCompatActivity {
         return sb.toString();
     }
 
+    /**
+     * Metodo que llama a un metodo isFinish que se le pasa
+     * por parametro una cadena
+     * @param v
+     */
     public void cerrar(View v) {
         IsFinish("¿Estás seguro deseas cancelar?");
     }
 
+    /**
+     * cuando se presiona atrasvuelve al principio
+     */
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
@@ -361,21 +404,18 @@ public class CrearCotizacionPintura extends AppCompatActivity {
 
     public void IsFinish(String msjAlert) {
 
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
 
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent i = new Intent(CrearCotizacionPintura.this, VistaUsuario.class);
-                        startActivity(i);
-                        // This above line close correctly
-                        //finish();
-                        break;
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(CrearCotizacionPintura.this, VistaUsuario.class);
+                    startActivity(i);
+                    // This above line close correctly
+                    //finish();
+                    break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
 

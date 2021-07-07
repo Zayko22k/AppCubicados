@@ -49,6 +49,11 @@ public class CotizacionCemento extends AppCompatActivity {
     private ProgressBar progressBar;
     private Spinner spTienda;
 
+    /**
+     * @Autor Pablo Rodriguez
+     * @param savedInstanceState
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,11 @@ public class CotizacionCemento extends AppCompatActivity {
         progressBar.getIndeterminateDrawable()
                 .setColorFilter(Color.rgb(250, 102, 0), PorterDuff.Mode.SRC_IN);
         rvCemento = findViewById(R.id.recyclerCemento);
+        /**
+         * Spinnerlistener que llama hilo scrap
+         * cubicar.Envia id de tiendas
+         *
+         */
         spTienda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -83,15 +93,6 @@ public class CotizacionCemento extends AppCompatActivity {
                             Toast.makeText(CotizacionCemento.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
                         }
                         break;
-                    case 2:
-                        try {
-                            cubicar.setIdTienda(3);
-                            imperialScrap();
-                            rvListener();
-                        } catch (Exception e) {
-                            Toast.makeText(CotizacionCemento.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
-                        }
-                        break;
                 }
             }
 
@@ -102,265 +103,184 @@ public class CotizacionCemento extends AppCompatActivity {
 
     }
 
+    /**
+     * Hilo scrap que trae los datos desde la url
+     * cementoProductList.Envia los datos al adaptadorCemento
+     * Jsoup que conecta con la url e inspecciona
+     * el contenido de las etiquetas por medio de llamada de clases css
+     */
     private void construmartScrap() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String url = "https://www.construmart.cl/tiendaonline/webapp/materiales-obra-gruesa/cementos-y-aridos/cementos/117-770-1114?desde=0&orden=preciosAsc&filtros=&precio=&precio1=3000-10000";
+        new Thread(() -> {
+            try {
+                String url = "https://www.construmart.cl/tiendaonline/webapp/materiales-obra-gruesa/cementos-y-aridos/cementos/117-770-1114?desde=0&orden=preciosAsc&filtros=&precio=&precio1=3000-10000";
 
-                    Document doc = Jsoup.connect(url).get();
+                Document doc = Jsoup.connect(url).get();
 
-                    Elements data = doc.select("div.container-productos");
+                Elements data = doc.select("div.container-productos");
 
-                    int size = data.size();
-                    Log.d("doc", "doc: " + doc);
-                    Log.d("data", "data: " + data);
-                    Log.d("size", "" + size);
-                    for (int i = 0; i < size; i++) {
+                int size = data.size();
+                Log.d("doc", "doc: " + doc);
+                Log.d("data", "data: " + data);
+                Log.d("size", "" + size);
+                for (int i = 0; i < size; i++) {
 
-                        String imgUrl = data.select("div.imageHover")
-                                .select("a")
-                                .select("img")
-                                .eq(i)
-                                .attr("src");
+                    String imgUrl = data.select("div.imageHover")
+                            .select("a")
+                            .select("img")
+                            .eq(i)
+                            .attr("src");
 
-                        String marca = data.select("div.description")
-                                .select("h5.marca")
-                                .eq(i)
-                                .text();
+                    String marca = data.select("div.description")
+                            .select("h5.marca")
+                            .eq(i)
+                            .text();
 
-                        String descripcion = data.select("div.description")
-                                .select("h2.minificha__nombre")
-                                .select("a")
-                                .eq(i)
-                                .text();
+                    String descripcion = data.select("div.description")
+                            .select("h2.minificha__nombre")
+                            .select("a")
+                            .eq(i)
+                            .text();
 
-                        String precio = data.select("div.description")
-                                .select("div.price")
-                                .eq(i)
-                                .text();
+                    String precio = data.select("div.description")
+                            .select("div.price")
+                            .eq(i)
+                            .text();
 
-                        String despacho = data.select("div.clearfix")
-                                .select("div.msj-venta")
-                                .select("p.despacho--disponible")
-                                .eq(i)
-                                .text();
+                    String despacho = data.select("div.clearfix")
+                            .select("div.msj-venta")
+                            .select("p.despacho--disponible")
+                            .eq(i)
+                            .text();
 
-                        String retiro = data.select("div.clearfix")
-                                .select("div.msj-venta")
-                                .select("p.en-tienda--disponible")
-                                .eq(i)
-                                .text();
+                    String retiro = data.select("div.clearfix")
+                            .select("div.msj-venta")
+                            .select("p.en-tienda--disponible")
+                            .eq(i)
+                            .text();
 
-                        String idProducto = data.select("div.imageHover")
-                                .select("a")
-                                .eq(i)
-                                .attr("href");
+                    String idProducto = data.select("div.imageHover")
+                            .select("a")
+                            .eq(i)
+                            .attr("href");
 
 
-                        String imgFinal = "https://www.construmart.cl/" + imgUrl;
+                    String imgFinal = "https://www.construmart.cl/" + imgUrl;
 
-                        cementoProductoList.add(new CementoProducto(url, imgFinal, marca, descripcion, precio, despacho, retiro, idProducto));
-                        Log.d("items", "img: " + imgFinal
-                                + " . marca: " + marca +
-                                ". descripcion: " + descripcion +
-                                ". precio: " + precio +
-                                ". despacho: " + despacho +
-                                ". retiro: " + retiro +
-                                ". idProducto: " + idProducto);
-                    }
-                    //cementoProductoList = new ArrayList<>();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    cementoProductoList.add(new CementoProducto(url, imgFinal, marca, descripcion, precio, despacho, retiro, idProducto));
+                    Log.d("items", "img: " + imgFinal
+                            + " . marca: " + marca +
+                            ". descripcion: " + descripcion +
+                            ". precio: " + precio +
+                            ". despacho: " + despacho +
+                            ". retiro: " + retiro +
+                            ". idProducto: " + idProducto);
                 }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rvCemento.setHasFixedSize(true);
-                        rvCemento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adaptadorCemento = new AdaptadorCemento(cementoProductoList, CotizacionCemento.this);
-                        rvCemento.setAdapter(adaptadorCemento);
-                        adaptadorCemento.notifyDataSetChanged();
-                        cementoProductoList = new ArrayList<>();
-
-                    }
-                });
+                //cementoProductoList = new ArrayList<>();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            runOnUiThread(() -> {
+                rvCemento.setHasFixedSize(true);
+                rvCemento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adaptadorCemento = new AdaptadorCemento(cementoProductoList, CotizacionCemento.this);
+                rvCemento.setAdapter(adaptadorCemento);
+                adaptadorCemento.notifyDataSetChanged();
+                cementoProductoList = new ArrayList<>();
+
+            });
         }).start();
     }
-
+    /**
+     *  Hilo scrap que trae los datos desde la url
+     *  Jsoup conecta con la url e inspecciona
+     *  trae los datos de cemento
+     *  cementoProductList.Envia los datos al adaptadorCemento
+     * el contenido de las etiquetas por medio de llamada de clases css
+     */
     private void sodimacScrap() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String url = "https://www.sodimac.cl/sodimac-cl/category/scat102653/Cemento-y-Morteros?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.L2_category_paths=scat913790%257C%257CObra%2520gruesa%252Fscat934880%257C%257CCemento%2520y%2520Complementos%252Fscat102653%257C%257CCemento%2520y%2520Morteros&f.product.attribute.Material=cemento%252C%2520aridos%2520y%2520aditivos%3A%3Ahormigon&f.product.brandName=Topex";
+        new Thread(() -> {
+            try {
+                String url = "https://www.sodimac.cl/sodimac-cl/category/scat102653/Cemento-y-Morteros?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.L2_category_paths=scat913790%257C%257CObra%2520gruesa%252Fscat934880%257C%257CCemento%2520y%2520Complementos%252Fscat102653%257C%257CCemento%2520y%2520Morteros&f.product.attribute.Material=cemento%252C%2520aridos%2520y%2520aditivos%3A%3Ahormigon&f.product.brandName=Topex";
 
-                    Document doc = Jsoup.connect(url).get();
+                Document doc = Jsoup.connect(url).get();
 
-                    Elements data = doc.select("div.ie11-product-container");
+                Elements data = doc.select("div.ie11-product-container");
 
-                    int size = data.size();
-                    Log.d("doc", "doc: " + doc);
-                    Log.d("data", "data: " + data);
-                    Log.d("size", "" + size);
-                    for (int i = 0; i < size; i++) {
+                int size = data.size();
+                Log.d("doc", "doc: " + doc);
+                Log.d("data", "data: " + data);
+                Log.d("size", "" + size);
+                for (int i = 0; i < size; i++) {
 
-                        String imgUrl = data.select("div.product-image")
-                                .select("img.ie11-image-contain")
-                                .eq(i)
-                                .attr("data-src");
+                    String imgUrl = data.select("div.product-image")
+                            .select("img.ie11-image-contain")
+                            .eq(i)
+                            .attr("data-src");
 
-                        String marca = data.select("div.jsx-886840993")
-                                .select("a")
-                                .select("div.product-brand")
-                                .eq(i)
-                                .text();
+                    String marca = data.select("div.jsx-886840993")
+                            .select("a")
+                            .select("div.product-brand")
+                            .eq(i)
+                            .text();
 
-                        String descripcion = data.select("div.jsx-411745769")
-                                .select("a")
-                                .select("h2.product-title")
-                                .eq(i)
-                                .text();
+                    String descripcion = data.select("div.jsx-411745769")
+                            .select("a")
+                            .select("h2.product-title")
+                            .eq(i)
+                            .text();
 
-                        String precio = data.select("div.jsx-175035124")
-                                .eq(i)
-                                .text();
+                    String precio = data.select("div.jsx-175035124")
+                            .eq(i)
+                            .text();
 
-                        String despacho = data.select("div.dispatch-info")
-                                .eq(i)
-                                .text();
+                    String despacho = data.select("div.dispatch-info")
+                            .eq(i)
+                            .text();
 
-                        String retiro = data.select("div.withdrawl-info")
-                                .eq(i)
-                                .text();
+                    String retiro = data.select("div.withdrawl-info")
+                            .eq(i)
+                            .text();
 
-                        String idProducto = data.select("div.product-image")
-                                .select("img.ie11-image-contain")
-                                .eq(i)
-                                .attr("id");
+                    String idProducto = data.select("div.product-image")
+                            .select("img.ie11-image-contain")
+                            .eq(i)
+                            .attr("id");
 
 
-                        cementoProductoList.add(new CementoProducto(url, imgUrl, marca, descripcion, precio, despacho, retiro, idProducto));
+                    cementoProductoList.add(new CementoProducto(url, imgUrl, marca, descripcion, precio, despacho, retiro, idProducto));
 
-                        Log.d("items",
-                                "Url Tienda: "+ url
-                                        +"img: " + imgUrl
-                                + " . marca: " + marca +
-                                ". descripcion: " + descripcion +
-                                ". precio: " + precio +
-                                ". despacho: " + despacho +
-                                ". retiro: " + retiro +
-                                ". idProducto:" + idProducto);
-                    }
-                   // cementoProductoList = new ArrayList<>();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.d("items",
+                            "Url Tienda: "+ url
+                                    +"img: " + imgUrl
+                            + " . marca: " + marca +
+                            ". descripcion: " + descripcion +
+                            ". precio: " + precio +
+                            ". despacho: " + despacho +
+                            ". retiro: " + retiro +
+                            ". idProducto:" + idProducto);
                 }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rvCemento.setHasFixedSize(true);
-                        rvCemento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adaptadorCemento = new AdaptadorCemento(cementoProductoList, CotizacionCemento.this);
-                        rvCemento.setAdapter(adaptadorCemento);
-                        adaptadorCemento.notifyDataSetChanged();
-                        cementoProductoList = new ArrayList<>();
-
-                    }
-                });
+               // cementoProductoList = new ArrayList<>();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            runOnUiThread(() -> {
+                rvCemento.setHasFixedSize(true);
+                rvCemento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adaptadorCemento = new AdaptadorCemento(cementoProductoList, CotizacionCemento.this);
+                rvCemento.setAdapter(adaptadorCemento);
+                adaptadorCemento.notifyDataSetChanged();
+                cementoProductoList = new ArrayList<>();
+
+            });
         }).start();
     }
 
-    private void imperialScrap(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String url = "https://www.imperial.cl/searchresults?&&&N=471717289+3069711006+3949476578&Nrpp=15&suppressResults=false&searchType=guided&type=search";
-
-                    Document doc = Jsoup.connect(url).get();
-
-                    Elements data = doc.select("div.content__grid content__grid--products");
-
-                    int size = data.size();
-                    Log.d("doc", "doc: " + doc);
-                    Log.d("data", "data: " + data);
-                    Log.d("size", "" + size);
-                    for (int i = 0; i < size; i++) {
-
-                        String imgUrl = data.select("div.content__product")
-                                .select("a")
-                                .select("img.content__product-img")
-                                .eq(i)
-                                .attr("src");
-
-                        String marca = data.select("div.content__product-title")
-                                .select("small")
-                                .eq(i)
-                                .text();
-
-                        String descripcion = data.select("div.content__product-title")
-                                .select("a")
-                                .eq(i)
-                                .text();
-
-                        String precio = data.select("div.content__product-title")
-                                .select("p.content__product-offer")
-                                .select("span")
-                                .eq(i)
-                                .text();
-
-                        String despacho = data.select("div.overlay-modal__show")
-                                .select("h3.u-text_center")
-                                .select("span")
-                                .eq(i)
-                                .text();
-
-                        String idProducto = data.select("div.content__product")
-                                .select("a.CC-product-grid-detail-132647-00")
-                                .eq(i)
-                                .attr("id");
-
-
-                        cementoProductoList.add(new CementoProducto(imgUrl, marca, descripcion, precio, despacho, idProducto));
-
-                        Log.d("items", "img: " + imgUrl
-                                + " . marca: " + marca +
-                                ". descripcion: " + descripcion +
-                                ". precio: " + precio +
-                                ". despacho: " + despacho +
-
-                                ". idProducto:" + idProducto);
-                    }
-                   // cementoProductoList = new ArrayList<>();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rvCemento.setHasFixedSize(true);
-                        rvCemento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adaptadorCemento = new AdaptadorCemento(cementoProductoList, CotizacionCemento.this);
-                        rvCemento.setAdapter(adaptadorCemento);
-                        adaptadorCemento.notifyDataSetChanged();
-                        cementoProductoList = new ArrayList<>();
-
-                    }
-                });
-            }
-        }).start();
-    }
-    private void easy(){
-
-    }
-
+    /**
+     * Lista de tiendas
+     * luego de get carga las tiendas en el spinner
+     */
     private void spinnerTienda() {
         Call<List<Tienda>> tiendaCall = RetrofitBuilder.tiendaService.getTiendas();
         tiendaCall.enqueue(new Callback<List<Tienda>>() {
@@ -386,6 +306,10 @@ public class CotizacionCemento extends AppCompatActivity {
 
     }
 
+    /**
+     * RecyclerView.Listener
+     * trae la posicion donde se marco
+     */
     private void rvListener() {
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
