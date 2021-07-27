@@ -1,5 +1,7 @@
 package com.cubic.appcubicados.Actividades;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,15 +13,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cubic.appcubicados.Modelos.Asistencia;
 import com.cubic.appcubicados.Modelos.Region;
+import com.cubic.appcubicados.Modelos.Users;
 import com.cubic.appcubicados.R;
 import com.cubic.appcubicados.Retrofit.RetrofitBuilder;
+import com.google.gson.Gson;
 
-import java.text.SimpleDateFormat;
+import org.jetbrains.annotations.NotNull;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,9 +36,9 @@ public class Consulta extends AppCompatActivity {
     private List<Region> regionList = new ArrayList<>();
     private List<String> nomRegionList = new ArrayList<>();
     private EditText emailAsis;
-    private com.cubic.appcubicados.Modelos.Asistencia asis = new com.cubic.appcubicados.Modelos.Asistencia();
     private EditText consultaAsis;
     private Button btnEnviarAsis;
+    Asistencia asistencia = new Asistencia();
 
     /**
      * Activity para las consultas(Asistencia de la app)
@@ -62,18 +67,30 @@ public class Consulta extends AppCompatActivity {
         if (emailAsis.getText().toString().isEmpty() || consultaAsis.getText().toString().isEmpty()) {
             Toast.makeText(this, "No deje campos vacios", Toast.LENGTH_SHORT).show();
         } else {
-            asis.setConsulta(consultaAsis.getText().toString());
-            asis.setEmail(emailAsis.getText().toString());
+            SharedPreferences prefs = getApplicationContext().getSharedPreferences("userP", MODE_PRIVATE);
+            String userSave = prefs.getString("userperfil", null);
+            Gson gson = new Gson();
+            Users usr = gson.fromJson(userSave, Users.class);
+            asistencia.setConsulta(consultaAsis.getText().toString());
+            asistencia.setEmail(emailAsis.getText().toString());
+            BigInteger bigInteger = new BigInteger(String.valueOf(usr.getId()));
+            asistencia.setUsers_id(bigInteger);
+            Call<Asistencia> asistenciaCall = RetrofitBuilder.asistenciaService.insertAsistencia(asistencia);
+            asistenciaCall.enqueue(new Callback<Asistencia>() {
+                @Override
+                public void onResponse(Call<Asistencia> call, Response<Asistencia> response) {
+                    if(response.isSuccessful()){
+                        Toast.makeText(Consulta.this, "Se envio tu consulta exitosamente",Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Consulta.this, VistaUsuario.class);
+                        startActivity(i);
+                    }
+                }
 
-            TimeZone myTimeZone = TimeZone.getTimeZone("America/Santiago");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            simpleDateFormat.setTimeZone(myTimeZone);
-            String dateTime = simpleDateFormat.format(new Date());
-            System.out.println("Hora chile: " + dateTime);
+                @Override
+                public void onFailure(Call<Asistencia> call, Throwable t) {
 
-            //asis.setFecha_creacion(dd);
-
-            //Call<Consulta> asistenciaCall = RetrofitAsistencia.getApiService().insertAsistencia()
+                }
+            });
         }
     }
 
@@ -89,7 +106,7 @@ public class Consulta extends AppCompatActivity {
                     regionList = response.body();
                     for (int i = 0; i < regionList.size(); i++) {
                         nomRegionList.add(regionList.get(i).getNomRegion());
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, nomRegionList);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, nomRegionList);
                         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spRegion.setAdapter(adapter);
                     }
@@ -99,7 +116,7 @@ public class Consulta extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                             // TODO Auto-generated method stub
-                            Toast.makeText(getApplicationContext(), "Item: " + regionList.get(position).getIdRegion(), Toast.LENGTH_SHORT).show();
+                         asistencia.setRegion_idRegion(regionList.get(position).getIdRegion());
                         }
 
                         @Override
@@ -111,10 +128,9 @@ public class Consulta extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Region>> call, Throwable t) {
+            public void onFailure(@NotNull Call<List<Region>> call, @NotNull Throwable t) {
 
             }
         });
     }
-
 }

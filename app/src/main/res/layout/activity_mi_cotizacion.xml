@@ -1,65 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/activity_mi_cotizacion"
-    android:background="@drawable/fondo_inicio"
-    tools:context=".Actividades.MiCotizacion">
-    <LinearLayout
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="120dp"
-            android:background="@drawable/logo_empresa"
-            android:layout_marginLeft="120dp" />
-        <TextView
-            android:id="@+id/txt"
-            android:text="Mis Cotizaciones"
-            android:textColor="@color/negroEX"
-            android:fontFamily="@font/gotham"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <EditText
-        android:id="@+id/buscador"
-        android:hint="                           Busca tu cotizacion"
-        android:drawableEnd="@drawable/ic_search"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:inputType="text"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableRight="@drawable/ic_search"
-        android:layout_marginLeft="5dp" />
-    <TextView
-        android:id="@+id/textLista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/gotham"
-        android:gravity="center"
-        android:text="Lista de cotizaciones"
-        android:textColor="@color/white"
-        android:textSize="15sp"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCotizaciones"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/activity_mi_cotizacion"
+        android:background="@drawable/fondo_inicio"
+        tools:context=".Actividades.MiCotizacion">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            tools:listitem="@layout/list_cotizaciones_main" />
-    </ScrollView>
-</LinearLayout>
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="120dp"
+                android:background="@drawable/logo_empresa"
+                android:layout_marginLeft="120dp" />
+            <TextView
+                android:id="@+id/txt"
+                android:text="Mis Cotizaciones"
+                android:textColor="@color/negroEX"
+                android:fontFamily="@font/gotham"
+                android:textSize="18sp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCotizaciones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                tools:listitem="@layout/list_cotizaciones_main" />
+        </ScrollView>
+    </LinearLayout>
+</layout>

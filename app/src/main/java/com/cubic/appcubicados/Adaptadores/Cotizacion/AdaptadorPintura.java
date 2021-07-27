@@ -53,6 +53,8 @@ public class AdaptadorPintura extends RecyclerView.Adapter<AdaptadorPintura.View
             holder.marcaMuro.setText(pinturaProducto.getMarca());
             holder.descripcionMuro.setText(pinturaProducto.getDescripcion());
             System.out.println("Marca: " + pinturaProducto.getMarca());
+            System.out.println("Precio: " + pinturaProducto.getPrecio());
+
 
             if (cubicar.getIdTienda() == 1) {
                 if (pinturaProducto.getPrecio().length() == 9) {
@@ -153,7 +155,10 @@ public class AdaptadorPintura extends RecyclerView.Adapter<AdaptadorPintura.View
     public int getItemCount() {
         return pinturaProductoList.size();
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView marcaMuro;
         TextView descripcionMuro;

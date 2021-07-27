@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_asistencia"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Actividades.Consulta">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -28,7 +30,7 @@
     <TextView
         android:id="@+id/text"
         android:textColor="@color/negroEX"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:fontFamily="@font/gotham"
         android:layout_marginStart="10dp"
         android:text="COMPLETA LOS SIGUIENTES DATOS:"
@@ -105,7 +107,9 @@
         android:layout_marginTop="150dp"
         android:fontFamily="@font/gotham"
         android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_marginStart="50dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp" />
 
 </LinearLayout>

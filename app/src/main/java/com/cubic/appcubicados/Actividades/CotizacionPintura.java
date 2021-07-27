@@ -3,6 +3,8 @@ package com.cubic.appcubicados.Actividades;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -32,6 +34,8 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,8 +71,9 @@ public class CotizacionPintura extends AppCompatActivity {
                     case 0:
                         try {
                             cubicar.setIdTienda(1);
-                            System.out.println("Id Pintura"+cubicar.getTipoPintura());
-                            sodimacScrapPintura();
+                            System.out.println("Id Pintura" + cubicar.getTipoPintura());
+                            //sodimacScrapPintura();
+                            d();
                             rvListener();
                         } catch (Exception e) {
                             Toast.makeText(CotizacionPintura.this, "Error en el id de la tienda", Toast.LENGTH_LONG).show();
@@ -92,6 +97,7 @@ public class CotizacionPintura extends AppCompatActivity {
             }
         });
     }
+
     /**
      * @GET Lista de tiendas
      * @Acción luego de get carga las tiendas en el spinner
@@ -120,6 +126,7 @@ public class CotizacionPintura extends AppCompatActivity {
 
 
     }
+
     private void rvListener() {
         final GestureDetector mGestureDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -159,6 +166,94 @@ public class CotizacionPintura extends AppCompatActivity {
         });
 
     }
+private void d(){
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
+    executor.execute(() ->{
+        try {
+            String url = "";
+            if (cubicar.getTipoPintura() == 0) {
+                url = "https://www.sodimac.cl/sodimac-cl/category/scat359268/Esmaltes-al-agua?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior";
+            } else if (cubicar.getTipoPintura() == 1) {
+                url = "https://www.sodimac.cl/sodimac-cl/category/scat359269?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
+            } else if (cubicar.getTipoPintura() == 2) {
+                url = "https://www.sodimac.cl/sodimac-cl/category/scat359271?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior&f.product.attribute.Contenido=1%20galon(es)";
+
+            } else if (cubicar.getTipoPintura() == 3) {
+                url = "https://www.sodimac.cl/sodimac-cl/category/scat359272?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
+            }
+            Document doc = Jsoup.connect(url).get();
+
+            Elements data = doc.select("div.product-container");
+
+            int size = data.size();
+            Log.d("doc", "doc: " + doc);
+            Log.d("data", "data: " + data);
+            Log.d("size", "" + size);
+            for (int i = 0; i < size; i++) {
+
+                String imgUrl = data.select("div.product-image")
+                        .select("img.ie11-image-contain")
+                        .eq(i)
+                        .attr("data-src");
+
+
+                String marca = data.select("div.jsx-110785930.brand-name")
+                        .eq(i)
+                        .text();
+
+
+                String descripcion = data.select("div.jsx-110785930.title-name")
+                        .eq(i)
+                        .text();
+
+                String precio = data.select("div.jsx-585964327.main.listView ")
+                        .eq(i)
+                        .text();
+
+                String despacho = data.select("div.dispatch-info")
+                        .eq(i)
+                        .text();
+
+                String retiro = data.select("div.withdrawl-info")
+                        .eq(i)
+                        .text();
+
+                String idProducto = data.select("div.product-image")
+                        .select("img.ie11-image-contain")
+                        .eq(i)
+                        .attr("id");
+
+
+                pinturaProductoList.add(new CementoProducto(url, imgUrl, marca, descripcion, precio, despacho, retiro, idProducto));
+
+                Log.d("items",
+                        "Url Tienda: " + url
+                                + "img: " + imgUrl
+                                + " . marca: " + marca +
+                                ". descripcion: " + descripcion +
+                                ". precio: " + precio +
+                                ". despacho: " + despacho +
+                                ". retiro: " + retiro +
+                                ". idProducto:" + idProducto);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Duracion: "+System.currentTimeMillis());
+        }
+        handler.post(() ->{
+            rvPintura.setHasFixedSize(true);
+            rvPintura.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            adaptadorPintura = new AdaptadorPintura(pinturaProductoList, CotizacionPintura.this);
+            rvPintura.setAdapter(adaptadorPintura);
+            adaptadorPintura.notifyDataSetChanged();
+            pinturaProductoList = new ArrayList<>();
+        });
+    });
+}
+
     /**
      * @Acción Hilo scrap que trae los datos desde la url
      * @Get trae los datos de pintura
@@ -167,95 +262,92 @@ public class CotizacionPintura extends AppCompatActivity {
      * el contenido de las etiquetas por medio de llamada de clases css
      */
     private void sodimacScrapPintura() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String url = "";
-                    if(cubicar.getTipoPintura()== 0){
-                        url = "https://www.sodimac.cl/sodimac-cl/category/scat359268/Esmaltes-al-agua?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior";
-                    } else if(cubicar.getTipoPintura() == 1){
-                        url ="https://www.sodimac.cl/sodimac-cl/category/scat359269?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
-                    } else if(cubicar.getTipoPintura() == 2){
-                        url = "https://www.sodimac.cl/sodimac-cl/category/scat359271?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior&f.product.attribute.Contenido=1%20galon(es)";
+        new Thread(() -> {
+            try {
+                String url = "";
+                if (cubicar.getTipoPintura() == 0) {
+                    url = "https://www.sodimac.cl/sodimac-cl/category/scat359268/Esmaltes-al-agua?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior";
+                } else if (cubicar.getTipoPintura() == 1) {
+                    url = "https://www.sodimac.cl/sodimac-cl/category/scat359269?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
+                } else if (cubicar.getTipoPintura() == 2) {
+                    url = "https://www.sodimac.cl/sodimac-cl/category/scat359271?currentpage=1&sortBy=derived.price.event.search.7,asc&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%20y%20exterior&f.product.attribute.Contenido=1%20galon(es)";
 
-                    } else if(cubicar.getTipoPintura() == 3){
-                        url = "https://www.sodimac.cl/sodimac-cl/category/scat359272?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
-                    }
-                    Document doc = Jsoup.connect(url).get();
+                } else if (cubicar.getTipoPintura() == 3) {
+                    url = "https://www.sodimac.cl/sodimac-cl/category/scat359272?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.attribute.Aplicaci%C3%B3n=interior%2520y%2520exterior&f.product.attribute.Contenido=1%2520galon(es)";
+                }
+                Document doc = Jsoup.connect(url).get();
 
-                    Elements data = doc.select("div.product-container");
+                Elements data = doc.select("div.product-container");
 
-                    int size = data.size();
-                    Log.d("doc", "doc: " + doc);
-                    Log.d("data", "data: " + data);
-                    Log.d("size", "" + size);
-                    for (int i = 0; i < size; i++) {
+                int size = data.size();
+                Log.d("doc", "doc: " + doc);
+                Log.d("data", "data: " + data);
+                Log.d("size", "" + size);
+                for (int i = 0; i < size; i++) {
 
-                        String imgUrl = data.select("div.product-image")
-                                .select("img.ie11-image-contain")
-                                .eq(i)
-                                .attr("data-src");
+                    String imgUrl = data.select("div.product-image")
+                            .select("img.ie11-image-contain")
+                            .eq(i)
+                            .attr("data-src");
 
 
-                        String marca = data.select("div.jsx-110785930.brand-name")
-                                .eq(i)
-                                .text();
+                    String marca = data.select("div.jsx-110785930.brand-name")
+                            .eq(i)
+                            .text();
 
 
-                        String descripcion = data.select("div.jsx-110785930.title-name")
-                                .eq(i)
-                                .text();
+                    String descripcion = data.select("div.jsx-110785930.title-name")
+                            .eq(i)
+                            .text();
 
-                        String precio = data.select("div.jsx-175035124")
-                                .eq(i)
-                                .text();
+                    String precio = data.select("div.jsx-585964327.main.listView ")
+                            .eq(i)
+                            .text();
 
-                        String despacho = data.select("div.dispatch-info")
-                                .eq(i)
-                                .text();
+                    String despacho = data.select("div.dispatch-info")
+                            .eq(i)
+                            .text();
 
-                        String retiro = data.select("div.withdrawl-info")
-                                .eq(i)
-                                .text();
+                    String retiro = data.select("div.withdrawl-info")
+                            .eq(i)
+                            .text();
 
-                        String idProducto = data.select("div.product-image")
-                                .select("img.ie11-image-contain")
-                                .eq(i)
-                                .attr("id");
+                    String idProducto = data.select("div.product-image")
+                            .select("img.ie11-image-contain")
+                            .eq(i)
+                            .attr("id");
 
 
-                        pinturaProductoList.add(new CementoProducto(url, imgUrl, marca, descripcion, precio, despacho, retiro, idProducto));
+                    pinturaProductoList.add(new CementoProducto(url, imgUrl, marca, descripcion, precio, despacho, retiro, idProducto));
 
-                        Log.d("items",
-                                "Url Tienda: "+ url
-                                        +"img: " + imgUrl
-                                        + " . marca: " + marca +
-                                        ". descripcion: " + descripcion +
-                                        ". precio: " + precio +
-                                        ". despacho: " + despacho +
-                                        ". retiro: " + retiro +
-                                        ". idProducto:" + idProducto);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.d("items",
+                            "Url Tienda: " + url
+                                    + "img: " + imgUrl
+                                    + " . marca: " + marca +
+                                    ". descripcion: " + descripcion +
+                                    ". precio: " + precio +
+                                    ". despacho: " + despacho +
+                                    ". retiro: " + retiro +
+                                    ". idProducto:" + idProducto);
                 }
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rvPintura.setHasFixedSize(true);
-                        rvPintura.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adaptadorPintura = new AdaptadorPintura(pinturaProductoList, CotizacionPintura.this);
-                        rvPintura.setAdapter(adaptadorPintura);
-                        adaptadorPintura.notifyDataSetChanged();
-                        pinturaProductoList = new ArrayList<>();
-
-                    }
-                });
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            runOnUiThread(() -> {
+                rvPintura.setHasFixedSize(true);
+                rvPintura.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adaptadorPintura = new AdaptadorPintura(pinturaProductoList, CotizacionPintura.this);
+                rvPintura.setAdapter(adaptadorPintura);
+                adaptadorPintura.notifyDataSetChanged();
+                pinturaProductoList = new ArrayList<>();
+
+            });
         }).start();
+
     }
+
     /**
      * @Acción Hilo scrap que trae los datos desde la url
      * @Get trae los datos de pintura
@@ -264,99 +356,93 @@ public class CotizacionPintura extends AppCompatActivity {
      * el contenido de las etiquetas por medio de llamada de clases css
      */
     private void construmartScrap() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                     String url = "";
-                    if(cubicar.getTipoPintura()== 0){
-                        url  = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/esmaltes-al-agua/118-780-1132?desde=0&orden=preciosAsc&filtros=&precio=&precio1=";
-                    } else if(cubicar.getTipoPintura() == 1){
-                        url  = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/latex/118-780-1133";
-                    } else if(cubicar.getTipoPintura() == 2){
-                        url = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/esmalte-sintetico/118-780-1131";
-                    } else if(cubicar.getTipoPintura() == 3){
-                        url  = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/oleos/118-780-1134";
-                    }
-                    Document doc = Jsoup.connect(url).get();
-
-                    Elements data = doc.select("div.container-productos");
-
-                    int size = data.size();
-                    Log.d("doc", "doc: " + doc);
-                    Log.d("data", "data: " + data);
-                    Log.d("size", "" + size);
-                    for (int i = 0; i < size; i++) {
-
-                        String imgUrl = data.select("div.imageHover")
-                                .select("a")
-                                .select("img")
-                                .eq(i)
-                                .attr("src");
-
-                        String marca = data.select("div.description")
-                                .select("h5.marca")
-                                .eq(i)
-                                .text();
-
-                        String descripcion = data.select("div.description")
-                                .select("h2.minificha__nombre")
-                                .select("a")
-                                .eq(i)
-                                .text();
-
-                        String precio = data.select("div.description")
-                                .select("div.price")
-                                .eq(i)
-                                .text();
-
-                        String despacho = data.select("div.clearfix")
-                                .select("div.msj-venta")
-                                .select("p.despacho--disponible")
-                                .eq(i)
-                                .text();
-
-                        String retiro = data.select("div.clearfix")
-                                .select("div.msj-venta")
-                                .select("p.en-tienda--disponible")
-                                .eq(i)
-                                .text();
-
-                        String idProducto = data.select("div.imageHover")
-                                .select("a")
-                                .eq(i)
-                                .attr("href");
-
-
-                        String imgFinal = "https://www.construmart.cl" + imgUrl;
-
-                        pinturaProductoList.add(new CementoProducto(url, imgFinal, marca, descripcion, precio, despacho, retiro, idProducto));
-                        Log.d("items", "img: " + imgFinal
-                                + " . marca: " + marca +
-                                ". descripcion: " + descripcion +
-                                ". precio: " + precio +
-                                ". despacho: " + despacho +
-                                ". retiro: " + retiro +
-                                ". idProducto: " + idProducto);
-                    }
-                    //cementoProductoList = new ArrayList<>();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        new Thread(() -> {
+            try {
+                String url = "";
+                if (cubicar.getTipoPintura() == 0) {
+                    url = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/esmaltes-al-agua/118-780-1132?desde=0&orden=preciosAsc&filtros=&precio=&precio1=";
+                } else if (cubicar.getTipoPintura() == 1) {
+                    url = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/latex/118-780-1133";
+                } else if (cubicar.getTipoPintura() == 2) {
+                    url = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/esmalte-sintetico/118-780-1131";
+                } else if (cubicar.getTipoPintura() == 3) {
+                    url = "https://www.construmart.cl/tiendaonline/webapp/pinturas/pintura-decorativas/oleos/118-780-1134";
                 }
+                Document doc = Jsoup.connect(url).get();
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rvPintura.setHasFixedSize(true);
-                        rvPintura.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        adaptadorPintura = new AdaptadorPintura(pinturaProductoList, CotizacionPintura.this);
-                        rvPintura.setAdapter(adaptadorPintura);
-                        adaptadorPintura.notifyDataSetChanged();
-                        pinturaProductoList = new ArrayList<>();
+                Elements data = doc.select("div.container-productos");
 
-                    }
-                });
+                int size = data.size();
+                Log.d("doc", "doc: " + doc);
+                Log.d("data", "data: " + data);
+                Log.d("size", "" + size);
+                for (int i = 0; i < size; i++) {
+
+                    String imgUrl = data.select("div.imageHover")
+                            .select("a")
+                            .select("img")
+                            .eq(i)
+                            .attr("src");
+
+                    String marca = data.select("div.description")
+                            .select("h5.marca")
+                            .eq(i)
+                            .text();
+
+                    String descripcion = data.select("div.description")
+                            .select("h2.minificha__nombre")
+                            .select("a")
+                            .eq(i)
+                            .text();
+
+                    String precio = data.select("div.description")
+                            .select("div.price")
+                            .eq(i)
+                            .text();
+
+                    String despacho = data.select("div.clearfix")
+                            .select("div.msj-venta")
+                            .select("p.despacho--disponible")
+                            .eq(i)
+                            .text();
+
+                    String retiro = data.select("div.clearfix")
+                            .select("div.msj-venta")
+                            .select("p.en-tienda--disponible")
+                            .eq(i)
+                            .text();
+
+                    String idProducto = data.select("div.imageHover")
+                            .select("a")
+                            .eq(i)
+                            .attr("href");
+
+
+                    String imgFinal = "https://www.construmart.cl" + imgUrl;
+
+                    pinturaProductoList.add(new CementoProducto(url, imgFinal, marca, descripcion, precio, despacho, retiro, idProducto));
+                    Log.d("items", "img: " + imgFinal
+                            + " . marca: " + marca +
+                            ". descripcion: " + descripcion +
+                            ". precio: " + precio +
+                            ". despacho: " + despacho +
+                            ". retiro: " + retiro +
+                            ". idProducto: " + idProducto);
+                }
+                //cementoProductoList = new ArrayList<>();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+            runOnUiThread(() -> {
+                rvPintura.setHasFixedSize(true);
+                rvPintura.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adaptadorPintura = new AdaptadorPintura(pinturaProductoList, CotizacionPintura.this);
+                rvPintura.setAdapter(adaptadorPintura);
+                adaptadorPintura.notifyDataSetChanged();
+                pinturaProductoList = new ArrayList<>();
+
+            });
         }).start();
     }
 

@@ -101,7 +101,8 @@ public class Perfil extends AppCompatActivity {
 
             switch (which) {
                 case DialogInterface.BUTTON_POSITIVE:
-                    android.os.Process.killProcess(android.os.Process.myPid());
+                    Intent i = new Intent(Perfil.this, MainActivity.class);
+                    startActivity(i);
                     // This above line close correctly
                     //finish();
                     break;

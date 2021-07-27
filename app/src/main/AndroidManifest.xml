@@ -10,7 +10,6 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -25,7 +24,8 @@
         android:theme="@style/Theme.AppCubicados"
         android:usesCleartextTraffic="true"
         tools:targetApi="n">
-        <activity android:name=".Actividades.Ver_Cotizacion_Muro"></activity>
+        <activity android:name=".Actividades.Notificacion"/>
+        <activity android:name=".Actividades.Ver_Cotizacion_Muro" />
         <activity android:name=".Actividades.CrearCotizacionPintura" />
         <activity android:name=".Actividades.CotizacionPintura" />
         <activity android:name=".Actividades.Ver_Cotizacion" />

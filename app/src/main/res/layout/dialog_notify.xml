@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="620dp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:background="@color/black"
+    android:layout_height="30dp">
+    <TextView
+        android:text="Consulta"
+        android:textSize="18sp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="160dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gotham"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp" />
+
+</LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="De: "
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/txtDeUsuario"
+            android:text="xx"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Para: "
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/txtParaUsuario"
+            android:text="xx"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Respondido el: "
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/txtFechaRespuesta"
+            android:text="xx"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="Región: "
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+        <TextView
+            android:id="@+id/txtNomRegion"
+            android:text="xx"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/linear_background"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Consulta: "
+                android:textStyle="bold"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp" />
+            <TextView
+                android:id="@+id/txtConsultaSelect"
+                android:text="xxx"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+        </LinearLayout>
+        <TextView
+            android:text="Respuesta: "
+            android:textStyle="bold"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtResp"
+                android:text="xxx"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+        android:text="Atte el equipo de Cubica2"
+        android:textSize="14sp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/black"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp" />
+    <TextView
+        android:text="©Cubic2"
+        android:textSize="14sp"
+        android:fontFamily="@font/gotham"
+        android:textColor="@color/black"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp" />
+
+</LinearLayout>

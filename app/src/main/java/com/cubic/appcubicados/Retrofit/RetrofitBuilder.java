@@ -8,6 +8,7 @@ import com.cubic.appcubicados.Servicios.DetalleCotizacionService;
 import com.cubic.appcubicados.Servicios.InmuebleService;
 import com.cubic.appcubicados.Servicios.MaterialService;
 import com.cubic.appcubicados.Servicios.RegionService;
+import com.cubic.appcubicados.Servicios.RespuestAsistenciaService;
 import com.cubic.appcubicados.Servicios.TiendaService;
 import com.cubic.appcubicados.Servicios.TipoConstruccionService;
 import com.cubic.appcubicados.Servicios.UsersService;
@@ -38,12 +39,13 @@ public class RetrofitBuilder {
             )
             .retryOnConnectionFailure(true)
             .addInterceptor(httpLoggingInterceptor).build();
-    public static final String url_BASE = "http://192.168.56.1/Project_Cubic/public/api/";
+    public static final String url_BASE = "http://192.168.1.10/Project_Cubic/public/api/";
     static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(url_BASE)
-            .client(okHttpClient)
+
             .addConverterFactory(GsonConverterFactory.create())
             .build();
+
     public static ArriendoService arriendoService = retrofit.create(ArriendoService.class);
     public static AsistenciaService asistenciaService = retrofit.create(AsistenciaService.class);
     public static ConstruccionesService construccionesService = retrofit.create(ConstruccionesService.class);
@@ -52,6 +54,7 @@ public class RetrofitBuilder {
     public static InmuebleService inmuebleService = retrofit.create(InmuebleService.class);
     public static MaterialService cementoService = retrofit.create(MaterialService.class);
     public static RegionService regionService = retrofit.create(RegionService.class);
+    public static RespuestAsistenciaService respuestAsistenciaService = retrofit.create(RespuestAsistenciaService.class);
     public static TiendaService tiendaService = retrofit.create(TiendaService.class);
     public static TipoConstruccionService tipoConstruccionService = retrofit.create(TipoConstruccionService.class);
     public static UsersService usersService = retrofit.create(UsersService.class);

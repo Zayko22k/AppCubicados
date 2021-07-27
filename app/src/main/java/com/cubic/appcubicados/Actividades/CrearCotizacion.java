@@ -298,7 +298,6 @@ public class CrearCotizacion extends AppCompatActivity {
     public void guardarCotizacion(int idMaterial, int idCubicacion) {
 
         try {
-
                 detalleCotizacion = new DetalleCotizacion();
                 detalleCotizacion.setNombreCoti(txtNombreCoti.getText().toString());
                 System.out.println(txtNombreCoti.getText().toString());
@@ -348,13 +347,10 @@ public class CrearCotizacion extends AppCompatActivity {
 
                 Thread.sleep(3000);
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(CrearCotizacion.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                runOnUiThread(() -> {
+                    Toast.makeText(CrearCotizacion.this, "¡Cotizacion creada!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
 
-                    }
                 });
                 Thread.sleep(1500);
                 Intent i = new Intent(CrearCotizacion.this, VistaUsuario.class);
@@ -406,21 +402,18 @@ public class CrearCotizacion extends AppCompatActivity {
 
     public void IsFinish(String msjAlert) {
 
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
 
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent i = new Intent(CrearCotizacion.this, VistaUsuario.class);
-                        startActivity(i);
-                        // This above line close correctly
-                        //finish();
-                        break;
+            switch (which) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Intent i = new Intent(CrearCotizacion.this, VistaUsuario.class);
+                    startActivity(i);
+                    // This above line close correctly
+                    //finish();
+                    break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
 

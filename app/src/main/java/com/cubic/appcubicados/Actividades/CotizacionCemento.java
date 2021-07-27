@@ -201,7 +201,7 @@ public class CotizacionCemento extends AppCompatActivity {
     private void sodimacScrap() {
         new Thread(() -> {
             try {
-                String url = "https://www.sodimac.cl/sodimac-cl/category/scat102653/Cemento-y-Morteros?currentpage=1&sortBy=derived.price.event.search.7%2Casc&=&f.availability.buyatstoreZones=100308&f.product.L2_category_paths=scat913790%257C%257CObra%2520gruesa%252Fscat934880%257C%257CCemento%2520y%2520Complementos%252Fscat102653%257C%257CCemento%2520y%2520Morteros&f.product.attribute.Material=cemento%252C%2520aridos%2520y%2520aditivos%3A%3Ahormigon&f.product.brandName=Topex";
+                String url = "https://www.sodimac.cl/sodimac-cl/category/scat934880/Cemento-y-Complementos?currentpage=1&=&f.product.attribute.Material=hormigon";
 
                 Document doc = Jsoup.connect(url).get();
 

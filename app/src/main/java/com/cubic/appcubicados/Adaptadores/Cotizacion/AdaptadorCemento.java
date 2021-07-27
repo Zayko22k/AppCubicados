@@ -109,7 +109,10 @@ public class AdaptadorCemento extends RecyclerView.Adapter<AdaptadorCemento.View
             }
         });
     }
-
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
     @Override
     public int getItemCount() {
         return cementoProductoList.size();

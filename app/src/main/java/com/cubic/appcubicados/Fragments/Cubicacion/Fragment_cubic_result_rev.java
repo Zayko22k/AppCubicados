@@ -72,23 +72,22 @@ public class Fragment_cubic_result_rev extends Fragment implements Serializable 
                 nombreDiluyente.setText("Aguarrás o diluyente sintático");
 
             }
-            int litrosAprox = (int) Math.round(cubicar.getLitrosPintura());
-            cantidadPintura.setText(litrosAprox + " litros  aprox necesitas");
+            System.out.println("Litros sin aproximar"+cubicar.getLitrosPintura());
+            cantidadPintura.setText((double)Math.round(cubicar.getLitrosPintura() * 100d) / 100d+ " litros  aprox necesitas");
             rendimientoLitro.setText(cubicar.getRendimientoPintura() + " mts2 / litro");
             if (cubicar.getHerramienta() == 0) {
                 herramienta.setText("Brocha o rodillo");
-                diluyente.setText(cubicar.getCantidadDiluyente() + " equivale al 5% de diluyente por la cantidad de pintura");
+                System.out.println((double)Math.round(cubicar.getCantidadDiluyente() * 100d) / 100d);
+ /* Salida : 1.42*/
+                diluyente.setText((double)Math.round(cubicar.getCantidadDiluyente() * 100d) / 100d+ " equivale al 5% de diluyente por la cantidad de pintura");
             } else if (cubicar.getHerramienta() == 1) {
                 herramienta.setText("Pistola");
                 diluyente.setText(cubicar.getCantidadDiluyente() + " equivale al 10% de diluyente por la cantidad de pintura");
 
             }
-            cotizarPintura.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getContext(), CotizacionPintura.class);
-                    startActivity(i);
-                }
+            cotizarPintura.setOnClickListener(v -> {
+                Intent i = new Intent(getContext(), CotizacionPintura.class);
+                startActivity(i);
             });
         } catch (Exception e) {
             e.printStackTrace();

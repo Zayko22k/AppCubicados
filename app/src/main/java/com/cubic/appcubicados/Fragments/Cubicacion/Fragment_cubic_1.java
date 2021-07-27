@@ -55,8 +55,6 @@ public class Fragment_cubic_1 extends Fragment implements Serializable {
     //Metodos
     private void verInmueble() {
         Call<List<Inmueble>> callInmueble = RetrofitBuilder.inmuebleService.indexInmueble();
-
-
         callInmueble.enqueue(new Callback<List<Inmueble>>() {
             @Override
             public void onResponse(Call<List<Inmueble>> call, Response<List<Inmueble>> response) {

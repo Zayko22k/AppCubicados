@@ -19,22 +19,27 @@ import java.util.List;
 public class AdaptadorInmueble extends RecyclerView.Adapter<AdaptadorInmueble.ViewHolder> {
 List<Inmueble> inmuebleList;
 Context context;
+
 public AdaptadorInmueble(List<Inmueble> inmuebleList, @NonNull Context context) {
     this.context = context.getApplicationContext();
     this.inmuebleList = inmuebleList;
+
     notifyDataSetChanged();
+
 }
 
 @NonNull
 @Override
-    public com.cubic.appcubicados.Adaptadores.AdaptadorInmueble.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
 
     View view = LayoutInflater.from(parent.getContext())
             .inflate(R.layout.list_inmueble_main, parent, false);
-            return new com.cubic.appcubicados.Adaptadores.AdaptadorInmueble.ViewHolder(view);
+            return new ViewHolder(view);
 }
+
 @Override
-    public void onBindViewHolder(@NonNull com.cubic.appcubicados.Adaptadores.AdaptadorInmueble.ViewHolder holder, int position){
+
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         Inmueble inmueble = inmuebleList.get(position);
 
         holder.txtInmueble.setText(inmueble.getNomInmueble());

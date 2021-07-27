@@ -45,7 +45,7 @@
                 android:layout_height="50dp"
                 android:background="@color/white"
                 android:fontFamily="@font/gotham"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:hint="Largo"
                 android:textColor="@color/negroEX"
                 android:drawableRight="@mipmap/icon_mts" />
@@ -67,7 +67,7 @@
                 android:drawableEnd="@mipmap/icon_mts"
                 android:layout_height="50dp"
                 android:background="@color/white"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:fontFamily="@font/gotham"
                 android:hint="Ancho"
                 android:textColor="@color/negroEX"

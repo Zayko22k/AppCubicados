@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gris"
+                 android:inputType="textEmailAddress"
                 android:drawableEnd="@drawable/ic_account_circle"
                 android:drawableRight="@drawable/ic_account_circle"
                 android:fontFamily="@font/gotham"
@@ -112,17 +113,5 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="170dp" />
-
-    <TextView
-        android:id="@+id/txtRegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hyperlink"
-        android:layout_marginTop="20dp"
-        android:autoLink="web"
-        android:textSize="18sp"
-        android:layout_marginStart="120dp"
-        android:textColor="@color/white"
-        android:layout_marginLeft="120dp" />
 
 </LinearLayout>

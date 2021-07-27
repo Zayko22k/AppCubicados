@@ -153,7 +153,7 @@ public class Ver_Cotizacion extends AppCompatActivity {
           txtDespachoMaterial.setText(detalleCotizacion.getDespacho());
           txtRetiroMaterial.setText(detalleCotizacion.getRetiro());
       }catch (Exception e){
-          Toast.makeText(Ver_Cotizacion.this,"No se pudo cargar la cotizacion", Toast.LENGTH_LONG).show();
+          e.printStackTrace();
       }
     }
 

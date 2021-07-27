@@ -6,15 +6,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cubic.appcubicados.Modelos.RespuestAsistencia;
 import com.cubic.appcubicados.Modelos.Users;
 import com.cubic.appcubicados.R;
 import com.cubic.appcubicados.Retrofit.RetrofitBuilder;
 import com.google.gson.Gson;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +36,9 @@ public class VistaUsuario extends AppCompatActivity {
     private ImageButton imgAsis;
     private ImageButton imgPerfil;
     Users users = new Users();
+    private List<RespuestAsistencia> respuestAsistenciaList = new ArrayList<>();
+    private ImageView imgCampana;
+    private TextView contadorNotify;
 
     /**
      * @Autor  Pablo Rodriguez
@@ -39,18 +52,52 @@ public class VistaUsuario extends AppCompatActivity {
         imgCotiz = findViewById(R.id.imgMiCoti);
         imgAsis = findViewById(R.id.imgAsistencia);
         imgPerfil = findViewById(R.id.imgPerfil);
+        contadorNotify = findViewById(R.id.contadorNoti);
+        imgCampana = findViewById(R.id.imgCampanaNoti);
+        contadorNotify.setVisibility(View.INVISIBLE);
         users = (Users) getIntent().getSerializableExtra("usuario");
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("userP", MODE_PRIVATE);
         String userSave = prefs.getString("userperfil", null);
         Gson gson = new Gson();
         Users usr = gson.fromJson(userSave, Users.class);
         cargarDiasRestantes(usr.getId());
-
+        notificacion(usr.getId());
+        imgCampana.setOnClickListener(v->{
+           Intent i = new Intent(VistaUsuario.this, Notificacion.class);
+           startActivity(i);
+        });
         //Metodos
         irCubicar();
         irAsistencia();
         irPerfil();
         irCoti();
+
+    }
+   private void notificacion(int uID){
+        Call<List<RespuestAsistencia>> respuestaCall = RetrofitBuilder.respuestAsistenciaService.getRespuesta(uID);
+        respuestaCall.enqueue(new Callback<List<RespuestAsistencia>>() {
+            @Override
+            public void onResponse(@NotNull Call<List<RespuestAsistencia>> call, @NotNull Response<List<RespuestAsistencia>> response) {
+                if(response.isSuccessful()){
+                respuestAsistenciaList = response.body();
+                for (int k = 0; k < respuestAsistenciaList.size(); k++){
+                     if(respuestAsistenciaList.get(k).getVisto() == 1)
+                    System.out.println("Contador "+respuestAsistenciaList.get(k).getVisto());
+                    int contador = respuestAsistenciaList.get(k).getVisto();
+                    if(contador == 1){
+                        contadorNotify.setVisibility(View.VISIBLE);
+                        contadorNotify.setText(String.valueOf(contador));
+                    }
+                }
+                }else{
+                    Toast.makeText(VistaUsuario.this, "Error de respuestas", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(@NotNull Call<List<RespuestAsistencia>> call, @NotNull Throwable t) {
+                Log.d("Error: ",t.getMessage());
+            }
+        });
     }
     /**
      * Metodo para redireccionar al cubicador
@@ -84,7 +131,6 @@ public class VistaUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(VistaUsuario.this, Perfil.class);
-
                 startActivity(i);
             }
         });
